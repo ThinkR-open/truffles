@@ -17,4 +17,6 @@ app_server <- function(input, output, session) {
     global$chenes_feularde <- dbReadTable(global$conn, name = "chenes_feularde")
     global$truffe <- dbReadTable(global$conn, name = "truffe")
   })
+
+  mod_carto_leaflet_server("carto_leaflet_1", global = global)
 }
