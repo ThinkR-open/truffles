@@ -1,0 +1,17 @@
+flat_utils_db.Rmd:
+  path: dev/flat_utils_db.Rmd
+  state: active
+  R:
+  - R/connect_db.R
+  - R/write_db_new_truffe.R
+  tests:
+  - tests/testthat/test-connect_db.R
+  - tests/testthat/test-write_db_new_truffe.R
+  vignettes: []
+  inflate:
+    flat_file: dev/flat_utils_db.Rmd
+    vignette_name: .na
+    open_vignette: true
+    check: false
+    document: true
+    overwrite: ask

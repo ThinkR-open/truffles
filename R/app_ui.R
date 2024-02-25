@@ -3,14 +3,28 @@
 #' @param request Internal parameter for `{shiny}`.
 #'     DO NOT REMOVE.
 #' @import shiny
+#' @import shinyMobile
 #' @noRd
 app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # Your application UI logic
-    fluidPage(
-      h1("truffles")
+    f7Page(
+      f7SingleLayout(
+        navbar = f7Navbar(
+          title = "Les chênes truffiers",
+          hairline = TRUE,
+          shadow = TRUE
+        ),
+        f7Shadow(
+          intensity = 16,
+          hover = TRUE,
+          f7Card(
+            mod_carto_leaflet_ui("carto_leaflet_1")
+          )
+        )
+      )
     )
   )
 }

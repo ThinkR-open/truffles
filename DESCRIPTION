@@ -1,16 +1,22 @@
 Package: truffles
 Title: Truffles
 Version: 0.0.0.9000
-Authors@R: person('AUTHOR_FIRST', 'AUTHOR_LAST', email = 'murielle@thinkr.fr', role = c('cre', 'aut'))
+Authors@R: 
+    person("AUTHOR_FIRST", "AUTHOR_LAST", , "murielle@thinkr.fr", role = c("cre", "aut"))
 Description: PKG_DESC.
 License: What license is it under?
 Imports: 
     config (>= 0.3.2),
+    DBI,
+    digest,
     golem (>= 0.4.1),
-    shiny (>= 1.8.0)
-Encoding: UTF-8
-LazyData: true
-RoxygenNote: 7.1.1
+    RSQLite,
+    shiny (>= 1.8.0),
+    shinyMobile
 Suggests: 
     testthat (>= 3.0.0)
+Config/fusen/version: 0.6.0
 Config/testthat/edition: 3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.3

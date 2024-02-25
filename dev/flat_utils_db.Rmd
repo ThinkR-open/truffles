@@ -1,0 +1,89 @@
+---
+title: "flat_utils_db.Rmd empty"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r development, include=FALSE}
+library(testthat)
+```
+
+```{r development-load}
+# Load already included functions if relevant
+pkgload::load_all(export_all = FALSE)
+```
+
+# connect_db
+    
+```{r function-connect_db}
+#' Title
+#' 
+#' Description
+#' 
+#' @param dbname name of db available in inst/
+#' @importFrom RSQLite SQLite
+#' @importFrom DBI dbConnect
+#' @return
+#' 
+#' @export
+connect_db <- function(dbname = "chenes_truffe.sqlite"){
+    conn <- dbConnect(SQLite(), 
+                      system.file(dbname, package = "truffe"))
+    return(conn)
+}
+```
+  
+```{r example-connect_db}
+connect_db()
+```
+  
+```{r tests-connect_db}
+test_that("connect_db works", {
+  expect_true(inherits(connect_db, "function")) 
+})
+```
+
+# write_db_new_truffe
+    
+```{r function-write_db_new_truffe}
+#' Title
+#' 
+#' Description
+#' @importFrom digest digest
+#' @importFrom DBI dbAppendTable
+#' @return
+#' 
+#' @export
+write_db_new_truffe <-
+  function(conn = connect_db(), id_chene, date_trouvee, poids) {
+    idtruffe = digest(Sys.time())
+    
+  add_truffe <- data.frame(
+  id_truffe = idtruffe,
+  id_chene = id_chene,
+  date_trouve = as.Date(date_trouvee),
+  poids = poids
+)
+  
+  dbAppendTable(conn, "truffe", add_truffe)
+  }
+```
+  
+```{r example-write_db_new_truffe}
+# write_db_new_truffe(id_chene = "chene")
+```
+  
+```{r tests-write_db_new_truffe}
+test_that("write_db_new_truffe works", {
+  expect_true(inherits(write_db_new_truffe, "function")) 
+})
+```
+  
+
+```{r development-inflate, eval=FALSE}
+# Run but keep eval=FALSE to avoid infinite loop
+# Execute in the console directly
+fusen::inflate(flat_file = "dev/flat_utils_db.Rmd", vignette_name = NA, check = FALSE)
+```
+
