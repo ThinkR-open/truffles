@@ -20,7 +20,7 @@ attachment::att_amend_desc()
 
 ## Add modules ----
 ## Create a module infrastructure in R/
-golem::add_module(name = "name_of_module1", with_test = TRUE) # Name of the module
+golem::add_module(name = "carto_leaflet", with_test = TRUE) # Name of the module
 golem::add_module(name = "name_of_module2", with_test = TRUE) # Name of the module
 
 ## Add helper functions ----
@@ -35,9 +35,15 @@ golem::add_js_handler("handlers")
 golem::add_css_file("custom")
 golem::add_sass_file("custom")
 
+
+golem::use_external_js_file("https://unpkg.com/leaflet@1.9.4/dist/leaflet.js")
+golem::use_external_css_file("https://unpkg.com/leaflet@1.9.4/dist/leaflet.css")
+golem::add_js_handler("leaflet_.js")
+
+
 ## Add internal datasets ----
 ## If you have data in your package
-usethis::use_data_raw(name = "my_dataset", open = FALSE)
+usethis::use_data_raw(name = "chenes_feularde", open = FALSE)
 
 ## Tests ----
 ## Add one line by test you want to create
