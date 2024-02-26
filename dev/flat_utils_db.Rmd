@@ -17,19 +17,19 @@ pkgload::load_all(export_all = FALSE)
 # connect_db
     
 ```{r function-connect_db}
-#' Title
+#' connect_db
 #' 
-#' Description
+#' To connect to the database available in the {truffles} package
 #' 
 #' @param dbname name of db available in inst/
 #' @importFrom RSQLite SQLite
 #' @importFrom DBI dbConnect
-#' @return
+#' @return NULL
 #' 
 #' @export
 connect_db <- function(dbname = "chenes_truffe.sqlite"){
     conn <- dbConnect(SQLite(), 
-                      system.file(dbname, package = "truffe"))
+                      system.file(dbname, package = "truffles"))
     return(conn)
 }
 ```
@@ -47,12 +47,18 @@ test_that("connect_db works", {
 # write_db_new_truffe
     
 ```{r function-write_db_new_truffe}
-#' Title
+#' write_db_new_truffe
 #' 
 #' Description
+#'
+#' @param conn a connection to database
+#' @param id_chene TOCOMPLETE
+#' @param date_trouvee TOCOMPLETE 
+#' @param poids TOCOMPLETE
+#'
 #' @importFrom digest digest
 #' @importFrom DBI dbAppendTable
-#' @return
+#' @return NULL
 #' 
 #' @export
 write_db_new_truffe <-
@@ -84,6 +90,8 @@ test_that("write_db_new_truffe works", {
 ```{r development-inflate, eval=FALSE}
 # Run but keep eval=FALSE to avoid infinite loop
 # Execute in the console directly
-fusen::inflate(flat_file = "dev/flat_utils_db.Rmd", vignette_name = NA, check = FALSE)
+fusen::inflate(flat_file = "dev/flat_utils_db.Rmd", 
+               vignette_name = NA, 
+               check = FALSE)
 ```
 

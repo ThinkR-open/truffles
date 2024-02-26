@@ -2,7 +2,7 @@
 % Please edit documentation in R/write_db_new_truffe.R
 \name{write_db_new_truffe}
 \alias{write_db_new_truffe}
-\title{Title}
+\title{write_db_new_truffe}
 \usage{
 write_db_new_truffe(conn = connect_db(), id_chene, date_trouvee, poids)
 }

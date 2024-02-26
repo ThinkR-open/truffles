@@ -40,6 +40,9 @@ golem::use_external_js_file("https://unpkg.com/leaflet@1.9.4/dist/leaflet.js")
 golem::use_external_css_file("https://unpkg.com/leaflet@1.9.4/dist/leaflet.css")
 golem::add_js_handler("leaflet_.js")
 
+golem::use_external_js_file(url = "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js")
+golem::use_external_css_file(url = "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css")
+golem::add_js_handler("sweetalert2_.js")
 
 ## Add internal datasets ----
 ## If you have data in your package

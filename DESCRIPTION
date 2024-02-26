@@ -9,6 +9,7 @@ Imports:
     config (>= 0.3.2),
     DBI,
     digest,
+    dplyr,
     golem (>= 0.4.1),
     RSQLite,
     shiny (>= 1.8.0),

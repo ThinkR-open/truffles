@@ -1,3 +1,20 @@
+flat_get_info_chene_truffe.Rmd:
+  path: dev/flat_get_info_chene_truffe.Rmd
+  state: active
+  R:
+  - R/get_info_chene.R
+  - R/get_info_chene_truffe.R
+  tests:
+  - tests/testthat/test-get_info_chene_truffe.R
+  - tests/testthat/test-get_info_chene.R
+  vignettes: []
+  inflate:
+    flat_file: dev/flat_get_info_chene_truffe.Rmd
+    vignette_name: .na
+    open_vignette: true
+    check: true
+    document: true
+    overwrite: ask
 flat_utils_db.Rmd:
   path: dev/flat_utils_db.Rmd
   state: active

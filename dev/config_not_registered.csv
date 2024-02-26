@@ -1,0 +1,8 @@
+"type","path","origin"
+"R","R/app_config.R","No existing source path found."
+"R","R/app_server.R","No existing source path found."
+"R","R/app_ui.R","No existing source path found."
+"R","R/globals.R","No existing source path found."
+"R","R/mod_carto_leaflet.R","No existing source path found."
+"R","R/run_app.R","No existing source path found."
+"test","tests/testthat/test-mod_carto_leaflet.R","No existing source path found."

@@ -7,7 +7,7 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_carto_leaflet_ui <- function(id){
+mod_carto_leaflet_ui <- function(id) {
   ns <- NS(id)
   tagList(
     tags$div(
@@ -20,26 +20,30 @@ mod_carto_leaflet_ui <- function(id){
 #' carto_leaflet Server Functions
 #'
 #' @noRd
-mod_carto_leaflet_server <- function(id, global){
-  moduleServer( id, function(input, output, session){
+mod_carto_leaflet_server <- function(id, global) {
+  moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
 
     observe({
       # prepa data to js
       df_prep <-
-        lapply(1:nrow(global$chenes_feularde),
-               function(i) {
-                 unname(as.list(as.character(global$chenes_feularde[i,])))
-               })
+        lapply(
+          1:nrow(global$chenes_feularde),
+          function(i) {
+            unname(as.list(as.character(global$chenes_feularde[i, ])))
+          }
+        )
 
 
-      golem::invoke_js("map",
-                       list(id = ns("mymap"),
-                            data = df_prep))
+      golem::invoke_js(
+        "map",
+        list(
+          id = ns("mymap"),
+          data = df_prep
+        )
+      )
     })
-
-
   })
 }
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/connect_db.R
 \name{connect_db}
 \alias{connect_db}
-\title{Title}
+\title{connect_db}
 \usage{
 connect_db(dbname = "chenes_truffe.sqlite")
 }
@@ -10,7 +10,7 @@ connect_db(dbname = "chenes_truffe.sqlite")
 \item{dbname}{name of db available in inst/}
 }
 \description{
-Description
+To connect to the database available in the {truffles} package
 }
 \examples{
 connect_db()

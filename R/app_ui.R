@@ -13,7 +13,7 @@ app_ui <- function(request) {
     f7Page(
       f7SingleLayout(
         navbar = f7Navbar(
-          title = "Les chênes truffiers",
+          title = "Les ch\u00eanes truffiers",
           hairline = TRUE,
           shadow = TRUE
         ),
