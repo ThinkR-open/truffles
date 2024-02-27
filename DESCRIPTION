@@ -11,6 +11,7 @@ Imports:
     digest,
     dplyr,
     golem (>= 0.4.1),
+    lubridate,
     RSQLite,
     shiny (>= 1.8.0),
     shinyMobile

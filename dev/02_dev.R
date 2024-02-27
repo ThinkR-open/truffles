@@ -21,7 +21,7 @@ attachment::att_amend_desc()
 ## Add modules ----
 ## Create a module infrastructure in R/
 golem::add_module(name = "carto_leaflet", with_test = TRUE) # Name of the module
-golem::add_module(name = "name_of_module2", with_test = TRUE) # Name of the module
+golem::add_module(name = "dataviz", with_test = TRUE) # Name of the module
 
 ## Add helper functions ----
 ## Creates fct_* and utils_*
@@ -39,6 +39,9 @@ golem::add_sass_file("custom")
 golem::use_external_js_file("https://unpkg.com/leaflet@1.9.4/dist/leaflet.js")
 golem::use_external_css_file("https://unpkg.com/leaflet@1.9.4/dist/leaflet.css")
 golem::add_js_handler("leaflet_.js")
+
+golem::use_external_js_file(url = "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js")
+golem::add_js_handler("chartjs_.js")
 
 golem::use_external_js_file(url = "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js")
 golem::use_external_css_file(url = "https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css")

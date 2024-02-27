@@ -8,5 +8,6 @@ globalVariables(unique(c(
   # get_info_chene_truffe:
   "date_trouve",
   "id_chene",
-  "poids"
+  "poids",
+  "annee"
 )))

@@ -19,7 +19,7 @@ chenes_feularde <- chenes_feularde |>
 conn <- dbConnect(SQLite(), "inst/chenes_truffe.sqlite")
 dbWriteTable(conn, "chenes_feularde", chenes_feularde, overwrite = TRUE)
 
-dates <- seq(as.Date("2024-01-01"), as.Date("2024-01-31"), by = "day")
+dates <- seq(as.Date("2022-01-01"), as.Date("2024-01-31"), by = "day")
 truffe <- data.frame(
   id_truffe = paste0("truffe", 1:100),
   id_chene = sample(chenes_feularde$id, 100, replace = TRUE),

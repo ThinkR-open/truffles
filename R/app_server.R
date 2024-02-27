@@ -42,4 +42,6 @@ app_server <- function(input, output, session) {
       )
     )
   })
+
+  mod_dataviz_server("dataviz_1", global = global)
 }

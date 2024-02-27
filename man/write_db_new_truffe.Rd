@@ -6,6 +6,15 @@
 \usage{
 write_db_new_truffe(conn = connect_db(), id_chene, date_trouvee, poids)
 }
+\arguments{
+\item{conn}{a connection to database}
+
+\item{id_chene}{TOCOMPLETE}
+
+\item{date_trouvee}{TOCOMPLETE}
+
+\item{poids}{TOCOMPLETE}
+}
 \description{
 Description
 }

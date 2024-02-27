@@ -11,17 +11,40 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic
     f7Page(
-      f7SingleLayout(
+      # title = "My app",
+      f7TabLayout(
         navbar = f7Navbar(
           title = "Les ch\u00eanes truffiers",
           hairline = TRUE,
           shadow = TRUE
         ),
-        f7Shadow(
-          intensity = 16,
-          hover = TRUE,
-          f7Card(
-            mod_carto_leaflet_ui("carto_leaflet_1")
+        f7Tabs(
+          animated = TRUE,
+          f7Tab(
+            tabName = "Carte",
+            icon = f7Icon("map"),
+            active = TRUE,
+            f7Shadow(
+              intensity = 10,
+              hover = TRUE,
+              f7Card(
+                title = NULL,
+                mod_carto_leaflet_ui("carto_leaflet_1")
+              )
+            )
+          ),
+          f7Tab(
+            tabName = "Graphe",
+            icon = f7Icon("graph_square"),
+            active = FALSE,
+            f7Shadow(
+              intensity = 10,
+              hover = TRUE,
+              f7Card(
+                title = NULL,
+                mod_dataviz_ui("dataviz_1")
+              )
+            )
           )
         )
       )
