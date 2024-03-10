@@ -1,14 +1,17 @@
 Package: truffles
 Title: Truffles
 Version: 0.0.0.9000
-Authors@R: person('Murielle', 'Delmotte', email = 'murielle@thinkr.fr', role = c('cre', 'aut'))
+Authors@R: 
+    person("Murielle", "Delmotte", , "murielle@thinkr.fr", role = c("cre", "aut"))
 Description: PKG_DESC.
 License: MIT + file LICENSE
 Imports: 
+    cli,
     config (>= 0.3.2),
     DBI,
     digest,
     dplyr,
+    gargoyle,
     golem (>= 0.4.1),
     lubridate,
     RSQLite,

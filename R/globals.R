@@ -9,5 +9,6 @@ globalVariables(unique(c(
   "date_trouve",
   "idchene",
   "poids",
-  "annee"
+  "annee",
+  "present"
 )))

@@ -5,9 +5,11 @@
 #' Description
 #'
 #' @param conn a connection to database
-#' @param id_chene TOCOMPLETE
+#' @param theidchene TOCOMPLETE
 #' @param date_trouvee TOCOMPLETE 
 #' @param poids TOCOMPLETE
+#' @param comment TOCOMPLETE
+#' @param digest_ TOCOMPLETE
 #'
 #' @importFrom digest digest
 #' @importFrom DBI dbAppendTable
@@ -15,15 +17,15 @@
 #' 
 #' @export
 #' @examples
-#' # write_db_new_truffe(id_chene = "chene")
+#' # write_db_new_truffe(theidchene = "chene")
 write_db_new_truffe <-
-  function(conn = connect_db(), id_chene, date_trouvee, poids, comment, digest_ = Sys.time()) {
+  function(conn = connect_db(), theidchene, date_trouvee, poids, comment, digest_ = Sys.time()) {
     
   idtruffe = digest(digest_)
     
   add_truffe <- data.frame(
-  id_truffe = idtruffe,
-  id_chene = id_chene,
+  idtruffe = idtruffe,
+  idchene = theidchene,
   date_trouve = as.Date(date_trouvee),
   poids = poids,
   commentaires = comment

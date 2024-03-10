@@ -26,6 +26,8 @@ mod_carto_leaflet_server <- function(id, global) {
 
 
     observe({
+      req(global$chenes_feularde)
+      log_info_dev("prepa leaflet")
       # prepa data to js
       df_prep <-
         lapply(

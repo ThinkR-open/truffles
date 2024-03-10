@@ -29,6 +29,8 @@ mod_dataviz_server <- function(id, global) {
     ns <- session$ns
 
     observe({
+      req(global$truffe)
+      log_info_dev("Dataviz")
       # By year
       truf <- weight_truffles_by(global$truffe, annee)
 

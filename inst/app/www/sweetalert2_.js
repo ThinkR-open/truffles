@@ -34,19 +34,20 @@ Swal.fire({
             '<input type="text" id="inputComm" class="swal2-input"> <hr>',
           focusConfirm: false,
           preConfirm: () => {
-            const inputDateValue = document.getElementById('inputDate').value;
-            const inputNumValue = document.getElementById('inputNum').value;
-            const inputCommValue = document.getElementById('inputComm').value;
+            var inputDateValue = document.getElementById('inputDate').value;
+            var inputNumValue = document.getElementById('inputNum').value;
+            var inputCommValue = document.getElementById('inputComm').value;
 
-            return { date: inputDateValue, num: inputNumValue , comm: inputCommValue};
+           return { date: inputDateValue, num: inputNumValue , comm: inputCommValue};
           }
         }).then((result) => {
           if (result.isConfirmed) {
-            Shiny.setInputValue('new_truffe', [date, text, comm])
             const { date, num, comm } = result.value;
+            Shiny.setInputValue('new_truffe', [ arg.id, date, num, comm]);
+            /*const { date, num, comm } = result.value;*/
             // Faites quelque chose avec les valeurs des inputs
             console.log("Date sélectionnée :", date);
-            console.log("Poids saisi :", text);
+            console.log("Poids saisi :", num);
             console.log("Commentaire saisi :", comm);
           }
         })

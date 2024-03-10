@@ -6,6 +6,16 @@
 \usage{
 get_info(dbchene, dbtruffe, theidchene)
 }
+\arguments{
+\item{dbchene}{dbchene TOCOMPLETE}
+
+\item{dbtruffe}{dbtruffe TOCOMPLETE}
+
+\item{theidchene}{idchene TOCOMPLETE}
+}
+\value{
+a list
+}
 \description{
 Description
 }

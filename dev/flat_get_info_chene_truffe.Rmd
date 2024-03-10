@@ -187,7 +187,11 @@ test_that("get_info_chene works", {
 #' 
 #' Description
 #' 
-#' @return
+#' @param dbchene dbchene TOCOMPLETE
+#' @param dbtruffe dbtruffe TOCOMPLETE
+#' @param theidchene idchene TOCOMPLETE
+#'
+#' @return a list
 #' 
 #' @export
 get_info <- function(dbchene, dbtruffe, theidchene){
@@ -276,7 +280,7 @@ test_that("get_info works", {
 #' Description
 #' 
 #' @param truffles database
-#'
+#' @param ... TOCOMPLETE
 #' @return a dataframe
 #' @importFrom dplyr mutate group_by summarise
 #' @importFrom lubridate year
@@ -289,19 +293,22 @@ weight_truffles_by <- function(truffles, ...) {
 }
 ```
   
-```{r example-weight_truffles_by_year}
+```{r example-weight_truffles_by}
+
+library(dplyr)
+
 conn <- connect_db()
 truffes <- DBI::dbReadTable(conn, name = "truffe")
 
-weight_truffles_by_year(truffes, annee)
+weight_truffles_by(truffes, annee)
 
 truffes_chene <- truffes |> 
   inner_join(DBI::dbReadTable(conn, name = "chenes_feularde"), by = join_by(idchene == id))
-weight_truffles_by_year(truffes_chene, annee, type)
+weight_truffles_by(truffes_chene, annee, type)
 ```
   
-```{r tests-weight_truffles_by_year}
-test_that("weight_truffles_by_year works", {
+```{r tests-weight_truffles_by}
+test_that("weight_truffles_by works", {
 truffles <- data.frame(
   idchene = c(1, 1, 2, 2, 3, 3),
   poids = c(100, 150, 200, 250, 50, 75),
