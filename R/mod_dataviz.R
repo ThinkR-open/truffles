@@ -13,6 +13,10 @@ mod_dataviz_ui <- function(id) {
     tags$canvas(
       id = ns("graph1"),
       style = "height: 800px;"
+    ),
+    tags$canvas(
+      id = ns("graph2"),
+      style = "height: 800px;"
     )
   )
 }
@@ -25,7 +29,9 @@ mod_dataviz_server <- function(id, global) {
     ns <- session$ns
 
     observe({
-      truf <- truffles_by_year(global$truffe)
+      # By year
+      truf <- weight_truffles_by(global$truffe, annee)
+
       golem::invoke_js(
         "byyear",
         list(
@@ -34,6 +40,28 @@ mod_dataviz_server <- function(id, global) {
           labels = truf$annee,
           data = truf$poids,
           title = "R\u00e9colte annuelle de truffes"
+        )
+      )
+
+      # By year and type
+
+      truf_chene <- global$truffe |>
+        dplyr::inner_join(
+          global$chenes_feularde,
+          by = dplyr::join_by(idchene == id)
+        ) |>
+        weight_truffles_by(annee, type)
+
+      golem::invoke_js(
+        "byyeartype",
+        list(
+          id = ns("graph2"),
+          label1 = "Normal",
+          label2 = "Vert",
+          labels = unique(truf_chene$annee),
+          data1 = truf_chene |> filter(type == "Normal") |> pull(poids),
+          data2 = truf_chene |> filter(type == "Green") |> pull(poids),
+          title = "R\u00e9colte annuelle de truffes par Type"
         )
       )
     })

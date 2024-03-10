@@ -17,14 +17,16 @@
 #' @examples
 #' # write_db_new_truffe(id_chene = "chene")
 write_db_new_truffe <-
-  function(conn = connect_db(), id_chene, date_trouvee, poids) {
-    idtruffe = digest(Sys.time())
+  function(conn = connect_db(), id_chene, date_trouvee, poids, comment, digest_ = Sys.time()) {
+    
+  idtruffe = digest(digest_)
     
   add_truffe <- data.frame(
   id_truffe = idtruffe,
   id_chene = id_chene,
   date_trouve = as.Date(date_trouvee),
-  poids = poids
+  poids = poids,
+  commentaires = comment
 )
   
   dbAppendTable(conn, "truffe", add_truffe)

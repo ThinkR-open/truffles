@@ -2,17 +2,21 @@ flat_get_info_chene_truffe.Rmd:
   path: dev/flat_get_info_chene_truffe.Rmd
   state: active
   R:
+  - R/get_info.R
   - R/get_info_chene.R
   - R/get_info_chene_truffe.R
+  - R/weight_truffles_by.R
   tests:
   - tests/testthat/test-get_info_chene_truffe.R
   - tests/testthat/test-get_info_chene.R
+  - tests/testthat/test-get_info.R
+  - tests/testthat/test-weight_truffles_by.R
   vignettes: []
   inflate:
     flat_file: dev/flat_get_info_chene_truffe.Rmd
     vignette_name: .na
     open_vignette: true
-    check: true
+    check: false
     document: true
     overwrite: ask
 flat_utils_db.Rmd:

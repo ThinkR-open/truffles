@@ -40,7 +40,10 @@ connect_db()
   
 ```{r tests-connect_db}
 test_that("connect_db works", {
-  expect_true(inherits(connect_db, "function")) 
+  conn <- connect_db()
+
+  # Vérifier que la connexion est valide
+  expect_s4_class(conn, "SQLiteConnection")
 })
 ```
 
@@ -62,14 +65,16 @@ test_that("connect_db works", {
 #' 
 #' @export
 write_db_new_truffe <-
-  function(conn = connect_db(), id_chene, date_trouvee, poids) {
-    idtruffe = digest(Sys.time())
+  function(conn = connect_db(), id_chene, date_trouvee, poids, comment, digest_ = Sys.time()) {
+    
+  idtruffe = digest(digest_)
     
   add_truffe <- data.frame(
   id_truffe = idtruffe,
   id_chene = id_chene,
   date_trouve = as.Date(date_trouvee),
-  poids = poids
+  poids = poids,
+  commentaires = comment
 )
   
   dbAppendTable(conn, "truffe", add_truffe)
@@ -82,7 +87,38 @@ write_db_new_truffe <-
   
 ```{r tests-write_db_new_truffe}
 test_that("write_db_new_truffe works", {
-  expect_true(inherits(write_db_new_truffe, "function")) 
+  conn <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
+  
+  # Création de la table truffe dans la base de données
+  DBI::dbWriteTable(
+    conn,
+    "truffe",
+    data.frame(
+      id_truffe = character(),
+      id_chene = numeric(),
+      date_trouve = numeric(),
+      poids = numeric(),
+      commentaires = character()
+    )
+  )
+  
+  # Écrire une nouvelle truffe dans la base de données
+  id_chene <- 1
+  date_trouvee <- "2024-03-08"
+  poids <- 50
+  comment <- "Truffe fraîchement trouvée"
+  write_db_new_truffe(conn, id_chene, date_trouvee, poids, comment, digest_ = date_trouvee)
+  
+  # Vérifier si la truffe a été correctement ajoutée à la base de données
+  expected_output <-
+    data.frame(
+      id_truffe = digest::digest(date_trouvee),
+      id_chene = 1,
+      date_trouve = 19790,
+      poids = 50,
+      commentaires = "Truffe fraîchement trouvée"
+    )
+  expect_equal(DBI::dbReadTable(conn, "truffe"), expected_output)
 })
 ```
   

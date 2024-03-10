@@ -14,7 +14,8 @@ app_server <- function(input, output, session) {
   )
   observe({
     global$conn <- dbConnect(SQLite(), system.file("chenes_truffe.sqlite", package = "truffles"))
-    global$chenes_feularde <- dbReadTable(global$conn, name = "chenes_feularde")
+    global$chenes_feularde <- dbReadTable(global$conn, name = "chenes_feularde") |>
+      filter(present == 1)
     global$truffe <- dbReadTable(global$conn, name = "truffe")
   })
 
@@ -24,21 +25,17 @@ app_server <- function(input, output, session) {
     req(input$chene_click)
     print(input$chene_click)
 
-    info <- global$chenes_feularde |>
-      filter(id == input$chene_click) |>
-      select(type, date_plantation)
-
-
-    info_truffes <- get_info_chene_truffe(dbtruffe = global$truffe, idchene = input$chene_click)
+    info <- get_info(dbchene = global$chenes_feularde, dbtruffe = global$truffe, theidchene = input$chene_click)
 
     golem::invoke_js(
       "modal",
       list(
         id = input$chene_click,
-        type = info$type,
-        date_p = as.Date(info$date_plantation),
-        der_truf = info_truffes$derniere_truffe,
-        tot_poids = info_truffes$poids_tot
+        type = info$chene$type,
+        date_p = as.Date(info$chene$date_plantation),
+        der_truf = info$truffes$derniere_truffe,
+        tot_poids = info$truffes$poids_tot,
+        comments = info$truffes$comments
       )
     )
   })

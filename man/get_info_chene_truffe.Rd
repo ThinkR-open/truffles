@@ -4,12 +4,12 @@
 \alias{get_info_chene_truffe}
 \title{get_info_chene_truffe Title}
 \usage{
-get_info_chene_truffe(dbtruffe, idchene)
+get_info_chene_truffe(dbtruffe, theidchene)
 }
 \arguments{
 \item{dbtruffe}{dbtruffe TOCOMPLETE}
 
-\item{idchene}{idchene TOCOMPLETE}
+\item{theidchene}{idchene TOCOMPLETE}
 }
 \value{
 a list
@@ -21,6 +21,6 @@ get_info_chene_truffe Title
 conn <- connect_db()
 truffe <- DBI::dbReadTable(conn, name = "truffe")
 
-get_info_chene_truffe(dbtruffe = truffe, idchene = "chene162")
+get_info_chene_truffe(dbtruffe = truffe, theidchene = "119")
 DBI::dbDisconnect(conn)
 }

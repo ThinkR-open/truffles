@@ -1,8 +1,9 @@
 $( document ).ready(function() {
+
   Shiny.addCustomMessageHandler('modal', function(arg) {
 
 Swal.fire({
-  title: 'Que souhaites-tu faire avec ' + arg.id + ' ?',
+  title: 'Chêne  ' + arg.id + ' :',
   showDenyButton: true,
   showCancelButton: true,
   confirmButtonText: `Carte d'identité`,
@@ -14,9 +15,10 @@ Swal.fire({
         html: `<b>Identifiant : <b> `+ arg.id + `
                           <hr> <b>Date de plantation : <b>` + arg.date_p + `
                           <hr> <b>Type : <b> `+ arg.type + `
-                          <hr> <b>Date de dernier Réensemencement : <b>
+                          <hr> <b>Dernier Réensemencement : <b>
                           <hr> <b>Dernière truffe : <b> ` + arg.der_truf + `
-                          <hr> <b>Poids total trouvé : <b>` + arg.tot_poids ,
+                          <hr> <b>Poids total trouvé : <b>` + arg.tot_poids + ` g` + `
+                          <hr> <b>Commentaires : <b>` + arg.comments ,
         showCancelButton: true
       })
   } else if (result.isDenied) {
@@ -26,7 +28,7 @@ Swal.fire({
           html: `<b>Identifiant : <b> `+ arg.id + `<hr>` +
             '<label for="inputDate">Date :</label>' +
             '<input type="date" id="inputDate" class="swal2-input"> <hr>' +
-            '<label for="inputNum">Poids :</label>' +
+            '<label for="inputNum">Poids (en g):</label>' +
             '<input type="number" id="inputNum" class="swal2-input"> <hr>' +
             '<label for="inputComm">Commentaire :</label>' +
             '<input type="text" id="inputComm" class="swal2-input"> <hr>',
@@ -54,3 +56,4 @@ Swal.fire({
 
   })
 });
+

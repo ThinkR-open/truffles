@@ -4,7 +4,14 @@
 \alias{write_db_new_truffe}
 \title{write_db_new_truffe}
 \usage{
-write_db_new_truffe(conn = connect_db(), id_chene, date_trouvee, poids)
+write_db_new_truffe(
+  conn = connect_db(),
+  id_chene,
+  date_trouvee,
+  poids,
+  comment,
+  digest_ = Sys.time()
+)
 }
 \arguments{
 \item{conn}{a connection to database}

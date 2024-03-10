@@ -3,7 +3,7 @@
 #' get_info_chene_truffe Title
 #'
 #' @param dbtruffe dbtruffe TOCOMPLETE
-#' @param idchene idchene TOCOMPLETE
+#' @param theidchene idchene TOCOMPLETE
 #'
 #' @return a list
 #' @importFrom dplyr filter summarise pull
@@ -13,28 +13,41 @@
 #' conn <- connect_db()
 #' truffe <- DBI::dbReadTable(conn, name = "truffe")
 #'
-#' get_info_chene_truffe(dbtruffe = truffe, idchene = "chene162")
+#' get_info_chene_truffe(dbtruffe = truffe, theidchene = "119")
 #' DBI::dbDisconnect(conn)
-get_info_chene_truffe <- function(dbtruffe, idchene) {
-  
-truffe_chene <- dbtruffe |>
-      filter(id_chene == idchene) 
+get_info_chene_truffe <- function(dbtruffe, theidchene) {
+  truffe_chene <- dbtruffe |>
+    filter(idchene == theidchene)
 
-if (nrow(truffe_chene) == 0) {
-  return(list(poids_tot = 0,
-            derniere_truffe = "-"))
-}
-  
-poids_tot = truffe_chene |>
-  summarise(poids_tot = sum(poids, na.rm = TRUE)) |> 
-  pull(poids_tot)
+  if (nrow(truffe_chene) == 0) {
+    return(list(
+      poids_tot = 0,
+      derniere_truffe = "-",
+      comments = "-"
+    ))
+  }
 
-derniere_truffe <- truffe_chene |>
-  summarise(date_trouve = as.Date(max(date_trouve, na.rm = TRUE)))|> 
-  pull(date_trouve)
+  poids_tot <- truffe_chene |>
+    summarise(poids_tot = sum(poids, na.rm = TRUE)) |>
+    pull(poids_tot)
 
-return(list(poids_tot = poids_tot,
-            derniere_truffe = derniere_truffe))
+  derniere_truffe <- truffe_chene |>
+    summarise(date_trouve = as.Date(max(date_trouve, na.rm = TRUE))) |>
+    pull(date_trouve)
 
+  comments <-
+    paste(
+      paste(
+        as.Date(truffe_chene$date_trouve),
+        truffe_chene$commentaires,
+        sep = " : "
+      ),
+      collapse = "\n"
+    )
 
+  return(list(
+    poids_tot = poids_tot,
+    derniere_truffe = derniere_truffe,
+    comments = comments
+  ))
 }

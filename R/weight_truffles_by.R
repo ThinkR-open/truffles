@@ -14,14 +14,14 @@
 #' conn <- connect_db()
 #' truffes <- DBI::dbReadTable(conn, name = "truffe")
 #'
-#' weight_truffles_by(truffes, annee)
+#' weight_truffles_by_year(truffes, annee)
 #'
 #' truffes_chene <- truffes |>
 #'   inner_join(DBI::dbReadTable(conn, name = "chenes_feularde"), by = join_by(idchene == id))
-#' weight_truffles_by(truffes_chene, annee, type)
+#' weight_truffles_by_year(truffes_chene, annee, type)
 weight_truffles_by <- function(truffles, ...) {
   truffles |>
     mutate(annee = year(as.Date(date_trouve))) |>
     group_by(...) |>
-    summarise(poids = sum(poids, na.rm = TRUE))
+    summarise(poids = sum(poids, na.rm = TRUE), .groups = "drop")
 }
