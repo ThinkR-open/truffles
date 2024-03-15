@@ -2,6 +2,36 @@ $( document ).ready(function() {
 
   Shiny.addCustomMessageHandler('modal', function(arg) {
 
+     function fillTemplate(template, args) {
+      var filledTemplate = template;
+      for (var prop in args) {
+        if (args.hasOwnProperty(prop)) {
+          filledTemplate = filledTemplate.replace(new RegExp('{{' + prop + '}}', 'g'), args[prop]);
+        }
+      }
+      return filledTemplate;
+    };
+
+  var templateidentitycard;
+
+  // Charger le modèle HTML pour la carte d'identité du chêne
+  $.get('www/template_identity_card.html', function(data) {
+    templateidentitycard = data;
+  });
+
+
+  var templatefindtruffle;
+
+  // Charger le modèle HTML pour la carte d'identité du chêne
+  $.get('www/template_find_truffle.html', function(data) {
+    templatefindtruffle = data;
+  });
+
+
+
+
+
+
 Swal.fire({
   title: 'Chêne  ' + arg.id + ' :',
   showDenyButton: true,
@@ -9,29 +39,24 @@ Swal.fire({
   confirmButtonText: `Carte d'identité`,
   denyButtonText: `Ajouter une truffe`,
 }).then((result) => {
+
   if (result.isConfirmed) {
+
+      var filledtemplateidentitycard = fillTemplate(templateidentitycard, arg);
+
       Swal.fire({
         title: 'Carte d identité du chêne',
-        html: `<b>Identifiant : <b> `+ arg.id + `
-                          <hr> <b>Date de plantation : <b>` + arg.date_p + `
-                          <hr> <b>Type : <b> `+ arg.type + `
-                          <hr> <b>Dernier Réensemencement : <b>
-                          <hr> <b>Dernière truffe : <b> ` + arg.der_truf + `
-                          <hr> <b>Poids total trouvé : <b>` + arg.tot_poids + ` g` + `
-                          <hr> <b>Commentaires : <b>` + arg.comments ,
+        html: filledtemplateidentitycard,
         showCancelButton: true
       })
+
   } else if (result.isDenied) {
+
+      var filledtemplatefindtruffle = fillTemplate(templatefindtruffle, arg);
 
         Swal.fire({
           title: 'Détails de la truffe trouvée :',
-          html: `<b>Identifiant : <b> `+ arg.id + `<hr>` +
-            '<label for="inputDate">Date :</label>' +
-            '<input type="date" id="inputDate" class="swal2-input"> <hr>' +
-            '<label for="inputNum">Poids (en g):</label>' +
-            '<input type="number" id="inputNum" class="swal2-input"> <hr>' +
-            '<label for="inputComm">Commentaire :</label>' +
-            '<input type="text" id="inputComm" class="swal2-input"> <hr>',
+          html: filledtemplatefindtruffle,
           focusConfirm: false,
           preConfirm: () => {
             var inputDateValue = document.getElementById('inputDate').value;
@@ -42,16 +67,29 @@ Swal.fire({
           }
         }).then((result) => {
           if (result.isConfirmed) {
+
             const { date, num, comm } = result.value;
-            Shiny.setInputValue('new_truffe', [ arg.id, date, num, comm]);
-            /*const { date, num, comm } = result.value;*/
-            // Faites quelque chose avec les valeurs des inputs
-            console.log("Date sélectionnée :", date);
-            console.log("Poids saisi :", num);
-            console.log("Commentaire saisi :", comm);
+
+              // Vérifier si des champs sont vides
+              if (date === "" || num === "" || comm === "") {
+
+                // Afficher un message d'erreur à l'utilisateur TODO
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Informations incomplètes',
+                  text: 'Veuillez remplir tous les champs.',
+                });
+              } else {
+                // Toutes les informations sont valides
+                Shiny.setInputValue('new_truffe', [arg.id, date, num, comm]);
+              }
+
           }
         })
 
+  } else if (result.isCancelled) {
+    // TODO
+     /* Shiny.setInputValue("chene_click", null);*/
   }
 })
 

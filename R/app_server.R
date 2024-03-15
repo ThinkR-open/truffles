@@ -21,12 +21,12 @@ app_server <- function(input, output, session) {
   observeEvent(TRUE, {
     log_info_dev("Connect db")
     global$conn <- dbConnect(SQLite(), system.file("chenes_truffe.sqlite", package = "truffles"))
-
     trigger("updatedb")
   })
 
   observe({
     watch("updatedb")
+    req(global$conn)
     log_info_dev("Read table db")
     global$chenes_feularde <- dbReadTable(global$conn, name = "chenes_feularde") |>
       filter(present == 1)

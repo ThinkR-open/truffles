@@ -16,35 +16,38 @@
 #' get_info_chene_truffe(dbtruffe = truffe, theidchene = "119")
 #' DBI::dbDisconnect(conn)
 get_info_chene_truffe <- function(dbtruffe, theidchene) {
-  
-truffe_chene <- dbtruffe |>
-      filter(idchene == theidchene) 
+  truffe_chene <- dbtruffe |>
+    filter(idchene == theidchene)
 
-if (nrow(truffe_chene) == 0) {
-  return(list(poids_tot = 0,
-            derniere_truffe = "-",
-            comments = "-"))
-}
-  
-poids_tot = truffe_chene |>
-  summarise(poids_tot = sum(poids, na.rm = TRUE)) |> 
-  pull(poids_tot)
+  if (nrow(truffe_chene) == 0) {
+    return(list(
+      poids_tot = 0,
+      derniere_truffe = "-",
+      comments = "-"
+    ))
+  }
 
-derniere_truffe <- truffe_chene |>
-  summarise(date_trouve = as.Date(max(date_trouve, na.rm = TRUE)))|> 
-  pull(date_trouve)
+  poids_tot <- truffe_chene |>
+    summarise(poids_tot = sum(poids, na.rm = TRUE)) |>
+    pull(poids_tot)
 
-comments <-
-  paste(paste(
-    as.Date(truffe_chene$date_trouve),
-    truffe_chene$commentaires,
-    sep = " : "
-  ),
-  collapse = "\n")
+  derniere_truffe <- truffe_chene |>
+    summarise(date_trouve = as.Date(max(date_trouve, na.rm = TRUE))) |>
+    pull(date_trouve)
 
-return(list(poids_tot = poids_tot,
-            derniere_truffe = derniere_truffe,
-            comments = comments))
+  comments <-
+    paste(
+      paste(
+        as.Date(truffe_chene$date_trouve),
+        truffe_chene$commentaires,
+        sep = " : "
+      ),
+      collapse = "\n"
+    )
 
-
+  return(list(
+    poids_tot = poids_tot,
+    derniere_truffe = derniere_truffe,
+    comments = comments
+  ))
 }
