@@ -22,6 +22,9 @@ chenes_feularde <- chenes_feularde |>
   ) |>
   janitor::clean_names()
 
+chenes_feularde$reensemence <- sample(c(0,1), size = nrow(chenes_feularde), replace = TRUE)
+
+
 conn <- dbConnect(SQLite(), "inst/chenes_truffe.sqlite")
 dbWriteTable(conn, "chenes_feularde", chenes_feularde, overwrite = TRUE)
 
