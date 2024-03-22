@@ -62,7 +62,7 @@ $( document ).ready(function() {
       },
       title: {
         display: true,
-        text: 'Chart.js Bar Chart'
+        text: arg.title
       }
     },
       scales: {
