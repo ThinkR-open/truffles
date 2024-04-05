@@ -7,3 +7,4 @@ $run_dev.*
 ^.here$
 ^truffles\.Rproj$
 ^LICENSE\.md$
+^README\.Rmd$
