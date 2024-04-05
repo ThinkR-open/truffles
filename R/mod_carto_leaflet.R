@@ -52,21 +52,24 @@ mod_carto_leaflet_server <- function(id, global) {
         )
     })
 
-    observeEvent(c(
-      input$reens_id#,input$done_id
-    ), {
-      req(local$df_prep)
+    observeEvent(
+      c(
+        input$reens_id # ,input$done_id
+      ),
+      {
+        req(local$df_prep)
 
-      golem::invoke_js(
-        "map",
-        list(
-          id = ns("mymap"),
-          data = local$df_prep,
-          reens = as.numeric(input$reens_id)#,
-          #done = as.numeric(input$done_id)
+        golem::invoke_js(
+          "map",
+          list(
+            id = ns("mymap"),
+            data = local$df_prep,
+            reens = as.numeric(input$reens_id) # ,
+            # done = as.numeric(input$done_id)
+          )
         )
-      )
-    })
+      }
+    )
   })
 }
 

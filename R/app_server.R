@@ -35,7 +35,7 @@ app_server <- function(input, output, session) {
 
   mod_carto_leaflet_server("carto_leaflet_1", global = global)
 
-  observeEvent(input$chene_click, {
+  observeEvent(input$chene_click, ignoreNULL = FALSE, {
     req(input$chene_click)
 
     log_info_dev("observeEvent(input$chene_click, ...")

@@ -42,7 +42,7 @@ get_info_chene_truffe <- function(dbtruffe, theidchene) {
         truffe_chene$commentaires,
         sep = " : "
       ),
-      collapse = "\n"
+      collapse = "<br>"
     )
 
   return(list(

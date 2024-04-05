@@ -35,7 +35,7 @@ test_that("get_info_chene_truffe works", {
     list(
       poids_tot = 125,
       derniere_truffe = as.Date("2024-05-01"),
-      comments = "2024-04-01 : Truffe petite\n2024-05-01 : Truffe moyenne"
+      comments = "2024-04-01 : Truffe petite<br>2024-05-01 : Truffe moyenne"
     )
 
   expect_equal(get_info_chene_truffe(dbtruffe, 3), expected_output)

@@ -53,7 +53,7 @@ test_that("get_info works", {
       truffes = list(
         poids_tot = 125,
         derniere_truffe = structure(19844, class = "Date"),
-        comments = "2024-04-01 : Truffe petite\n2024-05-01 : Truffe moyenne"
+        comments = "2024-04-01 : Truffe petite<br>2024-05-01 : Truffe moyenne"
       )
     )
   expect_equal(get_info(dbchene, dbtruffe, 3), expected_output)

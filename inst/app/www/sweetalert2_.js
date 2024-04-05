@@ -87,9 +87,10 @@ Swal.fire({
           }
         })
 
-  } else if (result.isCancelled) {
+  } else if (result.isDismissed) {
     // TODO
-     /* Shiny.setInputValue("chene_click", null);*/
+    console.log("coucou");
+    Shiny.setInputValue("chene_click", null, {priority: "event"});
   }
 })
 
