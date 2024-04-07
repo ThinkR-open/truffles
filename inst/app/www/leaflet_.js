@@ -31,7 +31,7 @@ $( document ).ready(function() {
         marker = new L.circleMarker([locations[i][2], locations[i][1]])
           .bindPopup(locations[i][0])
           .addTo(map).on('click', onClick)
-          .setStyle({radius: '4'});
+          .setStyle({radius: '6'});
 
           marker.id = locations[i][0];
 

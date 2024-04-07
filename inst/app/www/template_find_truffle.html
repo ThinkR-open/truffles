@@ -1,7 +1,19 @@
 <b>Identifiant : </b> {{id}} <hr>
 <label for="inputDate">Date :</label>
 <input type="date" id="inputDate" class="swal2-input"> <hr>
-<label for="inputNum">Poids (en g):</label>
-<input type="number" id="inputNum" class="swal2-input"> <hr>
+<div style="display: inline-block;">
+    <label for="inputNum">Poids (en g):</label>
+    <input type="number" id="inputNum" class="swal2-input">
+</div>
+<div style="display: inline-block;">
+    <div style="text-align: center;">
+        <label for="estimationToggle">Estimation</label><br>
+        <div class="toggle-switch">
+            <input type="checkbox" id="estimationToggle">
+            <label for="estimationToggle"></label>
+        </div>
+    </div>
+</div><hr>
 <label for="inputComm">Commentaire :</label>
 <input type="text" id="inputComm" class="swal2-input"> <hr>
+

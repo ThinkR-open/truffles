@@ -24,5 +24,4 @@ chene <- DBI::dbReadTable(conn, name = "chenes_feularde")
 get_info_chene(dbchene = chene, theidchene = "162")
 DBI::dbDisconnect(conn)
 
-
 }
