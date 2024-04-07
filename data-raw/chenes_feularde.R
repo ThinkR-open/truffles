@@ -8,7 +8,7 @@ library(RSQLite)
 dates <- seq(as.Date("2015-01-01"), as.Date("2015-12-31"), by = "day")
 
 chenes_feularde <- readr::read_csv("data-raw/points(5).csv")
-chenes_feularde<-chenes_feularde |>
+chenes_feularde <- chenes_feularde |>
   mutate(
     date_plantation = sample(dates, size = 1),
     Present = case_when(

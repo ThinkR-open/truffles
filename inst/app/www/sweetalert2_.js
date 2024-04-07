@@ -90,6 +90,14 @@ Swal.fire({
   }
 })
 
-  })
+  });
+
+
+  Shiny.addCustomMessageHandler('modal_info_missing', function(arg) {
+    Swal.fire({
+      title: 'Dernière truffe trouvée :',
+      focusConfirm: false
+    })
+ })
 });
 

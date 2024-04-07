@@ -1,0 +1,16 @@
+# BEGIN: Unit test for prepare_leaflet
+test_that("prepare_leaflet returns a valid leaflet object", {
+  # Create test data
+  data <- data.frame(
+    lat = c(40.7128, 34.0522, 37.7749),
+    lon = c(-74.0060, -118.2437, -122.4194),
+    name = c("New York", "Los Angeles", "San Francisco")
+  )
+  
+  # Call the function
+  leaflet_obj <- prepare_leaflet(data)
+  
+  # Check if the returned object is a leaflet object
+  expect_true(inherits(leaflet_obj, "leaflet"))
+})
+# END: Unit test for prepare_leaflet

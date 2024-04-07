@@ -14,9 +14,11 @@ Imports:
     gargoyle,
     golem (>= 0.4.1),
     lubridate,
+    purrr,
     RSQLite,
     shiny (>= 1.8.0),
-    shinyMobile
+    shinyMobile,
+    shinyWidgets
 Suggests: 
     knitr,
     rmarkdown,

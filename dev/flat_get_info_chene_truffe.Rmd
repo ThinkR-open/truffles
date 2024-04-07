@@ -327,7 +327,59 @@ truffles <- data.frame(
 })
 ```
   
+# get_info_chene_last_truffe
+    
+```{r function-get_info_chene_last_truffe}
+#' Get Information about the Last Truffle Found on a Specific Oak Tree
+#' 
+#' This function retrieves information about the last truffle found on a specific oak tree.
+#' 
+#' @param dbtruffe A data frame containing information about truffles.
+#' @param theidchene The ID of the oak tree.
+#' @importFrom dplyr filter
+#' @return A data frame containing information about the last truffle found on the specified oak tree.
+#' 
+#' @export
+get_info_chene_last_truffe <- function(dbtruffe, theidchene){
 
+if (isFALSE("idchene" %in% names(dbtruffe))) {
+  stop("The column idchene is missing")
+}
+  if (!any(theidchene %in% dbtruffe$idchene)) {
+    return(data.frame())
+  }
+    truffe_chene <- dbtruffe |>
+      filter(idchene == theidchene)  |> 
+      filter(date_trouve == max(date_trouve))
+
+return(truffe_chene)
+}
+```
+  
+```{r example-get_info_chene_last_truffe}
+
+dbtruffe <- data.frame(idchene = c(123, 123, 456, 789),
+                        date_trouve = as.Date(c("2023-01-01", "2023-03-15", "2023-02-01", "2022-12-01")))
+get_info_chene_last_truffe(dbtruffe = dbtruffe , theidchene = 123)
+```
+  
+```{r tests-get_info_chene_last_truffe}
+test_that("get_info_chene_last_truffe works", {
+  expect_true(inherits(get_info_chene_last_truffe, "function")) 
+
+dbtruffe <- data.frame(idchene = c(123, 123, 456, 789),
+                        date_trouve = as.Date(c("2023-01-01", "2023-03-15", "2023-02-01", "2022-12-01")))
+   # Cas où l'arbre spécifié possède des truffes dans la base de données
+  expect_equal(nrow(get_info_chene_last_truffe(dbtruffe, 123)), 1)
+  expect_equal(get_info_chene_last_truffe(dbtruffe, 123)$idchene, 123)
+  expect_equal(get_info_chene_last_truffe(dbtruffe, 123)$date_trouve, as.Date("2023-03-15"))
+  
+ 
+  # Cas où l'arbre spécifié n'existe pas dans la base de données
+  expect_equal(nrow(get_info_chene_last_truffe(dbtruffe, 999)), 0)
+})
+```
+  
 
 ```{r development-inflate, eval=FALSE}
 # Run but keep eval=FALSE to avoid infinite loop

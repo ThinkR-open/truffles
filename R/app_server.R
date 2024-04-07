@@ -39,19 +39,35 @@ app_server <- function(input, output, session) {
     req(input$chene_click)
 
     log_info_dev("observeEvent(input$chene_click, ...")
-    info <- get_info(dbchene = global$chenes_feularde, dbtruffe = global$truffe, theidchene = input$chene_click)
 
-    golem::invoke_js(
-      "modal",
-      list(
-        id = input$chene_click,
-        type = info$chene$type,
-        date_p = as.Date(info$chene$date_plantation),
-        der_truf = info$truffes$derniere_truffe,
-        tot_poids = info$truffes$poids_tot,
-        comments = info$truffes$comments
+
+    if (isTRUE(global$missingdata)) {
+      info <- get_info_chene_last_truffe(dbtruffe = global$truffe, theidchene = input$chene_click)
+
+      golem::invoke_js(
+        "modal_info_missing",
+        list(
+          id = input$chene_click,
+          idtruffe = info$idtruffe,
+          date_t = as.Date(info$date_trouve),
+          poids = info$poids,
+          comments = info$commentaires
+        )
       )
-    )
+    } else {
+      info <- get_info(dbchene = global$chenes_feularde, dbtruffe = global$truffe, theidchene = input$chene_click)
+      golem::invoke_js(
+        "modal",
+        list(
+          id = input$chene_click,
+          type = info$chene$type,
+          date_p = as.Date(info$chene$date_plantation),
+          der_truf = info$truffes$derniere_truffe,
+          tot_poids = info$truffes$poids_tot,
+          comments = info$truffes$comments
+        )
+      )
+    }
   })
 
 
@@ -59,12 +75,14 @@ app_server <- function(input, output, session) {
     req(input$new_truffe)
     log_info_dev("observeEvent(input$new_truffe, ...")
 
-    write_db_new_truffe( conn = global$conn, 
-    theidchene = input$new_truffe[1],
-    date_trouvee = input$new_truffe[2],
-    poids = as.numeric(input$new_truffe[3]),
-    estimation = as.logical(input$new_truffe[4]),
-    comment = input$new_truffe[5])
+    write_db_new_truffe(
+      conn = global$conn,
+      theidchene = input$new_truffe[1],
+      date_trouvee = input$new_truffe[2],
+      poids = as.numeric(input$new_truffe[3]),
+      estimation = as.logical(input$new_truffe[4]),
+      comment = input$new_truffe[5]
+    )
 
     trigger("updatedb")
   })

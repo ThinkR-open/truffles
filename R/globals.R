@@ -10,5 +10,8 @@ globalVariables(unique(c(
   "idchene",
   "poids",
   "annee",
-  "present"
+  "present",
+  # prepare_leaflet:
+  "estimation",
+  "info_missing"
 )))

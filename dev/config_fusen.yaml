@@ -4,6 +4,7 @@ flat_get_info_chene_truffe.Rmd:
   R:
   - R/get_info.R
   - R/get_info_chene.R
+  - R/get_info_chene_last_truffe.R
   - R/get_info_chene_truffe.R
   - R/weight_truffles_by.R
   tests:
@@ -11,6 +12,7 @@ flat_get_info_chene_truffe.Rmd:
   - tests/testthat/test-get_info_chene.R
   - tests/testthat/test-get_info.R
   - tests/testthat/test-weight_truffles_by.R
+  - tests/testthat/test-get_info_chene_last_truffe.R
   vignettes: []
   inflate:
     flat_file: dev/flat_get_info_chene_truffe.Rmd
@@ -31,6 +33,19 @@ flat_utils_db.Rmd:
   vignettes: []
   inflate:
     flat_file: dev/flat_utils_db.Rmd
+    vignette_name: .na
+    open_vignette: true
+    check: false
+    document: true
+    overwrite: ask
+flat_utils_js.Rmd:
+  path: dev/flat_utils_js.Rmd
+  state: active
+  R: R/prepare_leaflet.R
+  tests: tests/testthat/test-prepare_leaflet.R
+  vignettes: []
+  inflate:
+    flat_file: dev/flat_utils_js.Rmd
     vignette_name: .na
     open_vignette: true
     check: false
