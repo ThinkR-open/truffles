@@ -2,20 +2,24 @@
 % Please edit documentation in R/get_info_chene.R
 \name{get_info_chene}
 \alias{get_info_chene}
-\title{Title}
+\title{Get information about an oak tree}
 \usage{
 get_info_chene(dbchene, theidchene)
 }
 \arguments{
-\item{dbchene}{dbchene TOCOMPLETE}
+\item{dbchene}{Database containing information about oak trees.}
 
-\item{theidchene}{idchene TOCOMPLETE}
+\item{theidchene}{ID of the oak tree for which information is to be retrieved.}
 }
 \value{
+A list containing information about the oak tree, including its type and
+date of plantation.
+
 a list
 }
 \description{
-Description
+This function retrieves information about a specific oak tree based on its ID
+from the provided oak tree database.
 }
 \examples{
 conn <- DBI::dbConnect(RSQLite::SQLite(), system.file("chenes_truffe.sqlite", package = "truffles"))

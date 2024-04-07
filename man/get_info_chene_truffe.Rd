@@ -2,20 +2,23 @@
 % Please edit documentation in R/get_info_chene_truffe.R
 \name{get_info_chene_truffe}
 \alias{get_info_chene_truffe}
-\title{get_info_chene_truffe Title}
+\title{Get information about truffles associated with an oak tree}
 \usage{
 get_info_chene_truffe(dbtruffe, theidchene)
 }
 \arguments{
-\item{dbtruffe}{dbtruffe TOCOMPLETE}
+\item{dbtruffe}{Database containing information about truffles.}
 
-\item{theidchene}{idchene TOCOMPLETE}
+\item{theidchene}{ID of the oak tree for which information about associated truffles
+is to be retrieved.}
 }
 \value{
-a list
+A list containing information about truffles associated with the oak tree,
+including the total weight, date of the last truffle found, and any comments.
 }
 \description{
-get_info_chene_truffe Title
+This function retrieves information about truffles associated with a specific oak tree
+based on the oak tree's ID from the provided truffle database.
 }
 \examples{
 conn <- connect_db()

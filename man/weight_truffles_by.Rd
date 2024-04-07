@@ -2,20 +2,22 @@
 % Please edit documentation in R/weight_truffles_by.R
 \name{weight_truffles_by}
 \alias{weight_truffles_by}
-\title{Title}
+\title{Calculate total weight of truffles grouped by specified columns}
 \usage{
 weight_truffles_by(truffles, ...)
 }
 \arguments{
-\item{truffles}{database}
+\item{truffles}{A data frame containing information about truffles.}
 
-\item{...}{TOCOMPLETE}
+\item{...}{Columns to group by, passed as arguments.}
 }
 \value{
-a dataframe
+A summarized data frame containing the total weight of truffles
+grouped by the specified columns.
 }
 \description{
-Description
+This function calculates the total weight of truffles grouped by specified columns
+in a given data frame.
 }
 \examples{
 

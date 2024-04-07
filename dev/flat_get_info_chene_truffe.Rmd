@@ -17,12 +17,18 @@ pkgload::load_all(export_all = FALSE)
 # get_info_chene_truffe
 
 ```{r function-get_info_chene_truffe}
-#' get_info_chene_truffe Title
+#' Get information about truffles associated with an oak tree
+#' 
+#' This function retrieves information about truffles associated with a specific oak tree
+#' based on the oak tree's ID from the provided truffle database.
+#' 
+#' @param dbtruffe Database containing information about truffles.
+#' @param theidchene ID of the oak tree for which information about associated truffles
+#' is to be retrieved.
 #'
-#' @param dbtruffe dbtruffe TOCOMPLETE
-#' @param theidchene idchene TOCOMPLETE
-#'
-#' @return a list
+#' @return A list containing information about truffles associated with the oak tree,
+#' including the total weight, date of the last truffle found, and any comments.
+#' 
 #' @importFrom dplyr filter summarise pull
 #' @export
 #'
@@ -123,13 +129,16 @@ test_that("get_info_chene_truffe works", {
 # get_info_chene
     
 ```{r function-get_info_chene}
-#' Title
+#' Get information about an oak tree
 #' 
-#' Description
+#' This function retrieves information about a specific oak tree based on its ID
+#' from the provided oak tree database.
+#' 
+#' @param dbchene Database containing information about oak trees.
+#' @param theidchene ID of the oak tree for which information is to be retrieved.
 #'
-#' @param dbchene dbchene TOCOMPLETE
-#' @param theidchene idchene TOCOMPLETE
-#' 
+#' @return A list containing information about the oak tree, including its type and
+#' date of plantation.
 #'
 #' @importFrom dplyr filter 
 #' @return a list
@@ -184,15 +193,17 @@ test_that("get_info_chene works", {
 # get_info
     
 ```{r function-get_info}
-#' Title
+#' Get information about oak and truffles
 #' 
-#' Description
+#' This function retrieves information about oak trees and truffles based on the provided
+#' databases and oak tree ID.
 #' 
-#' @param dbchene dbchene TOCOMPLETE
-#' @param dbtruffe dbtruffe TOCOMPLETE
-#' @param theidchene idchene TOCOMPLETE
+#' @param dbchene Database containing information about oak trees.
+#' @param dbtruffe Database containing information about truffles.
+#' @param theidchene ID of the oak tree for which information is to be retrieved.
 #'
-#' @return a list
+#' @return A list containing information about oak trees and truffles.
+#' 
 #' 
 #' @export
 get_info <- function(dbchene, dbtruffe, theidchene){
@@ -276,13 +287,16 @@ test_that("get_info works", {
 # weight_truffles_by
     
 ```{r function-weight_truffles_by}
-#' Title
-#' 
-#' Description
-#' 
-#' @param truffles database
-#' @param ... TOCOMPLETE
-#' @return a dataframe
+#' Calculate total weight of truffles grouped by specified columns
+#'
+#' This function calculates the total weight of truffles grouped by specified columns
+#' in a given data frame.
+#'
+#' @param truffles A data frame containing information about truffles.
+#' @param ... Columns to group by, passed as arguments.
+#'
+#' @return A summarized data frame containing the total weight of truffles
+#' grouped by the specified columns.
 #' @importFrom dplyr mutate group_by summarise
 #' @importFrom lubridate year
 #' @export

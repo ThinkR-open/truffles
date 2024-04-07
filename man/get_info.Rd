@@ -2,22 +2,23 @@
 % Please edit documentation in R/get_info.R
 \name{get_info}
 \alias{get_info}
-\title{Title}
+\title{Get information about oak and truffles}
 \usage{
 get_info(dbchene, dbtruffe, theidchene)
 }
 \arguments{
-\item{dbchene}{dbchene TOCOMPLETE}
+\item{dbchene}{Database containing information about oak trees.}
 
-\item{dbtruffe}{dbtruffe TOCOMPLETE}
+\item{dbtruffe}{Database containing information about truffles.}
 
-\item{theidchene}{idchene TOCOMPLETE}
+\item{theidchene}{ID of the oak tree for which information is to be retrieved.}
 }
 \value{
-a list
+A list containing information about oak trees and truffles.
 }
 \description{
-Description
+This function retrieves information about oak trees and truffles based on the provided
+databases and oak tree ID.
 }
 \examples{
 conn <- DBI::dbConnect(RSQLite::SQLite(), system.file("chenes_truffe.sqlite", package = "truffles"))
