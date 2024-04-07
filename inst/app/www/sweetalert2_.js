@@ -28,10 +28,6 @@ $( document ).ready(function() {
   });
 
 
-
-
-
-
 Swal.fire({
   title: 'Chêne  ' + arg.id + ' :',
   showDenyButton: true,
@@ -61,35 +57,35 @@ Swal.fire({
           preConfirm: () => {
             var inputDateValue = document.getElementById('inputDate').value;
             var inputNumValue = document.getElementById('inputNum').value;
+            var inputEstimValue = document.getElementById('inputEstim').checked;
             var inputCommValue = document.getElementById('inputComm').value;
 
-           return { date: inputDateValue, num: inputNumValue , comm: inputCommValue};
+           return { date: inputDateValue, num: inputNumValue ,estim: inputEstimValue, comm: inputCommValue};
           }
         }).then((result) => {
           if (result.isConfirmed) {
 
-            const { date, num, comm } = result.value;
+            const { date, num, estim, comm } = result.value;
 
               // Vérifier si des champs sont vides
-              if (date === "" || num === "" || comm === "") {
+              if (date === "") {
 
                 // Afficher un message d'erreur à l'utilisateur TODO
                 Swal.fire({
                   icon: 'error',
                   title: 'Informations incomplètes',
-                  text: 'Veuillez remplir tous les champs.',
+                  text: 'Veuillez remplir au moins la date.',
                 });
               } else {
                 // Toutes les informations sont valides
-                Shiny.setInputValue('new_truffe', [arg.id, date, num, comm]);
+                Shiny.setInputValue('new_truffe', [arg.id, date, num, estim, comm]);
               }
 
           }
         })
 
   } else if (result.isDismissed) {
-    // TODO
-    console.log("coucou");
+    console.log("Dismissed chene_click");
     Shiny.setInputValue("chene_click", null, {priority: "event"});
   }
 })

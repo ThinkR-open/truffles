@@ -57,9 +57,15 @@ app_server <- function(input, output, session) {
 
   observeEvent(input$new_truffe, {
     req(input$new_truffe)
-
     log_info_dev("observeEvent(input$new_truffe, ...")
-    write_db_new_truffe(global$conn, input$new_truffe[1], input$new_truffe[2], input$new_truffe[3], input$new_truffe[4])
+
+    write_db_new_truffe( conn = global$conn, 
+    theidchene = input$new_truffe[1],
+    date_trouvee = input$new_truffe[2],
+    poids = as.numeric(input$new_truffe[3]),
+    estimation = as.logical(input$new_truffe[4]),
+    comment = input$new_truffe[5])
+
     trigger("updatedb")
   })
 

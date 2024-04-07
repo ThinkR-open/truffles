@@ -8,7 +8,7 @@ library(RSQLite)
 dates <- seq(as.Date("2015-01-01"), as.Date("2015-12-31"), by = "day")
 
 chenes_feularde <- readr::read_csv("data-raw/points(5).csv")
-chenes_feularde <- chenes_feularde |>
+chenes_feularde<-chenes_feularde |>
   mutate(
     date_plantation = sample(dates, size = 1),
     Present = case_when(
@@ -36,7 +36,11 @@ truffe <- data.frame(
   poids = sample(c(1:200), 100, replace = TRUE),
   commentaires = paste(c(1:100), "- commentaires")
 )
+
+truffe$estimation <- sample(c(0, 1), size = nrow(truffe), replace = TRUE)
+
 dbWriteTable(conn, "truffe", truffe, overwrite = TRUE)
+
 
 col_names <- c("idchene", "date_reens")
 reens <- data.frame(matrix(ncol = length(col_names), nrow = 0))

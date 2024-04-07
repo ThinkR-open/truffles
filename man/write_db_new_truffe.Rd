@@ -2,32 +2,35 @@
 % Please edit documentation in R/write_db_new_truffe.R
 \name{write_db_new_truffe}
 \alias{write_db_new_truffe}
-\title{write_db_new_truffe}
+\title{Write new truffle data to the database}
 \usage{
 write_db_new_truffe(
   conn = connect_db(),
   theidchene,
   date_trouvee,
   poids,
+  estimation,
   comment,
   digest_ = Sys.time()
 )
 }
 \arguments{
-\item{conn}{a connection to database}
+\item{conn}{A connection to the database.}
 
-\item{theidchene}{TOCOMPLETE}
+\item{theidchene}{The ID of the oak tree (chêne) where the truffle was found.}
 
-\item{date_trouvee}{TOCOMPLETE}
+\item{date_trouvee}{The date the truffle was found.}
 
-\item{poids}{TOCOMPLETE}
+\item{poids}{The weight of the truffle in grams.}
 
-\item{comment}{TOCOMPLETE}
+\item{estimation}{logical indicating whether the weight was estimated or not.}
 
-\item{digest_}{TOCOMPLETE}
+\item{comment}{Any additional comments related to the truffle.}
+
+\item{digest_}{The digest of the truffle.}
 }
 \description{
-Description
+This function writes new truffle data to the specified database table.
 }
 \examples{
 # write_db_new_truffe(theidchene = "chene")

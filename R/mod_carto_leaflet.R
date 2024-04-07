@@ -15,11 +15,6 @@ mod_carto_leaflet_ui <- function(id) {
       tags$label("Rensemenc\u00e9"),
       style = "display: inline-block; margin-right: 10px;"
     ),
-    # tags$div(
-    #   tags$input(type = "checkbox", id = ns("done_id"), value = "1"),
-    #   tags$label("D\u00e9j\u00e0 donn\u00e9"),
-    #   style = "display: inline-block; margin-right: 10px;"
-    # ),
     tags$div(
       id = ns("mymap"),
       style = "height: 800px;"
