@@ -1,0 +1,54 @@
+---
+title: "flat_utils.Rmd empty"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r development, include=FALSE}
+library(testthat)
+```
+
+```{r development-load}
+# Load already included functions if relevant
+pkgload::load_all(export_all = FALSE)
+```
+
+
+    
+```{r function-check_utils}
+#' check_param
+#' @noRd
+check_param <- function(param, type){
+
+    if (isFALSE(inherits(param, type))){
+      stop(paste(deparse(substitute(param)), "must be a", type))
+    }
+
+    return(invisible())
+}
+```
+
+
+```{r function-check_utils}
+#' check_names_dataframe
+#' @noRd
+check_names_dataframe <- function(names, df){
+
+check_ <- names %in% names(df)
+
+    if (!all(check_)){
+
+      stop(paste("Missing Column(s) :", paste(names[!check_], collapse = ", ")))
+    }
+
+    return(invisible())
+}
+```
+
+```{r development-inflate, eval=FALSE}
+# Run but keep eval=FALSE to avoid infinite loop
+# Execute in the console directly
+fusen::inflate(flat_file = "dev/flat_utils.Rmd", vignette_name = NA, check = FALSE)
+```
+

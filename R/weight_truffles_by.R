@@ -5,7 +5,7 @@
 #' This function calculates the total weight of truffles grouped by specified columns
 #' in a given data frame.
 #'
-#' @param truffles A data frame containing information about truffles.
+#' @param dbtruffe A data frame containing information about truffles.
 #' @param ... Columns to group by, passed as arguments.
 #'
 #' @return A summarized data frame containing the total weight of truffles
@@ -20,14 +20,16 @@
 #' conn <- connect_db()
 #' truffes <- DBI::dbReadTable(conn, name = "truffe")
 #'
-#' weight_truffles_by(truffes, annee)
+#' weight_truffles_by(truffes, annee = lubridate::year(as.Date(date_trouve)))
 #'
 #' truffes_chene <- truffes |>
 #'   inner_join(DBI::dbReadTable(conn, name = "chenes_feularde"), by = join_by(idchene == id))
-#' weight_truffles_by(truffes_chene, annee, type)
-weight_truffles_by <- function(truffles, ...) {
-  truffles |>
-    mutate(annee = year(as.Date(date_trouve))) |>
+#' weight_truffles_by(truffes_chene, annee = lubridate::year(as.Date(date_trouve)), type)
+weight_truffles_by <- function(dbtruffe, ...) {
+  check_param(dbtruffe, "data.frame")
+  check_names_dataframe(c("poids"), dbtruffe)
+
+  dbtruffe |>
     group_by(...) |>
     summarise(poids = sum(poids, na.rm = TRUE), .groups = "drop")
 }

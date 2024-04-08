@@ -4,10 +4,10 @@
 \alias{weight_truffles_by}
 \title{Calculate total weight of truffles grouped by specified columns}
 \usage{
-weight_truffles_by(truffles, ...)
+weight_truffles_by(dbtruffe, ...)
 }
 \arguments{
-\item{truffles}{A data frame containing information about truffles.}
+\item{dbtruffe}{A data frame containing information about truffles.}
 
 \item{...}{Columns to group by, passed as arguments.}
 }
@@ -26,9 +26,9 @@ library(dplyr)
 conn <- connect_db()
 truffes <- DBI::dbReadTable(conn, name = "truffe")
 
-weight_truffles_by(truffes, annee)
+weight_truffles_by(truffes, annee = lubridate::year(as.Date(date_trouve)))
 
-truffes_chene <- truffes |> 
+truffes_chene <- truffes |>
   inner_join(DBI::dbReadTable(conn, name = "chenes_feularde"), by = join_by(idchene == id))
-weight_truffles_by(truffes_chene, annee, type)
+weight_truffles_by(truffes_chene, annee = lubridate::year(as.Date(date_trouve)), type)
 }

@@ -21,4 +21,8 @@ test_that("get_info_chene works", {
     get_info_chene(dbchene, 2),
     list(type = "Chêne rouvre", date_plantation = as.Date("2018-03-15"))
   )
+
+  expect_error(get_info_chene(iris, 2))
+
+  expect_error(get_info_chene(iris, mtcars), regexp = "theidchene must be a numeric")
 })

@@ -21,6 +21,19 @@ flat_get_info_chene_truffe.Rmd:
     check: false
     document: true
     overwrite: ask
+flat_utils.Rmd:
+  path: dev/flat_utils.Rmd
+  state: active
+  R: R/check_param.R
+  tests: []
+  vignettes: []
+  inflate:
+    flat_file: dev/flat_utils.Rmd
+    vignette_name: .na
+    open_vignette: true
+    check: false
+    document: true
+    overwrite: ask
 flat_utils_db.Rmd:
   path: dev/flat_utils_db.Rmd
   state: active

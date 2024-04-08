@@ -24,6 +24,6 @@ based on the oak tree's ID from the provided truffle database.
 conn <- connect_db()
 truffe <- DBI::dbReadTable(conn, name = "truffe")
 
-get_info_chene_truffe(dbtruffe = truffe, theidchene = "119")
+get_info_chene_truffe(dbtruffe = truffe, theidchene = 119)
 DBI::dbDisconnect(conn)
 }

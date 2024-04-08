@@ -19,10 +19,14 @@
 #' conn <- DBI::dbConnect(RSQLite::SQLite(), system.file("chenes_truffe.sqlite", package = "truffles"))
 #' chene <- DBI::dbReadTable(conn, name = "chenes_feularde")
 #'
-#' get_info_chene(dbchene = chene, theidchene = "162")
+#' get_info_chene(dbchene = chene, theidchene = 162)
 #' DBI::dbDisconnect(conn)
 #'
 get_info_chene <- function(dbchene, theidchene) {
+  check_param(dbchene, "data.frame")
+  check_param(theidchene, "numeric")
+  check_names_dataframe(c("id", "type", "date_plantation"), dbchene)
+
   chene <- dbchene |>
     filter(id == theidchene)
 

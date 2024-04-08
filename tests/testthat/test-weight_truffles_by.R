@@ -9,7 +9,7 @@ test_that("weight_truffles_by works", {
 
   # Test avec une seule variable de groupement
   expected_output_1 <- tibble::tibble(annee = c(2024), poids = c(825))
-  expect_equal(weight_truffles_by(truffles, annee), expected_output_1)
+  expect_equal(weight_truffles_by(truffles, annee = lubridate::year(as.Date(date_trouve))), expected_output_1)
 
   # Test avec deux variables de groupement
   expected_output_2 <- tibble::tibble(
@@ -21,5 +21,5 @@ test_that("weight_truffles_by works", {
     ),
     poids = c(250, 450, 125)
   )
-  expect_equal(weight_truffles_by(truffles, idchene, annee), expected_output_2)
+  expect_equal(weight_truffles_by(truffles, idchene, annee = lubridate::year(as.Date(date_trouve))), expected_output_2)
 })

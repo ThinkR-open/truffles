@@ -23,9 +23,11 @@
 #' get_info_chene_last_truffe(dbtruffe = dbtruffe, theidchene = 123)
 #' get_info_chene_last_truffe(dbtruffe = dbtruffe, theidchene = 123, filter_missing_info = TRUE)
 get_info_chene_last_truffe <- function(dbtruffe, theidchene, filter_missing_info = FALSE) {
-  if (!(all(c("poids", "estimation", "idchene") %in% names(dbtruffe)))) {
-    stop("dbtruffe must have columns: poids, estimation, idchene")
-  }
+  check_param(dbtruffe, "data.frame")
+  check_param(theidchene, "numeric")
+  check_param(filter_missing_info, "logical")
+  check_names_dataframe(c("poids", "estimation", "idchene"), dbtruffe)
+
 
   if (!any(theidchene %in% dbtruffe$idchene)) {
     return(data.frame())
@@ -40,7 +42,7 @@ get_info_chene_last_truffe <- function(dbtruffe, theidchene, filter_missing_info
     filter(idchene == theidchene) |>
     filter(date_trouve == max(date_trouve)) |>
     dplyr::mutate(estim_js = dplyr::case_when(
-      estimation == 1 ~ "checked = 'checked'",
+      estimation == 1 ~ "checked = 'checked'", # TODO : deplace
       TRUE ~ ""
     ))
 

@@ -25,8 +25,7 @@ from the provided oak tree database.
 conn <- DBI::dbConnect(RSQLite::SQLite(), system.file("chenes_truffe.sqlite", package = "truffles"))
 chene <- DBI::dbReadTable(conn, name = "chenes_feularde")
 
-get_info_chene(dbchene = chene, theidchene = "162")
+get_info_chene(dbchene = chene, theidchene = 162)
 DBI::dbDisconnect(conn)
-
 
 }
