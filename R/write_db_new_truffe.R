@@ -33,4 +33,5 @@ write_db_new_truffe <-
     )
 
     dbAppendTable(conn, "truffe", add_truffe)
+    message("WRITING in DB truffe")
   }

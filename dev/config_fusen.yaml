@@ -39,10 +39,12 @@ flat_utils_db.Rmd:
   state: active
   R:
   - R/connect_db.R
+  - R/update_db_truffe.R
   - R/write_db_new_truffe.R
   tests:
   - tests/testthat/test-connect_db.R
   - tests/testthat/test-write_db_new_truffe.R
+  - tests/testthat/test-update_db_truffe.R
   vignettes: []
   inflate:
     flat_file: dev/flat_utils_db.Rmd

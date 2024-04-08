@@ -82,6 +82,7 @@ write_db_new_truffe <-
 )
   
   dbAppendTable(conn, "truffe", add_truffe)
+  message("WRITING in DB truffe")
   }
 ```
   
@@ -129,7 +130,105 @@ test_that("write_db_new_truffe works", {
   expect_equal(DBI::dbReadTable(conn, "truffe"), expected_output)
 })
 ```
+
+
+# update_db_truffe
+    
+```{r function-update_db_truffe}
+#' Update a row in the "truffe" table of a database.
+#'
+#' This function updates a row in the "truffe" table of a database using an SQL UPDATE query.
+#'
+#' @param conn A connection to the database.
+#' @param idtruffe The identifier of the truffle to update.
+#' @param idchene The identifier of the oak tree associated with the truffle.
+#' @param date_trouve The date when the truffle was found.
+#' @param poids The weight of the truffle.
+#' @param commentaires The comments associated with the truffle.
+#' @param estimation The estimation of the truffle.
+#'
+#' @return The function does not return any value, but it updates the corresponding row in the "truffe" table of the database.
+#' @importFrom DBI dbExecute
+#' 
+#' @export
+update_db_truffe <- function(conn = connect_db(), idtruffe, idchene, date_trouve, poids, commentaires, estimation){
+
+# Construire et exécuter la requête SQL pour mettre à jour la ligne
+update_query <- paste0("UPDATE truffe",
+                      " SET idtruffe = '", idtruffe, "',",
+                      " idchene = '", idchene, "',",
+                      " date_trouve = '", date_trouve, "',",
+                      " poids = ", poids, ",",
+                      " commentaires = '", commentaires, "',",
+                      " estimation = ", estimation, "",
+                      " WHERE idtruffe = '", idtruffe, "'")
+
+DBI::dbExecute(conn, update_query)
+message("UPDATE db truffe")
+}
+```
   
+```{r example-update_db_truffe}
+
+conn <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
+  
+  # Création de la table truffe dans la base de données
+  DBI::dbWriteTable(
+    conn,
+    "truffe",
+    data.frame(
+      idtruffe = "156",
+      idchene = "15",
+      date_trouve = as.Date("2020/02/02"),
+      poids = 12,
+      estimation = 1,
+      commentaires = "Comment"
+    )
+  )
+
+update_db_truffe(conn, idtruffe = "156", idchene = "15", date_trouve = as.Date("2020/02/02"), poids = 22, 
+                 estimation = 0, commentaires = "New comment")
+```
+  
+```{r tests-update_db_truffe}
+test_that("update_db_truffe works", {
+  expect_true(inherits(update_db_truffe, "function")) 
+
+conn <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
+  
+  # Création de la table truffe dans la base de données
+  DBI::dbWriteTable(
+    conn,
+    "truffe",
+    data.frame(
+      idtruffe = "156",
+      idchene = "15",
+      date_trouve = 18294,
+      poids = 12,
+      estimation = 1,
+      commentaires = "Comment"
+    )
+  )
+
+update_db_truffe(conn, idtruffe = "156", idchene = "15", date_trouve = 18294, poids = 22, 
+                 estimation = 0, commentaires = "New comment")
+
+  # Vérifier si la truffe a été correctement ajoutée à la base de données
+  expected_output <-
+    data.frame(
+      idtruffe = "156",
+      idchene = "15",
+      date_trouve = 18294,
+      poids = 22,
+      estimation = 0,
+      commentaires = "New comment"
+    )
+  expect_equal(DBI::dbReadTable(conn, "truffe")  |> 
+  dplyr::filter(idtruffe == "156"), expected_output)
+})
+```
+  
+
 
 ```{r development-inflate, eval=FALSE}
 # Run but keep eval=FALSE to avoid infinite loop
@@ -137,5 +236,5 @@ test_that("write_db_new_truffe works", {
 fusen::inflate(flat_file = "dev/flat_utils_db.Rmd", 
                vignette_name = NA, 
                check = FALSE)
+grkstyle::grk_style_pkg()
 ```
-

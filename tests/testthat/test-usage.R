@@ -46,7 +46,7 @@ test_that("Usage works", {
     df_prep$data_prep |>
       purrr::map(1),
     size = 1
-  ) [[1]]
+  )[[1]]
 
   info <- get_info(dbchene = chenes_feularde, dbtruffe = truffe, theidchene = theidchene)
 
@@ -66,7 +66,7 @@ test_that("Usage works", {
     df_prep$data_prep |>
       purrr::map(1),
     size = 1
-  ) [[1]]
+  )[[1]]
 
   info <- get_info(dbchene = chenes_feularde, dbtruffe = truffe, theidchene = theidchene)
 
