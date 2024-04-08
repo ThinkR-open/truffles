@@ -16,7 +16,8 @@
 #'   chene_nom = c("Chene 1", "Chene 2", "Chene 3")
 #' )
 #' dbtruffe <- data.frame(
-#'   idchene = c(1, 2, 3),
+#'   idchene = c(1, 1, 3),
+#'   idtruffe = c(1, 2, 3),
 #'   estimation = c(1, 0, 1),
 #'   poids = c(10, 15, NA)
 #' )
@@ -40,5 +41,8 @@ prepare_leaflet <- function(dbchene, dbtruffe) {
     }
   )
 
-  return(data_prep)
+  return(list(
+    data_prep = data_prep,
+    names_element = names(c)
+  ))
 }

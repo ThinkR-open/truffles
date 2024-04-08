@@ -20,5 +20,5 @@ test_that("prepare_leaflet works", {
   expect_type(leaflet_data, "list")
 
   # Vérifier si la longueur de la liste est correcte
-  expect_equal(length(leaflet_data), nrow(dbchene))
+  expect_equal(length(leaflet_data$data_prep), nrow(dbchene))
 })

@@ -5,6 +5,8 @@ test_that("get_info_chene_last_truffe works", {
 
   dbtruffe <- data.frame(
     idchene = c(123, 123, 456, 789),
+    estimation = c(1, 0, 1, 0),
+    poids = c(NA, 5, 10, 100),
     date_trouve = as.Date(c("2023-01-01", "2023-03-15", "2023-02-01", "2022-12-01"))
   )
   # Cas où l'arbre spécifié possède des truffes dans la base de données

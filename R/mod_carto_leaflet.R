@@ -60,39 +60,30 @@ mod_carto_leaflet_server <- function(id, global) {
 
     observeEvent(
       c(
-        input$reens_id # ,input$done_id
-      ),
-      {
-        req(local$df_prep)
-
-        golem::invoke_js(
-          "map",
-          list(
-            id = ns("mymap"),
-            data = local$df_prep,
-            reens = as.numeric(input$reens_id) # ,
-            # done = as.numeric(input$done_id)
-          )
-        )
-      }
-    )
-
-    observeEvent(
-      c(
+        input$reens_id,
         input$missingdata
       ),
-      ignoreInit = TRUE,
+      ignoreNULL = FALSE,
       {
         req(local$df_prep)
 
         global$missingdata <- input$missingdata
+
+        if (isTRUE(input$missingdata)) {
+          thedata <- local$df_prep$data_prep |>
+            purrr::keep(\(x) (x[8] == "1"))
+          thereens <- 0
+        } else {
+          thedata <- local$df_prep$data_prep
+          thereens <- as.numeric(input$reens_id)
+        }
+
         golem::invoke_js(
           "map",
           list(
             id = ns("mymap"),
-            data = local$df_prep |>
-              purrr::keep(\(x) (x[8] == "1")),
-            reens = 0
+            data = thedata,
+            reens = thereens
           )
         )
       }

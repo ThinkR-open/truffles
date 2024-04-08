@@ -37,7 +37,8 @@ truffe <- data.frame(
   commentaires = paste(c(1:100), "- commentaires")
 )
 
-truffe$estimation <- sample(c(0, 1), size = nrow(truffe), replace = TRUE)
+truffe$estimation <- 0
+truffe$estimation[c(1, 2, 10)] <- 1
 
 dbWriteTable(conn, "truffe", truffe, overwrite = TRUE)
 

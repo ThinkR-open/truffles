@@ -42,7 +42,7 @@ app_server <- function(input, output, session) {
 
 
     if (isTRUE(global$missingdata)) {
-      info <- get_info_chene_last_truffe(dbtruffe = global$truffe, theidchene = input$chene_click)
+      info <- get_info_chene_last_truffe(dbtruffe = global$truffe, theidchene = input$chene_click, filter_missing_info = TRUE)
 
       golem::invoke_js(
         "modal_info_missing",
@@ -51,11 +51,13 @@ app_server <- function(input, output, session) {
           idtruffe = info$idtruffe,
           date_t = as.Date(info$date_trouve),
           poids = info$poids,
+          estim = info$estim_js,
           comments = info$commentaires
         )
       )
     } else {
       info <- get_info(dbchene = global$chenes_feularde, dbtruffe = global$truffe, theidchene = input$chene_click)
+
       golem::invoke_js(
         "modal",
         list(
@@ -83,6 +85,16 @@ app_server <- function(input, output, session) {
       estimation = as.logical(input$new_truffe[4]),
       comment = input$new_truffe[5]
     )
+
+    trigger("updatedb")
+  })
+
+
+  observeEvent(input$complete_truffe, {
+    req(input$complete_truffe)
+    log_info_dev("observeEvent(input$complete_truffe, ...")
+
+    # TODO update_db_truffe
 
     trigger("updatedb")
   })

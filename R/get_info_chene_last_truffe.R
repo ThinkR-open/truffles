@@ -6,7 +6,8 @@
 #'
 #' @param dbtruffe A data frame containing information about truffles.
 #' @param theidchene The ID of the oak tree.
-#' @importFrom dplyr filter
+#' @param filter_missing_info logical to filter truffle with missing data
+#' @importFrom dplyr filter mutate
 #' @return A data frame containing information about the last truffle found on the specified oak tree.
 #'
 #' @export
@@ -14,19 +15,34 @@
 #'
 #' dbtruffe <- data.frame(
 #'   idchene = c(123, 123, 456, 789),
+#'   estimation = c(1, 0, 1, 0),
+#'   poids = c(NA, 5, 10, 100),
 #'   date_trouve = as.Date(c("2023-01-01", "2023-03-15", "2023-02-01", "2022-12-01"))
 #' )
+#'
 #' get_info_chene_last_truffe(dbtruffe = dbtruffe, theidchene = 123)
-get_info_chene_last_truffe <- function(dbtruffe, theidchene) {
-  if (isFALSE("idchene" %in% names(dbtruffe))) {
-    stop("The column idchene is missing")
+#' get_info_chene_last_truffe(dbtruffe = dbtruffe, theidchene = 123, filter_missing_info = TRUE)
+get_info_chene_last_truffe <- function(dbtruffe, theidchene, filter_missing_info = FALSE) {
+  if (!(all(c("poids", "estimation", "idchene") %in% names(dbtruffe)))) {
+    stop("dbtruffe must have columns: poids, estimation, idchene")
   }
+
   if (!any(theidchene %in% dbtruffe$idchene)) {
     return(data.frame())
   }
+
+  if (isTRUE(filter_missing_info)) {
+    dbtruffe <- dbtruffe |>
+      dplyr::filter(estimation == 1 | is.na(poids))
+  }
+
   truffe_chene <- dbtruffe |>
     filter(idchene == theidchene) |>
-    filter(date_trouve == max(date_trouve))
+    filter(date_trouve == max(date_trouve)) |>
+    dplyr::mutate(estim_js = dplyr::case_when(
+      estimation == 1 ~ "checked = 'checked'",
+      TRUE ~ ""
+    ))
 
   return(truffe_chene)
 }

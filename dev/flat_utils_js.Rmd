@@ -45,7 +45,8 @@ by = c("id" = "idchene"))
           }
         )  
 
-return(data_prep)
+return(list(data_prep = data_prep, 
+names_element = names(c)))
 
 }
 ```
@@ -53,7 +54,8 @@ return(data_prep)
 ```{r example-prepare_leaflet}
 dbchene <- data.frame(id = c(1, 2, 3),
                        chene_nom = c("Chene 1", "Chene 2", "Chene 3"))
-dbtruffe <- data.frame(idchene = c(1, 2, 3),
+dbtruffe <- data.frame(idchene = c(1, 1, 3),
+                        idtruffe = c(1, 2, 3),
                         estimation = c(1, 0, 1),
                         poids = c(10, 15, NA))
 prepare_leaflet(dbchene, dbtruffe)
@@ -76,7 +78,7 @@ dbtruffe <- data.frame(idchene = c(1, 2, 3),
   expect_type(leaflet_data, "list")
   
   # Vérifier si la longueur de la liste est correcte
-  expect_equal(length(leaflet_data), nrow(dbchene))
+  expect_equal(length(leaflet_data$data_prep), nrow(dbchene))
 
 
 })

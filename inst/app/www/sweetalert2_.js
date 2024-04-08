@@ -27,7 +27,6 @@ $( document ).ready(function() {
     templatefindtruffle = data;
   });
 
-
 Swal.fire({
   title: 'Chêne  ' + arg.id + ' :',
   showDenyButton: true,
@@ -94,10 +93,58 @@ Swal.fire({
 
 
   Shiny.addCustomMessageHandler('modal_info_missing', function(arg) {
+
     Swal.fire({
-      title: 'Dernière truffe trouvée :',
-      focusConfirm: false
-    })
+      title: 'Compléter les infos de la dernière truffe:',
+      html:
+        '<label for="date">Date :</label>' + 
+        '<input type="date" id="date" class="swal2-input" placeholder="Date" value="' + (arg.date_t ? arg.date_t : '') + '"><hr>' +
+        '<div style="display: inline-block">' +
+          '<label for="weight">Poids (en g):</label>' +
+          '<input type="number" id="weight" class="swal2-input" placeholder="Poids (kg)" value="' + (arg.poids ? arg.poids : '') + '">' +
+        '</div>' +
+        '<div style="display: inline-block;"> ' +
+          '<div style="text-align: center;"> ' +
+            '<label for="estim">Estimation</label><br> ' +
+              '<div class="toggle-switch"> ' +
+                '<input type="checkbox" id="estim" class="swal2-input" placeholder="Estimation"' + (arg.estim ? arg.estim : '') + '">' +
+                '<label for="estim"></label> ' +
+              '</div>' +
+          '</div>' +
+        '</div><hr>' +
+        '<label for="comment">Commentaire :</label>' +
+        '<input type="text" id="comment" class="swal2-input" placeholder="Commentaire"value="' + (arg.comments ? arg.comments : '') + '">' ,
+      focusConfirm: false,
+      preConfirm: () => {
+        return {
+          date: document.getElementById('date').value,
+          weight: document.getElementById('weight').value,
+          estim: document.getElementById('estim').checked,
+          comment: document.getElementById('comment').value
+        }
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        const { date, weight, estim, comment } = result.value;
+
+
+              // Vérifier si des champs sont vides
+              if (date === "") {
+
+                // Afficher un message d'erreur à l'utilisateur TODO
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Informations incomplètes',
+                  text: 'Veuillez remplir au moins la date.',
+                });
+              } else {
+                // Toutes les informations sont valides
+                Shiny.setInputValue('complete_truffe', [arg.id, arg.idtruffe, date, weight, estim, comment]);
+              }
+       
+      }
+    });
  })
 });
 
