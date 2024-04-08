@@ -18,7 +18,7 @@
 #' chene <- DBI::dbReadTable(conn, name = "chenes_feularde")
 #' truffe <- DBI::dbReadTable(conn, name = "truffe")
 #'
-#' get_info(dbchene = chene, dbtruffe = truffe, theidchene = 162)
+#' get_info(dbchene = chene, dbtruffe = truffe, theidchene = "162")
 #' DBI::dbDisconnect(conn)
 get_info <- function(dbchene, dbtruffe, theidchene) {
   resultat <- list(

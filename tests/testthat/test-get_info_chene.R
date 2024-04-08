@@ -2,14 +2,14 @@
 
 test_that("get_info_chene works", {
   dbchene <- data.frame(
-    id = c(1, 2, 3),
+    id = c("1", "2", "3"),
     type = c("Chêne vert", "Chêne rouvre", "Chêne pédonculé"),
     date_plantation = c("2020-01-01", "2018-03-15", "2019-06-20")
   )
 
   # Test quand le chêne n'existe pas dans la base de données
   expect_equal(
-    get_info_chene(dbchene, 4),
+    get_info_chene(dbchene, "4"),
     list(
       type = character(0),
       date_plantation = structure(numeric(0), class = "Date")
@@ -18,11 +18,11 @@ test_that("get_info_chene works", {
 
   # Test quand le chêne existe dans la base de données
   expect_equal(
-    get_info_chene(dbchene, 2),
+    get_info_chene(dbchene, "2"),
     list(type = "Chêne rouvre", date_plantation = as.Date("2018-03-15"))
   )
 
-  expect_error(get_info_chene(iris, 2))
+  expect_error(get_info_chene(iris, "2"))
 
-  expect_error(get_info_chene(iris, mtcars), regexp = "theidchene must be a numeric")
+  expect_error(get_info_chene(iris, mtcars), regexp = "theidchene must be a character")
 })

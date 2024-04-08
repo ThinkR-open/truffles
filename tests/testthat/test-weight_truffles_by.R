@@ -2,7 +2,7 @@
 
 test_that("weight_truffles_by works", {
   truffles <- data.frame(
-    idchene = c(1, 1, 2, 2, 3, 3),
+    idchene = c("1", "1", "2", "2", "3", "3"),
     poids = c(100, 150, 200, 250, 50, 75),
     date_trouve = c("2024-01-01", "2024-02-01", "2024-03-01", "2024-03-15", "2024-04-01", "2024-05-01")
   )
@@ -13,7 +13,7 @@ test_that("weight_truffles_by works", {
 
   # Test avec deux variables de groupement
   expected_output_2 <- tibble::tibble(
-    idchene = c(1, 2, 3),
+    idchene = c("1", "2", "3"),
     annee = c(
       2024,
       2024,

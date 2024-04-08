@@ -2,7 +2,7 @@
 
 test_that("get_info_chene_truffe works", {
   dbtruffe <- data.frame(
-    idchene = c(1, 1, 2, 3, 3),
+    idchene = c("1", "1", "2", "3", "3"),
     poids = c(100, 150, 200, 50, 75),
     date_trouve = c(
       "2024-01-01",
@@ -22,7 +22,7 @@ test_that("get_info_chene_truffe works", {
 
   # Test quand le chêne n'existe pas dans la base de données
   expect_equal(
-    get_info_chene_truffe(dbtruffe, 4),
+    get_info_chene_truffe(dbtruffe, "4"),
     list(
       poids_tot = 0,
       derniere_truffe = "-",
@@ -38,5 +38,5 @@ test_that("get_info_chene_truffe works", {
       comments = "2024-04-01 : Truffe petite<br>2024-05-01 : Truffe moyenne"
     )
 
-  expect_equal(get_info_chene_truffe(dbtruffe, 3), expected_output)
+  expect_equal(get_info_chene_truffe(dbtruffe, "3"), expected_output)
 })

@@ -36,7 +36,7 @@ pkgload::load_all(export_all = FALSE)
 get_info_chene_truffe <- function(dbtruffe, theidchene) {
 
 check_param(dbtruffe, "data.frame")
-check_param(theidchene, "numeric")
+check_param(theidchene, "character")
 check_names_dataframe(c("idchene", "poids","date_trouve", "commentaires"), dbtruffe)
 
 truffe_chene <- dbtruffe |>
@@ -77,7 +77,7 @@ return(list(poids_tot = poids_tot,
 conn <- connect_db()
 truffe <- DBI::dbReadTable(conn, name = "truffe")
 
-get_info_chene_truffe(dbtruffe = truffe, theidchene = 119)
+get_info_chene_truffe(dbtruffe = truffe, theidchene = "119")
 DBI::dbDisconnect(conn)
 ```
 
@@ -86,7 +86,7 @@ test_that("get_info_chene_truffe works", {
 
   
   dbtruffe <- data.frame(
-    idchene = c(1, 1, 2, 3, 3),
+    idchene = c("1", "1", "2", "3", "3"),
     poids = c(100, 150, 200, 50, 75),
     date_trouve = c(
       "2024-01-01",
@@ -106,7 +106,7 @@ test_that("get_info_chene_truffe works", {
   
   # Test quand le chêne n'existe pas dans la base de données
   expect_equal(
-    get_info_chene_truffe(dbtruffe, 4),
+    get_info_chene_truffe(dbtruffe, "4"),
     list(
       poids_tot = 0,
       derniere_truffe = "-",
@@ -122,7 +122,7 @@ test_that("get_info_chene_truffe works", {
       comments = "2024-04-01 : Truffe petite<br>2024-05-01 : Truffe moyenne"
     )
   
-  expect_equal(get_info_chene_truffe(dbtruffe, 3), expected_output)
+  expect_equal(get_info_chene_truffe(dbtruffe, "3"), expected_output)
   
   
 })
@@ -151,7 +151,7 @@ test_that("get_info_chene_truffe works", {
 get_info_chene <- function(dbchene, theidchene){
 
 check_param(dbchene, "data.frame")
-check_param(theidchene, "numeric")
+check_param(theidchene, "character")
 check_names_dataframe(c("id", "type","date_plantation"), dbchene)
 
   chene <- dbchene |>
@@ -168,7 +168,7 @@ check_names_dataframe(c("id", "type","date_plantation"), dbchene)
 conn <- DBI::dbConnect(RSQLite::SQLite(), system.file("chenes_truffe.sqlite", package = "truffles"))
 chene <- DBI::dbReadTable(conn, name = "chenes_feularde")
 
-get_info_chene(dbchene = chene, theidchene = 162)
+get_info_chene(dbchene = chene, theidchene = "162")
 DBI::dbDisconnect(conn)
 
 
@@ -179,25 +179,25 @@ test_that("get_info_chene works", {
   
   
   dbchene <- data.frame(
-    id = c(1, 2, 3),
+    id = c("1", "2", "3"),
     type = c("Chêne vert", "Chêne rouvre", "Chêne pédonculé"),
     date_plantation = c("2020-01-01", "2018-03-15", "2019-06-20")
   )
   
   # Test quand le chêne n'existe pas dans la base de données
-  expect_equal(get_info_chene(dbchene, 4),
+  expect_equal(get_info_chene(dbchene, "4"),
                list(
                  type = character(0),
                  date_plantation = structure(numeric(0), class = "Date")
                ))
   
   # Test quand le chêne existe dans la base de données
-  expect_equal(get_info_chene(dbchene, 2),
+  expect_equal(get_info_chene(dbchene, "2"),
                list(type = "Chêne rouvre", date_plantation = as.Date("2018-03-15")))
   
-  expect_error(get_info_chene(iris, 2))
+  expect_error(get_info_chene(iris, "2"))
   
-  expect_error(get_info_chene(iris, mtcars), regexp = "theidchene must be a numeric")
+  expect_error(get_info_chene(iris, mtcars), regexp = "theidchene must be a character")
 
 })
 ```
@@ -234,7 +234,7 @@ conn <- DBI::dbConnect(RSQLite::SQLite(), system.file("chenes_truffe.sqlite", pa
 chene <- DBI::dbReadTable(conn, name = "chenes_feularde")
 truffe <- DBI::dbReadTable(conn, name = "truffe")
 
-get_info(dbchene = chene, dbtruffe = truffe, theidchene = 162)
+get_info(dbchene = chene, dbtruffe = truffe, theidchene = "162")
 DBI::dbDisconnect(conn)
 ```
   
@@ -242,13 +242,13 @@ DBI::dbDisconnect(conn)
 test_that("get_info works", {
   # Création de données de test
   dbchene <- data.frame(
-    id = c(1, 2, 3),
+    id = c("1", "2", "3"),
     type = c("Chêne vert", "Chêne rouvre", "Chêne pédonculé"),
     date_plantation = c("2020-01-01", "2018-03-15", "2019-06-20")
   )
   
   dbtruffe <- data.frame(
-    idchene = c(1, 1, 2, 3, 3),
+    idchene = c("1", "1", "2", "3", "3"),
     poids = c(100, 150, 200, 50, 75),
     date_trouve = c(
       "2024-01-01",
@@ -267,7 +267,7 @@ test_that("get_info works", {
   )
   
   # Test quand le chêne n'existe pas dans la base de données
-  expect_equal(get_info(dbchene, dbtruffe, 4),
+  expect_equal(get_info(dbchene, dbtruffe, "4"),
                list(
                  chene = list(
                    type = character(0),
@@ -293,7 +293,7 @@ test_that("get_info works", {
         comments = "2024-04-01 : Truffe petite<br>2024-05-01 : Truffe moyenne"
       )
     )
-  expect_equal(get_info(dbchene, dbtruffe, 3), expected_output)
+  expect_equal(get_info(dbchene, dbtruffe, "3"), expected_output)
 })
 ```
   
@@ -341,7 +341,7 @@ weight_truffles_by(truffes_chene, annee = lubridate::year(as.Date(date_trouve)),
 ```{r tests-weight_truffles_by}
 test_that("weight_truffles_by works", {
 truffles <- data.frame(
-  idchene = c(1, 1, 2, 2, 3, 3),
+  idchene = c("1", "1", "2", "2", "3", "3"),
   poids = c(100, 150, 200, 250, 50, 75),
   date_trouve = c("2024-01-01", "2024-02-01", "2024-03-01", "2024-03-15", "2024-04-01", "2024-05-01")
 )
@@ -351,7 +351,7 @@ truffles <- data.frame(
   expect_equal(weight_truffles_by(truffles, annee = lubridate::year(as.Date(date_trouve))), expected_output_1)
   
   # Test avec deux variables de groupement
-  expected_output_2 <- tibble::tibble(idchene = c(1, 2, 3), annee = c(2024, 2024, 2024
+  expected_output_2 <- tibble::tibble(idchene = c("1", "2", "3"), annee = c(2024, 2024, 2024
 ), poids = c(250, 450, 125))
   expect_equal(weight_truffles_by(truffles, idchene, annee = lubridate::year(as.Date(date_trouve))), expected_output_2)
 })
@@ -375,7 +375,7 @@ get_info_chene_last_truffe <- function(dbtruffe, theidchene, filter_missing_info
 
 
 check_param(dbtruffe, "data.frame")
-check_param(theidchene, "numeric")
+check_param(theidchene, "character")
 check_param(filter_missing_info, "logical")
 check_names_dataframe(c("poids","estimation", "idchene"), dbtruffe)
 
@@ -403,31 +403,31 @@ return(truffe_chene)
   
 ```{r example-get_info_chene_last_truffe}
 
-dbtruffe <- data.frame(idchene = c(123, 123, 456, 789), 
+dbtruffe <- data.frame(idchene = c("123", "123", "456", "789"), 
                         estimation = c(1,0,1,0),
                         poids = c(NA, 5,10,100),
                         date_trouve = as.Date(c("2023-01-01", "2023-03-15", "2023-02-01", "2022-12-01")))
 
-get_info_chene_last_truffe(dbtruffe = dbtruffe , theidchene = 123)
-get_info_chene_last_truffe(dbtruffe = dbtruffe , theidchene = 123, filter_missing_info = TRUE)
+get_info_chene_last_truffe(dbtruffe = dbtruffe , theidchene = "123")
+get_info_chene_last_truffe(dbtruffe = dbtruffe , theidchene = "123", filter_missing_info = TRUE)
 ```
   
 ```{r tests-get_info_chene_last_truffe}
 test_that("get_info_chene_last_truffe works", {
   expect_true(inherits(get_info_chene_last_truffe, "function")) 
 
-dbtruffe <- data.frame(idchene = c(123, 123, 456, 789), 
+dbtruffe <- data.frame(idchene = c("123", "123", "456", "789"), 
                         estimation = c(1,0,1,0),
                         poids = c(NA, 5,10,100),
                         date_trouve = as.Date(c("2023-01-01", "2023-03-15", "2023-02-01", "2022-12-01")))
    # Cas où l'arbre spécifié possède des truffes dans la base de données
-  expect_equal(nrow(get_info_chene_last_truffe(dbtruffe, 123)), 1)
-  expect_equal(get_info_chene_last_truffe(dbtruffe, 123)$idchene, 123)
-  expect_equal(get_info_chene_last_truffe(dbtruffe, 123)$date_trouve, as.Date("2023-03-15"))
+  expect_equal(nrow(get_info_chene_last_truffe(dbtruffe, "123")), 1)
+  expect_equal(get_info_chene_last_truffe(dbtruffe, "123")$idchene, "123")
+  expect_equal(get_info_chene_last_truffe(dbtruffe, "123")$date_trouve, as.Date("2023-03-15"))
   
  
   # Cas où l'arbre spécifié n'existe pas dans la base de données
-  expect_equal(nrow(get_info_chene_last_truffe(dbtruffe, 999)), 0)
+  expect_equal(nrow(get_info_chene_last_truffe(dbtruffe, "999")), 0)
 })
 ```
   

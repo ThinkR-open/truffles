@@ -14,17 +14,17 @@
 #' @examples
 #'
 #' dbtruffe <- data.frame(
-#'   idchene = c(123, 123, 456, 789),
+#'   idchene = c("123", "123", "456", "789"),
 #'   estimation = c(1, 0, 1, 0),
 #'   poids = c(NA, 5, 10, 100),
 #'   date_trouve = as.Date(c("2023-01-01", "2023-03-15", "2023-02-01", "2022-12-01"))
 #' )
 #'
-#' get_info_chene_last_truffe(dbtruffe = dbtruffe, theidchene = 123)
-#' get_info_chene_last_truffe(dbtruffe = dbtruffe, theidchene = 123, filter_missing_info = TRUE)
+#' get_info_chene_last_truffe(dbtruffe = dbtruffe, theidchene = "123")
+#' get_info_chene_last_truffe(dbtruffe = dbtruffe, theidchene = "123", filter_missing_info = TRUE)
 get_info_chene_last_truffe <- function(dbtruffe, theidchene, filter_missing_info = FALSE) {
   check_param(dbtruffe, "data.frame")
-  check_param(theidchene, "numeric")
+  check_param(theidchene, "character")
   check_param(filter_missing_info, "logical")
   check_names_dataframe(c("poids", "estimation", "idchene"), dbtruffe)
 

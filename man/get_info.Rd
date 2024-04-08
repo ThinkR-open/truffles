@@ -25,6 +25,6 @@ conn <- DBI::dbConnect(RSQLite::SQLite(), system.file("chenes_truffe.sqlite", pa
 chene <- DBI::dbReadTable(conn, name = "chenes_feularde")
 truffe <- DBI::dbReadTable(conn, name = "truffe")
 
-get_info(dbchene = chene, dbtruffe = truffe, theidchene = 162)
+get_info(dbchene = chene, dbtruffe = truffe, theidchene = "162")
 DBI::dbDisconnect(conn)
 }

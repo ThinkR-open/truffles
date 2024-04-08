@@ -3,13 +3,13 @@
 test_that("get_info works", {
   # Création de données de test
   dbchene <- data.frame(
-    id = c(1, 2, 3),
+    id = c("1", "2", "3"),
     type = c("Chêne vert", "Chêne rouvre", "Chêne pédonculé"),
     date_plantation = c("2020-01-01", "2018-03-15", "2019-06-20")
   )
 
   dbtruffe <- data.frame(
-    idchene = c(1, 1, 2, 3, 3),
+    idchene = c("1", "1", "2", "3", "3"),
     poids = c(100, 150, 200, 50, 75),
     date_trouve = c(
       "2024-01-01",
@@ -29,7 +29,7 @@ test_that("get_info works", {
 
   # Test quand le chêne n'existe pas dans la base de données
   expect_equal(
-    get_info(dbchene, dbtruffe, 4),
+    get_info(dbchene, dbtruffe, "4"),
     list(
       chene = list(
         type = character(0),
@@ -56,5 +56,5 @@ test_that("get_info works", {
         comments = "2024-04-01 : Truffe petite<br>2024-05-01 : Truffe moyenne"
       )
     )
-  expect_equal(get_info(dbchene, dbtruffe, 3), expected_output)
+  expect_equal(get_info(dbchene, dbtruffe, "3"), expected_output)
 })

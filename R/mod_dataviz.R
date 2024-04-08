@@ -32,7 +32,7 @@ mod_dataviz_server <- function(id, global) {
       req(global$truffe)
       log_info_dev("Dataviz")
       # By year
-      truf <- weight_truffles_by(global$truffe, annee)
+      truf <- weight_truffles_by(global$truffe, annee = lubridate::year(as.Date(date_trouve)))
 
       golem::invoke_js(
         "byyear",
@@ -52,7 +52,7 @@ mod_dataviz_server <- function(id, global) {
           global$chenes_feularde,
           by = dplyr::join_by(idchene == id)
         ) |>
-        weight_truffles_by(annee, type)
+        weight_truffles_by(annee = lubridate::year(as.Date(date_trouve)), type)
 
       golem::invoke_js(
         "byyeartype",

@@ -19,11 +19,11 @@
 #' conn <- connect_db()
 #' truffe <- DBI::dbReadTable(conn, name = "truffe")
 #'
-#' get_info_chene_truffe(dbtruffe = truffe, theidchene = 119)
+#' get_info_chene_truffe(dbtruffe = truffe, theidchene = "119")
 #' DBI::dbDisconnect(conn)
 get_info_chene_truffe <- function(dbtruffe, theidchene) {
   check_param(dbtruffe, "data.frame")
-  check_param(theidchene, "numeric")
+  check_param(theidchene, "character")
   check_names_dataframe(c("idchene", "poids", "date_trouve", "commentaires"), dbtruffe)
 
   truffe_chene <- dbtruffe |>
