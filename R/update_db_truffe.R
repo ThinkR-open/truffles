@@ -27,7 +27,7 @@
 #'   data.frame(
 #'     idtruffe = "156",
 #'     idchene = "15",
-#'     date_trouve = as.Date("2020/02/02"),
+#'     date_trouve = as.numeric(as.Date("2020/02/02")),
 #'     poids = 12,
 #'     estimation = 1,
 #'     commentaires = "Comment"
@@ -38,7 +38,7 @@
 #'   conn,
 #'   idtruffe = "156",
 #'   idchene = "15",
-#'   date_trouve = as.Date("2020/02/02"),
+#'   date_trouve = as.numeric(as.Date("2020/02/02")),
 #'   poids = 22,
 #'   estimation = 0,
 #'   commentaires = "New comment"
@@ -53,9 +53,9 @@ update_db_truffe <- function(conn = connect_db(), idtruffe, idchene, date_trouve
     " idchene = '",
     idchene,
     "',",
-    " date_trouve = '",
+    " date_trouve = ",
     date_trouve,
-    "',",
+    ",",
     " poids = ",
     poids,
     ",",

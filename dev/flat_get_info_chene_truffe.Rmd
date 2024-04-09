@@ -165,12 +165,9 @@ check_names_dataframe(c("id", "type","date_plantation"), dbchene)
 ```
   
 ```{r example-get_info_chene}
-conn <- DBI::dbConnect(RSQLite::SQLite(), system.file("chenes_truffe.sqlite", package = "truffles"))
-chene <- DBI::dbReadTable(conn, name = "chenes_feularde")
+chene <- DBI::dbReadTable(connect_db(), name = "chenes_feularde")
 
 get_info_chene(dbchene = chene, theidchene = "162")
-DBI::dbDisconnect(conn)
-
 
 ```
   

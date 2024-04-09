@@ -5,7 +5,7 @@ library(dplyr)
 library(RSQLite)
 
 # chenes_feularde <- geojson_read("data-raw/map(2).geojson")
-dates <- seq(as.Date("2015-01-01"), as.Date("2015-12-31"), by = "day")
+dates <- as.numeric(seq(as.Date("2015-01-01"), as.Date("2015-12-31"), by = "day"))
 
 chenes_feularde <- readr::read_csv("data-raw/points(5).csv")
 chenes_feularde <- chenes_feularde |>
@@ -29,7 +29,7 @@ chenes_feularde$reensemence <- sample(c(0, 1), size = nrow(chenes_feularde), rep
 conn <- dbConnect(SQLite(), "inst/chenes_truffe.sqlite")
 dbWriteTable(conn, "chenes_feularde", chenes_feularde, overwrite = TRUE)
 
-dates <- seq(as.Date("2022-01-01"), as.Date("2024-01-31"), by = "day")
+dates <- as.numeric(seq(as.Date("2022-01-01"), as.Date("2024-01-31"), by = "day"))
 truffe <- data.frame(
   idtruffe = paste0("truffe", 1:100),
   idchene = sample(chenes_feularde$id, 100, replace = TRUE) |> as.character(),

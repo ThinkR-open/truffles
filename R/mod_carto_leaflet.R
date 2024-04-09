@@ -13,7 +13,7 @@ mod_carto_leaflet_ui <- function(id) {
     tags$div(
       prettySwitch(
         inputId = ns("missingdata"),
-        label = "Info à compl\u00e9ter",
+        label = "Info \u00e0 compl\u00e9ter",
         fill = TRUE,
         status = "primary"
       ),
@@ -61,7 +61,9 @@ mod_carto_leaflet_server <- function(id, global) {
     observeEvent(
       c(
         input$reens_id,
-        input$missingdata
+        input$missingdata,
+        global$truffe,
+        global$chenes_feularde
       ),
       ignoreNULL = FALSE,
       {

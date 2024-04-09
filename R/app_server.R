@@ -20,7 +20,7 @@ app_server <- function(input, output, session) {
 
   observeEvent(TRUE, {
     log_info_dev("Connect db")
-    global$conn <- dbConnect(SQLite(), system.file("chenes_truffe.sqlite", package = "truffles"))
+    global$conn <- connect_db()
     trigger("updatedb")
   })
 
@@ -94,7 +94,15 @@ app_server <- function(input, output, session) {
     req(input$complete_truffe)
     log_info_dev("observeEvent(input$complete_truffe, ...")
 
-    # TODO update_db_truffe
+    update_db_truffe(
+      conn = global$conn,
+      idtruffe = input$complete_truffe[2],
+      idchene = input$complete_truffe[1],
+      date_trouve = as.numeric(as.Date(input$complete_truffe[3])),
+      poids = as.numeric(input$complete_truffe[4]),
+      estimation = as.numeric(as.logical(input$complete_truffe[5])),
+      commentaires = input$complete_truffe[6]
+    )
 
     trigger("updatedb")
   })
