@@ -10,3 +10,4 @@ $run_dev.*
 ^README\.Rmd$
 ^\.gitlab-ci\.yml$
 ^ci/lib$
+^CODE_OF_CONDUCT\.md$

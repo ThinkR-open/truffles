@@ -61,6 +61,8 @@ usethis::use_test("app")
 usethis::use_vignette("truffles")
 devtools::build_vignettes()
 
+usethis::use_code_of_conduct("murielle@thinkr.fr")
+
 ## Code Coverage----
 ## Set the code coverage service ("codecov" or "coveralls")
 usethis::use_coverage()
