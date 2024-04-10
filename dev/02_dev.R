@@ -102,6 +102,7 @@ usethis::use_jenkins()
 
 # GitLab CI
 usethis::use_gitlab_ci()
+gitlabr::use_gitlab_ci(type = "check-coverage-pkgdown")
 
 # You're now set! ----
 # go to dev/03_deploy.R

@@ -8,3 +8,5 @@ $run_dev.*
 ^truffles\.Rproj$
 ^LICENSE\.md$
 ^README\.Rmd$
+^\.gitlab-ci\.yml$
+^ci/lib$
