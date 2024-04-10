@@ -6,18 +6,18 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-R Package for Truffle Orchard Mapping and Management
+R package for mapping and managing a truffle tree plantation
 
 truffles is an R package designed to facilitate the visualization and
-management of truffle orchards through a mobile application format. With
-truffles, users can efficiently map out truffle orchards, visualize them
-cartographically, and interactively manage truffle-related data.
+management of a truffle tree plantation via a mobile application. With
+truffles, users can efficiently map a truffle tree plantation, visualize
+them cartographically and interactively manage truffle data.
 
 ## Features
 
-- **Cartographic Visualization**: truffles enables users to visualize
-  truffle orchards on a map interface, providing a comprehensive
-  overview of the orchard layout.
+- **Cartographic Visualization**: enables users to visualize truffle
+  trees on a cartographic interface, providing an overview of the
+  plantation layout.
 
 - **Interactive Information Display**: Each truffle tree is clickable,
   allowing users to access detailed information such as planting date
@@ -51,3 +51,23 @@ the mobile application using the following commands:
 library(truffles)
 run_app()
 ```
+
+## Cartography tab
+
+### Visuasilation of home page
+
+![](man/figures/accueil.png)
+
+### View information on truffles found to complete
+
+![](man/figures/infoacompleter.png)
+
+### Visualization of reseeded truffle oak trees
+
+![](man/figures/reensemence.png)
+
+## Graphics tab
+
+### View truffle oak yields
+
+![](man/figures/dataviz.png)
