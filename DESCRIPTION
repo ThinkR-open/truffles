@@ -1,9 +1,9 @@
 Package: truffles
 Title: Truffles
 Version: 0.0.1.9000
-Authors@R: 
-    person("Murielle", "Delmotte", , "murielle@thinkr.fr", role = c("cre", "aut"))
-Description: PKG_DESC.
+Authors@R: person('Murielle', 'Delmotte', email = 'murielle@thinkr.fr', role = c('cre', 'aut'))
+Description: To map and manage a truffle tree
+ plantation.
 License: MIT + file LICENSE
 Imports: 
     cli,
