@@ -28,7 +28,7 @@ truffes <- DBI::dbReadTable(conn, name = "truffe")
 
 weight_truffles_by(truffes, annee = lubridate::year(as.Date(date_trouve)))
 
-truffes_chene <- truffes |> 
+truffes_chene <- truffes |>
   inner_join(DBI::dbReadTable(conn, name = "chenes_feularde"), by = join_by(idchene == id))
 weight_truffles_by(truffes_chene, annee = lubridate::year(as.Date(date_trouve)), type)
 }

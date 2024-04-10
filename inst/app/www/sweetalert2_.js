@@ -78,6 +78,7 @@ Swal.fire({
               } else {
                 // Toutes les informations sont valides
                 Shiny.setInputValue('new_truffe', [arg.id, date, num, estim, comm]);
+                Shiny.setInputValue("chene_click", null, {priority: "event"});
               }
 
           }
@@ -143,6 +144,9 @@ Swal.fire({
                 Shiny.setInputValue('complete_truffe', [arg.id, arg.idtruffe, date, weight, estim, comment]);
               }
        
+      } else if (result.isDismissed) {
+        console.log("Dismissed chene_click");
+        Shiny.setInputValue("chene_click", null, {priority: "event"});
       }
     });
  })
