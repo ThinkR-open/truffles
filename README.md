@@ -1,12 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# truffles
+# truffles <img src="man/figures/hex-truffles.png" align="right" alt="" width="120" />
 
 <!-- badges: start -->
-<!-- badges: end -->
 
-R package for mapping and managing a truffle tree plantation
+[![R build
+status](https://gitlab.com/MurielleDelmotte/truffles/badges/main/pipeline.svg)](https://gitlab.com/thinkr-open/squirrels/-/pipelines)
+<!-- badges: end --> R package for mapping and managing a truffle tree
+plantation
 
 truffles is an R package designed to facilitate the visualization and
 management of a truffle tree plantation via a mobile application. With
