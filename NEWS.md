@@ -1,3 +1,5 @@
+# truffles (development version)
+
 # truffles 0.0.1
 
 - New function connect_db() to connect the database
