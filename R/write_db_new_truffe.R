@@ -11,6 +11,7 @@
 #' @param estimation logical indicating whether the weight was estimated or not.
 #' @param comment Any additional comments related to the truffle.
 #' @param digest_ The digest of the truffle.
+#' @param date_comment the date of the comment (Sys.Date() by default)
 #'
 #' @importFrom digest digest
 #' @importFrom DBI dbAppendTable
@@ -20,7 +21,7 @@
 #' @examples
 #' # write_db_new_truffe(theidchene = "chene")
 write_db_new_truffe <-
-  function(conn = connect_db(), theidchene, date_trouvee, poids, estimation, comment, digest_ = Sys.time()) {
+  function(conn = connect_db(), theidchene, date_trouvee, poids, estimation, comment, digest_ = Sys.time(), date_comment = Sys.Date()) {
     idtruffe <- digest(digest_)
 
     add_truffe <- data.frame(
@@ -29,7 +30,7 @@ write_db_new_truffe <-
       date_trouve = as.Date(date_trouvee),
       poids = poids,
       estimation = estimation,
-      commentaires = comment
+      commentaires = paste(date_comment, comment, sep = " : ")
     )
 
     dbAppendTable(conn, "truffe", add_truffe)
