@@ -30,9 +30,9 @@ $( document ).ready(function() {
 Swal.fire({
   title: 'Chêne  ' + arg.id + ' :',
   showDenyButton: true,
-  showCancelButton: true,
   confirmButtonText: `Carte d'identité`,
   denyButtonText: `Ajouter une truffe`,
+  showCancelButton: true
 }).then((result) => {
 
   if (result.isConfirmed) {
@@ -42,8 +42,12 @@ Swal.fire({
       Swal.fire({
         title: 'Carte d identité du chêne',
         html: filledtemplateidentitycard,
-        showCancelButton: true
+        showCancelButton: false,
+        confirmButtonText: `Fermer`
+      }).then((result) => {
+          Shiny.setInputValue("chene_click", null, {priority: "event"});
       })
+      
 
   } else if (result.isDenied) {
 

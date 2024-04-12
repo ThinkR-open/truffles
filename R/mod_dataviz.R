@@ -28,9 +28,14 @@ mod_dataviz_server <- function(id, global) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    observe({
+     observeEvent(
+      c(        
+        global$truffe,
+        global$chenes_feularde),
+      {
       req(global$truffe)
       log_info_dev("Dataviz")
+
       # By year
       truf <- weight_truffles_by(global$truffe, annee = lubridate::year(as.Date(date_trouve)))
 
