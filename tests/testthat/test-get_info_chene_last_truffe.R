@@ -14,6 +14,8 @@ test_that("get_info_chene_last_truffe works", {
   expect_equal(get_info_chene_last_truffe(dbtruffe, "123")$idchene, "123")
   expect_equal(get_info_chene_last_truffe(dbtruffe, "123")$date_trouve, as.Date("2023-03-15"))
 
+  expect_equal(get_info_chene_last_truffe(dbtruffe, "123", filter_missing_info = TRUE)$date_trouve, as.Date("2023-01-01"))
+
 
   # Cas où l'arbre spécifié n'existe pas dans la base de données
   expect_equal(nrow(get_info_chene_last_truffe(dbtruffe, "999")), 0)

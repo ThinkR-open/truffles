@@ -23,6 +23,6 @@ from a dataframe containing reseeding information.
 conn <- connect_db()
 reensemence <- DBI::dbReadTable(conn, name = "reens")
 
-get_info_reensemence(dbreensemence = reensemence, theidchene = "150")
+get_info_reensemence( dbreensemence = reensemence, theidchene = "150")
 DBI::dbDisconnect(conn)
 }

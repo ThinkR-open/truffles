@@ -487,6 +487,8 @@ dbtruffe <- data.frame(idchene = c("123", "123", "456", "789"),
   expect_equal(nrow(get_info_chene_last_truffe(dbtruffe, "123")), 1)
   expect_equal(get_info_chene_last_truffe(dbtruffe, "123")$idchene, "123")
   expect_equal(get_info_chene_last_truffe(dbtruffe, "123")$date_trouve, as.Date("2023-03-15"))
+
+  expect_equal(get_info_chene_last_truffe(dbtruffe, "123", filter_missing_info = TRUE)$date_trouve, as.Date("2023-01-01"))
   
  
   # Cas où l'arbre spécifié n'existe pas dans la base de données
