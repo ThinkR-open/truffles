@@ -38,28 +38,21 @@ This function updates a row in the "truffe" table of a database using an SQL UPD
 \examples{
 
 conn <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
-
-# Création de la table truffe dans la base de données
-DBI::dbWriteTable(
-  conn,
-  "truffe",
-  data.frame(
-    idtruffe = "156",
-    idchene = "15",
-    date_trouve = as.numeric(as.Date("2020/02/02")),
-    poids = 12,
-    estimation = 1,
-    commentaires = "Comment"
+  
+  # Création de la table truffe dans la base de données
+  DBI::dbWriteTable(
+    conn,
+    "truffe",
+    data.frame(
+      idtruffe = "156",
+      idchene = "15",
+      date_trouve = as.numeric(as.Date("2020/02/02")),
+      poids = 12,
+      estimation = 1,
+      commentaires = "Comment"
+    )
   )
-)
 
-update_db_truffe(
-  conn,
-  idtruffe = "156",
-  idchene = "15",
-  date_trouve = as.numeric(as.Date("2020/02/02")),
-  poids = 22,
-  estimation = 0,
-  commentaires = "C'est déjà bien!"
-)
+update_db_truffe(conn, idtruffe = "156", idchene = "15", date_trouve = as.numeric(as.Date("2020/02/02")), poids = 22, 
+                 estimation = 0, commentaires = "C'est déjà bien!")
 }

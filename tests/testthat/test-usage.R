@@ -1,8 +1,8 @@
 test_that("Usage works", {
   conn <- connect_db()
 
-chenes_feularde_ <- dbReadTable(conn, name = "chenes_feularde")
-reens_ <- dbReadTable(conn, name = "reens")
+  chenes_feularde_ <- dbReadTable(conn, name = "chenes_feularde")
+  reens_ <- dbReadTable(conn, name = "reens")
 
   DBI::dbDisconnect(conn)
   # Creation d'une DB temporaire pour les tests:
@@ -27,7 +27,7 @@ reens_ <- dbReadTable(conn, name = "reens")
     "chenes_feularde",
     chenes_feularde_
   )
-  
+
   DBI::dbWriteTable(
     conn_usage,
     "reens",
@@ -56,10 +56,12 @@ reens_ <- dbReadTable(conn, name = "reens")
     size = 1
   )[[1]]
 
-  info <- get_info(dbchene = chenes_feularde, 
-  dbtruffe = truffe, 
-  dbreensemence = reens, 
-  theidchene = theidchene)
+  info <- get_info(
+    dbchene = chenes_feularde,
+    dbtruffe = truffe,
+    dbreensemence = reens,
+    theidchene = theidchene
+  )
 
   write_db_new_truffe(
     conn = conn_usage,
@@ -79,9 +81,12 @@ reens_ <- dbReadTable(conn, name = "reens")
     size = 1
   )[[1]]
 
-  info <- get_info(dbchene = chenes_feularde, dbtruffe = truffe, 
-  dbreensemence = reens, 
-  theidchene = theidchene)
+  info <- get_info(
+    dbchene = chenes_feularde,
+    dbtruffe = truffe,
+    dbreensemence = reens,
+    theidchene = theidchene
+  )
 
   write_db_new_truffe(
     conn = conn_usage,
@@ -101,9 +106,12 @@ reens_ <- dbReadTable(conn, name = "reens")
     size = 1
   )[[1]]
 
-  info <- get_info(dbchene = chenes_feularde, dbtruffe = truffe, 
-  dbreensemence = reens, 
-  theidchene = theidchene)
+  info <- get_info(
+    dbchene = chenes_feularde,
+    dbtruffe = truffe,
+    dbreensemence = reens,
+    theidchene = theidchene
+  )
 
   write_db_new_truffe(
     conn = conn_usage,

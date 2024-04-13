@@ -57,6 +57,11 @@ usethis::use_test("app")
 
 # Documentation
 
+
+usethis::use_pkgdown()
+pkgdown::build_site(override = list(destination = "inst/site"))
+
+
 ## Vignette ----
 usethis::use_vignette("truffles")
 devtools::build_vignettes()

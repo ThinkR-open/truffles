@@ -1,0 +1,269 @@
+---
+title: "Utilisation des fonctions métier"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{truffles}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(truffles)
+library(DBI)
+library(lubridate)
+```
+
+## Introduction
+
+Le package {truffles} fournit des fonctionnalités pour gérer les données relatives aux truffes trouvées sous les chênes. Cette vignette détaille les étapes de base pour utiliser le package.
+
+## Connexion à une base de données
+
+La première étape consiste à se connecter à une base de données contenant les informations sur les chênes, les truffes et les resemis.
+
+
+### Préparation de la base de données pour les tests
+
+Nous créons une base de données temporaire pour effectuer nos tests sans altérer les données originales.
+
+#### Création des tables
+
+```{r}
+conn_usage <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
+
+# Création de la table truffe dans la base de données
+DBI::dbWriteTable(
+  conn_usage,
+  "truffe",
+  data.frame(
+    idtruffe = character(),
+    idchene = character(),
+    date_trouve = numeric(),
+    poids = numeric(),
+    estimation = logical(),
+    commentaires = character()
+  )
+)
+
+DBI::dbWriteTable(
+  conn_usage,
+  "chenes",
+  data.frame(
+    id = character(),
+    lon = numeric(),
+    lat = numeric(),
+    type = character(),
+    present = numeric(),
+    date_plantation = numeric(),
+    reensemence = numeric()
+  )
+)
+
+DBI::dbWriteTable(
+  conn_usage,
+  "reens",
+  data.frame(
+    idchene = character(),
+    date_reens = numeric()
+  )
+)
+```
+
+
+```{r}
+chenes_ <- structure(
+  list(
+    id = c("1", "2", "3", "4", "5"),
+    lon = c(1.53193333748493, 1.53198654139325, 1.53203490858186, 1.53208085741133, 1.53213164296051),
+    lat = c(47.9984324222873, 47.9984696419663, 47.9985181893329, 47.99855540895, 47.998600719752),
+    type = c("Normal", "Normal", "Normal", "Normal", "Green"),
+    present = c(1L, 1L, 1L, 1L, 1L),
+    date_plantation = c("2024-01-15", "2023-12-20", "2023-11-05", "2024-02-10", "2023-10-25")
+  ),
+  row.names = c(NA, -5L),
+  class = c("tbl_df", "tbl", "data.frame")
+)
+
+
+DBI::dbWriteTable(
+  conn_usage,
+  "chenes",
+  chenes_,
+  overwrite = TRUE
+)
+
+
+reens_ <- structure(
+  list(
+    idchene = c("5", "5", "1"),
+    date_reens = c(19128, 19043, 19605)
+  ),
+  row.names = c(
+    NA,
+    3L
+  ),
+  class = "data.frame"
+)
+
+DBI::dbWriteTable(
+  conn_usage,
+  "reens",
+  reens_,
+  overwrite = TRUE
+)
+```
+
+### Chargement des données
+
+Nous chargeons les données à partir de la base de données. Nous supposons que les tables de la base de données contiennent les informations suivantes :
+
+- chenes_feularde : données sur les chênes
+- truffe : données sur les truffes trouvées
+- reens : données sur les resemis
+
+```{r}
+chenes <- dbReadTable(conn_usage, name = "chenes")
+truffe <- dbReadTable(conn_usage, name = "truffe")
+reens <- dbReadTable(conn_usage, name = "reens")
+```
+
+
+## Filtrage des chênes présents
+
+Nous filtrons les chênes présents dans la base de données.
+
+```{r}
+chenes <- chenes |>
+  dplyr::filter(present == 1)
+```
+
+
+## Ajout d'une nouvelle truffe avec toutes les informations
+
+Nous ajoutons une nouvelle truffe avec toutes les informations requises.
+
+### Ajout de la nouvelle truffe
+
+```{r}
+write_db_new_truffe(
+  conn = conn_usage,
+  theidchene = "5",
+  date_trouvee = "2024-01-01",
+  poids = 25,
+  estimation = 0,
+  comment = "Un commentaire"
+)
+```
+
+### Ajout d'une nouvelle truffe sans poids
+
+Nous ajoutons une nouvelle truffe sans spécifier le poids.
+
+```{r}
+write_db_new_truffe(
+  conn = conn_usage,
+  theidchene = "1",
+  date_trouvee = "2024-01-01",
+  poids = NA,
+  estimation = 1,
+  comment = "Poids a completer plus tard"
+)
+```
+
+### Ajout d'une nouvelle truffe avec estimation du poids
+
+Nous ajoutons une nouvelle truffe en estimant son poids.
+
+```{r}
+write_db_new_truffe(
+  conn = conn_usage,
+  theidchene = "3",
+  date_trouvee = "2024-02-01",
+  poids = 100,
+  estimation = 1,
+  comment = "Un poids estime"
+)
+```
+
+
+### Vérification des résultats
+
+Nous vérifions le nombre total de truffes ajoutées.
+
+
+```{r}
+truffe <- dbReadTable(conn_usage, name = "truffe")
+truffe
+```
+## Complétion d'informations
+
+```{r}
+info <- get_info_chene_last_truffe(dbtruffe = truffe, theidchene = "3")
+update_db_truffe(
+  conn_usage,
+  idtruffe = info$idtruffe,
+  idchene = info$idchene,
+  date_trouve = info$date_trouve,
+  poids = 32,
+  commentaires = "J'avais surestimé",
+  estimation = 0
+)
+```
+
+## Récupération des informations
+
+
+```{r}
+truffe <- dbReadTable(conn_usage, name = "truffe")
+```
+Nous récupèrons les informations du chêne truffier n°5 :
+```{r}
+get_info(
+  dbchene = chenes,
+  dbtruffe = truffe,
+  dbreensemence = reens,
+  theidchene = "3"
+)
+```
+
+La dernière truffe trouvée pour le chêne n°5
+
+```{r}
+get_info_chene_last_truffe(dbtruffe = truffe, theidchene = "5")
+```
+## Calcul d'aggrégation:
+
+### Poids total de truffes trouvés
+
+```{r}
+weight_truffles_by(truffe)
+```
+
+
+### Poids total de truffes trouvés par annee
+
+```{r}
+weight_truffles_by(truffe, annee = year(as.Date(date_trouve)))
+```
+
+### Poids total de truffes trouvés par annee et par type
+
+```{r}
+truffes_chene <- truffe |>
+  dplyr::inner_join(chenes, by = dplyr::join_by(idchene == id))
+weight_truffles_by(truffes_chene, annee = lubridate::year(as.Date(date_trouve)), type)
+```
+
+## Déconnexion de la base de données
+
+```{r}
+DBI::dbDisconnect(conn_usage)
+```
+
