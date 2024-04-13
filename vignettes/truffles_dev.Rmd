@@ -1,0 +1,28 @@
+---
+title: ""
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{truffles_dev}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Schématisation de l'application
+
+![](../reference/figures/structure_app.png)
+
+## Visualisation des dépendances
+
+![](../reference/figures/pkgnet_global.png)
+
+
+## Visualisation des dépendances - app_server.R
+
+![](../reference/figures/pkgnet_app_server.png)

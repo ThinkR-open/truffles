@@ -20,7 +20,7 @@ mod_carto_leaflet_ui <- function(id) {
       prettySwitch(
         inputId = ns("reens_id"),
         value = FALSE,
-        label = "Rensemenc\u00e9",
+        label = "R\u00e9ensemenc\u00e9",
         fill = TRUE,
         status = "primary"
       )

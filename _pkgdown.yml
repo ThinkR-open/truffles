@@ -11,6 +11,6 @@ navbar:
       href: articles/truffles.html
     - text: -------
     - text: Developpeur
-    - text: Article B1
-      href: articles/truffles.html
+    - text: Architecture de l'application
+      href: articles/truffles_dev.html
     
