@@ -31,6 +31,7 @@ app_server <- function(input, output, session) {
     global$chenes_feularde <- dbReadTable(global$conn, name = "chenes_feularde") |>
       filter(present == 1)
     global$truffe <- dbReadTable(global$conn, name = "truffe")
+    global$reensemence <- dbReadTable(global$conn, name = "reens")
   })
 
   mod_carto_leaflet_server("carto_leaflet_1", global = global)
@@ -56,13 +57,19 @@ app_server <- function(input, output, session) {
         )
       )
     } else {
-      info <- get_info(dbchene = global$chenes_feularde, dbtruffe = global$truffe, theidchene = input$chene_click)
+      info <- get_info(
+        dbchene = global$chenes_feularde,
+        dbtruffe = global$truffe,
+        dbreensemence = global$reensemence,
+        theidchene = input$chene_click
+      )
 
       golem::invoke_js(
         "modal",
         list(
           id = input$chene_click,
           type = info$chene$type,
+          date_reens = info$reensemence,
           date_p = as.Date(info$chene$date_plantation),
           der_truf = info$truffes$derniere_truffe,
           tot_poids = info$truffes$poids_tot,

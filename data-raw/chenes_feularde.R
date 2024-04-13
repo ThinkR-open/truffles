@@ -43,10 +43,14 @@ truffe$estimation[c(1, 2, 10)] <- 1
 
 dbWriteTable(conn, "truffe", truffe, overwrite = TRUE)
 
+reens <- data.frame(
+  idchene = chenes_feularde |>
+    filter(reensemence == 1) |>
+    pull(id)
+)
 
-col_names <- c("idchene", "date_reens")
-reens <- data.frame(matrix(ncol = length(col_names), nrow = 0))
-colnames(reens) <- col_names
+reens$date_reens <- sample(dates, size = nrow(reens), replace = TRUE)
+
 
 dbWriteTable(conn, "reens", reens, overwrite = TRUE)
 DBI::dbDisconnect(conn)

@@ -4,12 +4,14 @@
 \alias{get_info}
 \title{Get information about oak and truffles}
 \usage{
-get_info(dbchene, dbtruffe, theidchene)
+get_info(dbchene, dbtruffe, dbreensemence, theidchene)
 }
 \arguments{
 \item{dbchene}{Database containing information about oak trees.}
 
 \item{dbtruffe}{Database containing information about truffles.}
+
+\item{dbreensemence}{Database containing reseeding information.}
 
 \item{theidchene}{ID of the oak tree for which information is to be retrieved.}
 }
@@ -24,7 +26,8 @@ databases and oak tree ID.
 conn <- DBI::dbConnect(RSQLite::SQLite(), system.file("chenes_truffe.sqlite", package = "truffles"))
 chene <- DBI::dbReadTable(conn, name = "chenes_feularde")
 truffe <- DBI::dbReadTable(conn, name = "truffe")
+reensemence <- DBI::dbReadTable(conn, name = "reens")
 
-get_info(dbchene = chene, dbtruffe = truffe, theidchene = "162")
+get_info(dbchene = chene, dbtruffe = truffe, dbreensemence = reensemence, theidchene = "162")
 DBI::dbDisconnect(conn)
 }

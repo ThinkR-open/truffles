@@ -128,7 +128,63 @@ test_that("get_info_chene_truffe works", {
 })
 ```
 
+# get_info_reensemence
+    
+```{r function-get_info_reensemence}
+#' Get the latest reseeding date for a given oak tree ID.
+#'
+#' This function retrieves the latest reseeding date for a specified oak tree ID
+#' from a dataframe containing reseeding information.
+#'
+#' @param dbreensemence A data frame containing reseeding information with columns "idchene" and "date_reens".
+#' @param theidchene The ID of the oak tree for which to retrieve the reseeding date.
+#' 
+#' @return Returns the latest reseeding date for the specified oak tree ID. If no reseeding
+#' information is available for the given ID, returns "-".
+#' 
+#' @export
+get_info_reensemence <- function(dbreensemence, theidchene){
 
+check_param(dbreensemence, "data.frame")
+check_param(theidchene, "character")
+check_names_dataframe(c("idchene", "date_reens"), dbreensemence)
+
+reensemence_chene <- dbreensemence |>
+      filter(idchene == theidchene)  
+
+if (nrow(reensemence_chene) == 0 ) {
+  res = "-"
+} else  {
+res <- as.Date(max(reensemence_chene$date_reens))
+}
+
+return(res)
+}
+```
+  
+```{r example-get_info_reensemence}
+conn <- connect_db()
+reensemence <- DBI::dbReadTable(conn, name = "reens")
+
+get_info_reensemence( dbreensemence = reensemence, theidchene = "150")
+DBI::dbDisconnect(conn)
+```
+  
+```{r tests-get_info_reensemence}
+test_that("get_info_reensemence works", {
+  expect_true(inherits(get_info_reensemence, "function")) 
+  expect_error(get_info_reensemence("not a data frame", "theidchene"), "dbreensemence must be a data.frame")
+  expect_error(get_info_reensemence(data.frame(), 123), "theidchene must be a character")
+  
+  dbreensemence <- data.frame(idchene = c("theidchene", "otherid", "theidchene"), 
+  date_reens = c(as.Date("2022/01/01"), as.Date("2024/01/02"), as.Date("2024/01/05")))
+  expect_equal(get_info_reensemence(dbreensemence, "nonexistentid"), "-")
+  expect_equal(get_info_reensemence(dbreensemence, "theidchene"), as.Date("2024/01/05"))
+
+
+})
+```
+  
 
 # get_info_chene
     
@@ -209,17 +265,19 @@ test_that("get_info_chene works", {
 #' 
 #' @param dbchene Database containing information about oak trees.
 #' @param dbtruffe Database containing information about truffles.
+#' @param dbreensemence Database containing reseeding information.
 #' @param theidchene ID of the oak tree for which information is to be retrieved.
 #'
 #' @return A list containing information about oak trees and truffles.
 #' 
 #' 
 #' @export
-get_info <- function(dbchene, dbtruffe, theidchene){
+get_info <- function(dbchene, dbtruffe, dbreensemence, theidchene){
 
     resultat <- list(
       chene = get_info_chene(dbchene = dbchene, theidchene = theidchene),
-      truffes = get_info_chene_truffe(dbtruffe = dbtruffe, theidchene = theidchene)
+      truffes = get_info_chene_truffe(dbtruffe = dbtruffe, theidchene = theidchene),
+      reensemence = get_info_reensemence(dbreensemence = dbreensemence, theidchene = theidchene)
     )
     
     return(resultat)
@@ -230,8 +288,9 @@ get_info <- function(dbchene, dbtruffe, theidchene){
 conn <- DBI::dbConnect(RSQLite::SQLite(), system.file("chenes_truffe.sqlite", package = "truffles"))
 chene <- DBI::dbReadTable(conn, name = "chenes_feularde")
 truffe <- DBI::dbReadTable(conn, name = "truffe")
+reensemence <- DBI::dbReadTable(conn, name = "reens")
 
-get_info(dbchene = chene, dbtruffe = truffe, theidchene = "162")
+get_info(dbchene = chene, dbtruffe = truffe, dbreensemence = reensemence, theidchene = "162")
 DBI::dbDisconnect(conn)
 ```
   
@@ -263,9 +322,12 @@ test_that("get_info works", {
     )
   )
   
+  dbreensemence <- data.frame(
+    idchene = c("1", "4", "4"),
+    date_reens = c("2024-01-01", "2012-03-15", "2021-06-20")
+  )
   # Test quand le chêne n'existe pas dans la base de données
-  expect_equal(get_info(dbchene, dbtruffe, "4"),
-               list(
+  expected_output0 <- list(
                  chene = list(
                    type = character(0),
                    date_plantation = structure(numeric(0), class = "Date")
@@ -274,9 +336,12 @@ test_that("get_info works", {
                    poids_tot = 0,
                    derniere_truffe = "-",
                    comments = "-"
-                 )
-               ))
+                 ),
+                 reensemence = as.Date("2021-06-20")
+               )
   
+  expect_equal(get_info(dbchene, dbtruffe, dbreensemence, "4"),expected_output0)
+
   # Test quand le chêne existe dans la base de données
   expected_output <-
     list(
@@ -288,9 +353,10 @@ test_that("get_info works", {
         poids_tot = 125,
         derniere_truffe = structure(19844, class = "Date"),
         comments = "2024-04-01 : Truffe petite<br>2024-05-01 : Truffe moyenne"
-      )
+      ),
+      reensemence = "-"
     )
-  expect_equal(get_info(dbchene, dbtruffe, "3"), expected_output)
+  expect_equal(get_info(dbchene, dbtruffe, dbreensemence, "3"), expected_output)
 })
 ```
   

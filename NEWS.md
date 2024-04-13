@@ -1,5 +1,6 @@
 # truffles (development version)
 
+- New function get_info_reensemence() to get information about the latest reseeding date
 # truffles 0.0.1
 
 - New function connect_db() to connect the database

@@ -6,9 +6,11 @@ flat_get_info_chene_truffe.Rmd:
   - R/get_info_chene.R
   - R/get_info_chene_last_truffe.R
   - R/get_info_chene_truffe.R
+  - R/get_info_reensemence.R
   - R/weight_truffles_by.R
   tests:
   - tests/testthat/test-get_info_chene_truffe.R
+  - tests/testthat/test-get_info_reensemence.R
   - tests/testthat/test-get_info_chene.R
   - tests/testthat/test-get_info.R
   - tests/testthat/test-weight_truffles_by.R
