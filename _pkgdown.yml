@@ -12,5 +12,7 @@ navbar:
     - text: -------
     - text: Developpeur
     - text: Architecture de l'application
-      href: articles/truffles_dev.html
+      href: articles/dev_truffles.html
+    - text: Couverture en tests unitaires
+      href: articles/dev_coverage.html
     

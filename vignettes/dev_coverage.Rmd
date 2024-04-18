@@ -1,0 +1,18 @@
+---
+title: "dev_coverage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{dev_coverage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+```{r}
+covr::package_coverage("../")
+```

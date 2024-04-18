@@ -1,0 +1,135 @@
+---
+title: ""
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{truffles_dev}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+Cette documentation vise à fournir des instructions détaillées pour les développeurs travaillant sur cette application utilisant {golem} et implémentant des fonctionnalités métier avec {fusen}.
+
+L'application utilise également les bibliothèques JavaScript Leaflet, SweetAlert2 et Chart.js.
+
+## Architecture de l'application
+
+L'application Shiny suit une architecture basée sur {golem}. 
+Voici la structure de base de l'application :
+
+```{kotlin}
+.
+├── CODE_OF_CONDUCT.md
+├── data-raw
+├── DESCRIPTION
+├── dev
+├── docs
+├── inst
+├── LICENSE
+├── LICENSE.md
+├── man
+├── NAMESPACE
+├── NEWS.md
+├── R
+├── README.md
+├── README.Rmd
+├── tests
+├── truffles.Rproj
+├── vignettes
+└── _pkgdown.yml
+```
+
+Avec entre autre:
+
+    DESCRIPTION: Fichier de description du package.
+    R/: Contient les scripts pour le serveur (app_server.R) et l'interface utilisateur (app_ui.R).
+    data-raw/: Répertoire pour stocker les données utilisées poru construire la base sql qui sert d'exemple.
+    inst/app/: Répertoire pour les ressources web statiques utilisées par l'application.
+    man/: Documentation pour les fonctions.
+    tests/: Tests unitaires pour l'application.
+
+
+## Développement des fonctionnalités métier avec {fusen}
+
+{fusen} est utilisé pour implémenter les fonctionnalités métier de l'application. 
+Les fonctions et les modules {fusen} doivent être développés dans les flat file dédiés dans le dossier dev/. 
+
+```{kotlin}
+├── dev
+│   ├── 01_start.R
+│   ├── 02_dev.R
+│   ├── 03_deploy.R
+│   ├── config_attachment.yaml
+│   ├── config_fusen.yaml
+│   ├── config_not_registered.csv
+│   ├── flat_get_info_chene_truffe.Rmd
+│   ├── flat_utils.Rmd
+│   ├── flat_utils_db.Rmd
+│   ├── flat_utils_js.Rmd
+│   ├── run_dev.R
+│   └── structure_app.excalidraw
+```
+
+
+## Utilisation des Bibliothèques JavaScript
+
+
+```{kotlin}
+./inst/app/www
+├── chart.js
+├── chart.umd.min.js
+├── chartjs_.js
+├── custom.css
+├── favicon.ico
+├── leaflet.css
+├── leaflet.js
+├── leaflet_.js
+├── sweetalert2.all.min.js
+├── sweetalert2.min.css
+├── sweetalert2_.js
+├── template_find_truffle.html
+└── template_identity_card.html
+```
+
+### Leaflet
+
+Leaflet est une bibliothèque JavaScript de cartographie interactive. 
+Elle est utilisée pour la génération de la carte cliquable de la plantation de chênes truffiers.
+
+### SweetAlert2
+
+SweetAlert2 est une bibliothèque JavaScript permettant d'afficher des alertes personnalisées. 
+Elle est notamment utilisée pour les intéractions avec l'utilisateur via des modals.
+
+Il est important de noter que l'utilisation de SweetAlert2 dans cette application repose également sur des templates HTML pour construire les modales:
+
+```{kotlin}
+├── template_find_truffle.html
+└── template_identity_card.html
+```
+
+### Chart.js
+
+Chart.js est une bibliothèque JavaScript permettant de créer des graphiques interactifs. 
+Elle est utilisée dans l'onglet "dataviz".
+
+## Schématisation de l'application
+
+![](../reference/figures/structure_app.png)
+
+## Visualisation des dépendances
+
+![](../reference/figures/pkgnet_global.png)
+
+
+## Visualisation des dépendances - app_server.R
+
+![](../reference/figures/pkgnet_app_server.png)
