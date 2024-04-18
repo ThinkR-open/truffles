@@ -46,6 +46,18 @@ check_ <- names %in% names(df)
 }
 ```
 
+
+```{r function-formater_comment}
+#' formater_comment
+#' @noRd 
+formater_comment <- function(comment, date = Sys.Date()){
+    c <- paste(date, comment, sep = " : ")
+    return(c)
+}
+```
+
+
+
 ```{r development-inflate, eval=FALSE}
 # Run but keep eval=FALSE to avoid infinite loop
 # Execute in the console directly

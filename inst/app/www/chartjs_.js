@@ -1,9 +1,20 @@
 $( document ).ready(function() {
+
+  let newChart = null;
+  let newChart1 = null;
+  
+  Chart.defaults.color = '#f2eeed';
+      // Chart.defaults.backgroundColor = '#f2eeed';
+      // Chart.defaults.borderColor = '#f2eeed';
+
   Shiny.addCustomMessageHandler('byyear', function(arg) {
 
- const ctx = document.getElementById(arg.id);
+if (newChart) newChart.destroy();
 
-  new Chart(ctx, {
+const ctx = document.getElementById(arg.id);
+
+
+newChart =  new Chart(ctx, {
     type: 'bar',
     data: {
       labels: arg.labels,
@@ -14,27 +25,33 @@ $( document ).ready(function() {
       }]
     },
     options: {
+      aspectRatio: 1.1, 
           responsive: true,
-    plugins: {
-      title: {
-        display: true,
-        text: arg.title
-      }
-    },
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
+          // indexAxis: 'y',
+          plugins: {
+            title: {
+              display: true, 
+              text: arg.title
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
     }
   });
+
 
   })
 
     Shiny.addCustomMessageHandler('byyeartype', function(arg) {
 
- const ctx = document.getElementById(arg.id);
+      if (newChart1) newChart1.destroy();
 
+ const ctx = document.getElementById(arg.id);
+ 
+ newChart1 = 
   new Chart(ctx, {
     type: 'bar',
     data: {
@@ -55,23 +72,25 @@ $( document ).ready(function() {
       }]
     },
     options: {
-          responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: arg.title
-      }
-    },
-      scales: {
-        y: {
-          beginAtZero: true
+        aspectRatio: 1.1, 
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: arg.title
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
         }
-      }
     }
   });
+
 
   })
 });

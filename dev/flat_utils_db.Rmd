@@ -61,6 +61,7 @@ test_that("connect_db works", {
 #' @param estimation logical indicating whether the weight was estimated or not.
 #' @param comment Any additional comments related to the truffle.
 #' @param digest_ The digest of the truffle.
+#' @param date_comment the date of the comment (Sys.Date() by default)
 #'
 #' @importFrom digest digest
 #' @importFrom DBI dbAppendTable
@@ -68,7 +69,7 @@ test_that("connect_db works", {
 #' 
 #' @export
 write_db_new_truffe <-
-  function(conn = connect_db(), theidchene, date_trouvee, poids, estimation, comment, digest_ = Sys.time()) {
+  function(conn = connect_db(), theidchene, date_trouvee, poids, estimation, comment, digest_ = Sys.time(), date_comment = Sys.Date()) {
     
   idtruffe = digest(digest_)
     
@@ -78,7 +79,7 @@ write_db_new_truffe <-
   date_trouve = as.Date(date_trouvee),
   poids = poids,
   estimation = estimation,
-  commentaires = comment
+  commentaires = paste(date_comment, comment, sep =" : ")
 )
   
   dbAppendTable(conn, "truffe", add_truffe)
@@ -125,7 +126,7 @@ test_that("write_db_new_truffe works", {
       date_trouve = 19790,
       poids = 50,
       estimation = 1,
-      commentaires = "Truffe fraîchement trouvée"
+      commentaires = formater_comment("Truffe fraîchement trouvée")
     )
   expect_equal(DBI::dbReadTable(conn, "truffe"), expected_output)
 })
@@ -148,20 +149,24 @@ test_that("write_db_new_truffe works", {
 #' @param estimation The estimation of the truffle.
 #'
 #' @return The function does not return any value, but it updates the corresponding row in the "truffe" table of the database.
-#' @importFrom DBI dbExecute
+#' @importFrom DBI dbExecute sqlInterpolate ANSI
 #' 
 #' @export
 update_db_truffe <- function(conn = connect_db(), idtruffe, idchene, date_trouve, poids, commentaires, estimation){
 
+commentaires <- formater_comment(commentaires)
+
 # Construire et exécuter la requête SQL pour mettre à jour la ligne
-update_query <- paste0("UPDATE truffe",
-                      " SET idtruffe = '", idtruffe, "',",
-                      " idchene = '", idchene, "',",
-                      " date_trouve = ", date_trouve, ",",
-                      " poids = ", poids, ",",
-                      " commentaires = '", commentaires, "',",
-                      " estimation = ", estimation, "",
-                      " WHERE idtruffe = '", idtruffe, "'")
+
+update_query <- DBI::sqlInterpolate(DBI::ANSI(),
+                                    "UPDATE truffe SET idtruffe = ?,
+                                    idchene = ?, 
+                                    date_trouve = ?, 
+                                    poids = ?, 
+                                    estimation = ?, 
+                                    commentaires = ?
+                                    WHERE idtruffe = ?",
+                                    idtruffe, idchene, date_trouve, poids, estimation, commentaires, idtruffe)
 
 DBI::dbExecute(conn, update_query)
 message("UPDATE db truffe")
@@ -187,7 +192,7 @@ conn <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
   )
 
 update_db_truffe(conn, idtruffe = "156", idchene = "15", date_trouve = as.numeric(as.Date("2020/02/02")), poids = 22, 
-                 estimation = 0, commentaires = "New comment")
+                 estimation = 0, commentaires = "C'est déjà bien!")
 ```
   
 ```{r tests-update_db_truffe}
@@ -221,7 +226,7 @@ update_db_truffe(conn, idtruffe = "156", idchene = "15", date_trouve = 18294, po
       date_trouve = 18294,
       poids = 22,
       estimation = 0,
-      commentaires = "New comment"
+      commentaires = formater_comment("New comment")
     )
   expect_equal(DBI::dbReadTable(conn, "truffe")  |> 
   dplyr::filter(idtruffe == "156"), expected_output)

@@ -1,9 +1,9 @@
 Package: truffles
 Title: Truffles
-Version: 0.0.1
+Version: 0.0.1.9000
 Authors@R: 
     person("Murielle", "Delmotte", , "murielle@thinkr.fr", role = c("cre", "aut"))
-Description: PKG_DESC.
+Description: To map and manage a truffle tree plantation.
 License: MIT + file LICENSE
 Imports: 
     cli,
@@ -20,10 +20,13 @@ Imports:
     shinyMobile,
     shinyWidgets
 Suggests: 
+    covr,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
     tibble
+VignetteBuilder: 
+    knitr
 Config/fusen/version: 0.6.0
 Config/testthat/edition: 3
 Encoding: UTF-8

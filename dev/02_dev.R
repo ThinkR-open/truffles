@@ -57,8 +57,14 @@ usethis::use_test("app")
 
 # Documentation
 
+
+usethis::use_pkgdown()
+pkgdown::build_site(override = list(destination = "inst/site"))
+
+
 ## Vignette ----
 usethis::use_vignette("truffles")
+usethis::use_vignette("truffles_dev")
 devtools::build_vignettes()
 
 usethis::use_code_of_conduct("murielle@thinkr.fr")

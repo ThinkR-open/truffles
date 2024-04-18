@@ -11,3 +11,7 @@ $run_dev.*
 ^\.gitlab-ci\.yml$
 ^ci/lib$
 ^CODE_OF_CONDUCT\.md$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+inst/site

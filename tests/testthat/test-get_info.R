@@ -27,21 +27,25 @@ test_that("get_info works", {
     )
   )
 
-  # Test quand le chêne n'existe pas dans la base de données
-  expect_equal(
-    get_info(dbchene, dbtruffe, "4"),
-    list(
-      chene = list(
-        type = character(0),
-        date_plantation = structure(numeric(0), class = "Date")
-      ),
-      truffes = list(
-        poids_tot = 0,
-        derniere_truffe = "-",
-        comments = "-"
-      )
-    )
+  dbreensemence <- data.frame(
+    idchene = c("1", "4", "4"),
+    date_reens = c("2024-01-01", "2012-03-15", "2021-06-20")
   )
+  # Test quand le chêne n'existe pas dans la base de données
+  expected_output0 <- list(
+    chene = list(
+      type = character(0),
+      date_plantation = structure(numeric(0), class = "Date")
+    ),
+    truffes = list(
+      poids_tot = 0,
+      derniere_truffe = "-",
+      comments = "-"
+    ),
+    reensemence = as.Date("2021-06-20")
+  )
+
+  expect_equal(get_info(dbchene, dbtruffe, dbreensemence, "4"), expected_output0)
 
   # Test quand le chêne existe dans la base de données
   expected_output <-
@@ -54,7 +58,8 @@ test_that("get_info works", {
         poids_tot = 125,
         derniere_truffe = structure(19844, class = "Date"),
         comments = "2024-04-01 : Truffe petite<br>2024-05-01 : Truffe moyenne"
-      )
+      ),
+      reensemence = "-"
     )
-  expect_equal(get_info(dbchene, dbtruffe, "3"), expected_output)
+  expect_equal(get_info(dbchene, dbtruffe, dbreensemence, "3"), expected_output)
 })

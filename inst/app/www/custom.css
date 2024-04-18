@@ -43,3 +43,10 @@
     transform: translateX(12px);
 }
  
+.conteneur{
+    display:flex;
+  }
+
+  .conteneur .enfant{
+    flex:1 0 200px;   /* cette ligne est un raccourci de la suite */
+  }

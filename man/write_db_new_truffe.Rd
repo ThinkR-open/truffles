@@ -11,7 +11,8 @@ write_db_new_truffe(
   poids,
   estimation,
   comment,
-  digest_ = Sys.time()
+  digest_ = Sys.time(),
+  date_comment = Sys.Date()
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ write_db_new_truffe(
 \item{comment}{Any additional comments related to the truffle.}
 
 \item{digest_}{The digest of the truffle.}
+
+\item{date_comment}{the date of the comment (Sys.Date() by default)}
 }
 \description{
 This function writes new truffle data to the specified database table.

@@ -13,7 +13,7 @@
 #' @param estimation The estimation of the truffle.
 #'
 #' @return The function does not return any value, but it updates the corresponding row in the "truffe" table of the database.
-#' @importFrom DBI dbExecute
+#' @importFrom DBI dbExecute sqlInterpolate ANSI
 #'
 #' @export
 #' @examples
@@ -41,33 +41,29 @@
 #'   date_trouve = as.numeric(as.Date("2020/02/02")),
 #'   poids = 22,
 #'   estimation = 0,
-#'   commentaires = "New comment"
+#'   commentaires = "C'est déjà bien!"
 #' )
 update_db_truffe <- function(conn = connect_db(), idtruffe, idchene, date_trouve, poids, commentaires, estimation) {
+  commentaires <- formater_comment(commentaires)
+
   # Construire et exécuter la requête SQL pour mettre à jour la ligne
-  update_query <- paste0(
-    "UPDATE truffe",
-    " SET idtruffe = '",
+
+  update_query <- DBI::sqlInterpolate(
+    DBI::ANSI(),
+    "UPDATE truffe SET idtruffe = ?,
+                                    idchene = ?,
+                                    date_trouve = ?,
+                                    poids = ?,
+                                    estimation = ?,
+                                    commentaires = ?
+                                    WHERE idtruffe = ?",
     idtruffe,
-    "',",
-    " idchene = '",
     idchene,
-    "',",
-    " date_trouve = ",
     date_trouve,
-    ",",
-    " poids = ",
     poids,
-    ",",
-    " commentaires = '",
-    commentaires,
-    "',",
-    " estimation = ",
     estimation,
-    "",
-    " WHERE idtruffe = '",
-    idtruffe,
-    "'"
+    commentaires,
+    idtruffe
   )
 
   DBI::dbExecute(conn, update_query)
