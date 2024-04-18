@@ -1,5 +1,6 @@
-# truffles (development version)
+# truffles 0.0.2
 
+- Using flexbox in modals
 - New function get_info_reensemence() to get information about the latest reseeding date
 - Add User Doc / Dev Doc in pkgdown 
 
