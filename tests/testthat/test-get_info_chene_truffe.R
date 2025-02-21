@@ -19,7 +19,7 @@ test_that("get_info_chene_truffe works", {
     )
   )
 
-  # Test quand le chêne n'existe pas dans la base de données
+  # Test when oak does not exist in the database
   expect_equal(
     get_info_chene_truffe(dbtruffe, "4"),
     list(
@@ -29,7 +29,7 @@ test_that("get_info_chene_truffe works", {
     )
   )
 
-  # Test quand le chêne existe dans la base de données
+  # Test when oak exists in the database
   expected_output <-
     list(
       poids_tot = 125,

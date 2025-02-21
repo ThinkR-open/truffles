@@ -4,7 +4,7 @@
 #' This function writes new truffle data to the specified database table.
 #'
 #' @param conn A connection to the database.
-#' @param theidchene The ID of the oak tree (chêne) where the truffle was found.
+#' @param theidchene The ID of the oak tree (oak) where the truffle was found.
 #' @param date_trouvee The date the truffle was found.
 #' @param poids The weight of the truffle in grams.
 #' @param estimation logical indicating whether the weight was estimated or not.

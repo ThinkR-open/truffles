@@ -2,7 +2,7 @@
 test_that("write_db_new_truffe works", {
   conn <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
 
-  # Création de la table truffe dans la base de données
+  # Creating the truffle table in the database
   DBI::dbWriteTable(
     conn,
     "truffe",
@@ -16,15 +16,15 @@ test_that("write_db_new_truffe works", {
     )
   )
 
-  # Écrire une nouvelle truffe dans la base de données
+  # write a new truffle to the database
   theidchene <- 1
   date_trouvee <- "2024-03-08"
   poids <- 50
-  comment <- "Truffe fraîchement trouvée"
+  comment <- "Freshly found truffle"
   estimation <- 1
   write_db_new_truffe(conn, theidchene, date_trouvee, poids, estimation, comment, digest_ = date_trouvee)
 
-  # Vérifier si la truffe a été correctement ajoutée à la base de données
+  # Check that the truffle has been correctly added to the database
   expected_output <-
     data.frame(
       idtruffe = digest::digest(date_trouvee),
@@ -32,7 +32,7 @@ test_that("write_db_new_truffe works", {
       date_trouve = 19790,
       poids = 50,
       estimation = 1,
-      commentaires = formater_comment("Truffe fraîchement trouvée")
+      commentaires = formater_comment("Freshly found truffle")
     )
   expect_equal(DBI::dbReadTable(conn, "truffe"), expected_output)
 })

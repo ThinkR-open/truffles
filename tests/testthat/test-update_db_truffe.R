@@ -4,7 +4,7 @@ test_that("update_db_truffe works", {
 
   conn <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
 
-  # Création de la table truffe dans la base de données
+  # Creating the truffle table in the database
   DBI::dbWriteTable(
     conn,
     "truffe",
@@ -28,7 +28,7 @@ test_that("update_db_truffe works", {
     commentaires = "New comment"
   )
 
-  # Vérifier si la truffe a été correctement ajoutée à la base de données
+  # Check that the truffle has been correctly added to the database
   expected_output <-
     data.frame(
       idtruffe = "156",

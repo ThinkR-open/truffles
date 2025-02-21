@@ -8,7 +8,7 @@ test_that("get_info_chene_last_truffe works", {
     poids = c(NA, 5, 10, 100),
     date_trouve = as.Date(c("2023-01-01", "2023-03-15", "2023-02-01", "2022-12-01"))
   )
-  # Cas où l'arbre spécifié possède des truffes dans la base de données
+  # Case where the specified tree has truffles in the database
   expect_equal(nrow(get_info_chene_last_truffe(dbtruffe, "123")), 1)
   expect_equal(get_info_chene_last_truffe(dbtruffe, "123")$idchene, "123")
   expect_equal(get_info_chene_last_truffe(dbtruffe, "123")$date_trouve, as.Date("2023-03-15"))
@@ -16,6 +16,6 @@ test_that("get_info_chene_last_truffe works", {
   expect_equal(get_info_chene_last_truffe(dbtruffe, "123", filter_missing_info = TRUE)$date_trouve, as.Date("2023-01-01"))
 
 
-  # Cas où l'arbre spécifié n'existe pas dans la base de données
+  # Case where the specified tree does not exist in the database
   expect_equal(nrow(get_info_chene_last_truffe(dbtruffe, "999")), 0)
 })

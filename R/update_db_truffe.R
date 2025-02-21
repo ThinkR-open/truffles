@@ -19,7 +19,7 @@
 #'
 #' conn <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
 #'
-#' # Création de la table truffe dans la base de données
+#' # Create a truffle table in the database
 #' DBI::dbWriteTable(
 #'   conn,
 #'   "truffe",
@@ -40,12 +40,12 @@
 #'   date_trouve = as.numeric(as.Date("2020/02/02")),
 #'   poids = 22,
 #'   estimation = 0,
-#'   commentaires = "C'est déjà bien!"
+#'   commentaires = "It's good!"
 #' )
 update_db_truffe <- function(conn = connect_db(), idtruffe, idchene, date_trouve, poids, commentaires, estimation) {
   commentaires <- formater_comment(commentaires)
 
-  # Construire et exécuter la requête SQL pour mettre à jour la ligne
+  # Build and execute the SQL query to update the line
 
   update_query <- DBI::sqlInterpolate(
     DBI::ANSI(),

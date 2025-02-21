@@ -39,7 +39,7 @@ This function updates a row in the "truffe" table of a database using an SQL UPD
 
 conn <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
 
-# Création de la table truffe dans la base de données
+# Create a truffle table in the database
 DBI::dbWriteTable(
   conn,
   "truffe",
@@ -60,6 +60,6 @@ update_db_truffe(
   date_trouve = as.numeric(as.Date("2020/02/02")),
   poids = 22,
   estimation = 0,
-  commentaires = "C'est déjà bien!"
+  commentaires = "It's good!"
 )
 }

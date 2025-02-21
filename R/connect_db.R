@@ -1,7 +1,7 @@
 
 #' connect_db
 #'
-#' To connect to the database available in the {truffles} package
+#' To connect to the database available in the \{truffles\} package
 #'
 #' @param dbname name of db available in inst/
 #' @importFrom RSQLite SQLite

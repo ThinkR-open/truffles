@@ -4,7 +4,7 @@ test_that("prepare_leaflet works", {
 
   dbchene <- data.frame(
     id = c(1, 2, 3),
-    chene_nom = c("Chene 1", "Chene 2", "Chene 3")
+    chene_nom = c("Oak 1", "Oak 2", "Oak 3")
   )
   dbtruffe <- data.frame(
     idchene = c(1, 2, 3),
@@ -12,12 +12,12 @@ test_that("prepare_leaflet works", {
     poids = c(10, 15, NA)
   )
 
-  # Exécuter la fonction
+  # Execute function
   leaflet_data <- prepare_leaflet(dbchene, dbtruffe)
 
-  # Vérifier le type de sortie
+  # Check output type
   expect_type(leaflet_data, "list")
 
-  # Vérifier si la longueur de la liste est correcte
+  # Check that the list length is correct
   expect_equal(length(leaflet_data$data_prep), nrow(dbchene))
 })

@@ -8,7 +8,7 @@ test_that("Usage works", {
   # Creation d'une DB temporaire pour les tests:
   conn_usage <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
 
-  # Création de la table truffe dans la base de données
+  # Creating the truffle table in the database
   DBI::dbWriteTable(
     conn_usage,
     "truffe",

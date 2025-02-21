@@ -10,7 +10,7 @@ connect_db(dbname = "chenes_truffe.sqlite")
 \item{dbname}{name of db available in inst/}
 }
 \description{
-To connect to the database available in the {truffles} package
+To connect to the database available in the \{truffles\} package
 }
 \examples{
 connect_db()

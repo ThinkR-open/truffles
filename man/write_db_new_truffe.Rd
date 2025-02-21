@@ -18,7 +18,7 @@ write_db_new_truffe(
 \arguments{
 \item{conn}{A connection to the database.}
 
-\item{theidchene}{The ID of the oak tree (chêne) where the truffle was found.}
+\item{theidchene}{The ID of the oak tree (oak) where the truffle was found.}
 
 \item{date_trouvee}{The date the truffle was found.}
 

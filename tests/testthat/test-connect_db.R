@@ -2,6 +2,6 @@
 test_that("connect_db works", {
   conn <- connect_db()
 
-  # Vérifier que la connexion est valide
+  # Check that the connection is valid
   expect_s4_class(conn, "SQLiteConnection")
 })
