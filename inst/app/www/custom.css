@@ -50,3 +50,17 @@
   .conteneur .enfant{
     flex:1 0 200px;   /* cette ligne est un raccourci de la suite */
   }
+
+
+.swal-btn {
+    display: block;
+    width: 100%;
+    margin: 7px 0;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+    border: 0;
+    border-radius: 0.25em;
+    font-size: 1em;
+}
+

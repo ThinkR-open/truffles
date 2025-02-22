@@ -96,6 +96,18 @@ app_server <- function(input, output, session) {
     trigger("updatedb")
   })
 
+  observeEvent(input$new_reens, {
+    req(input$new_reens)
+    log_info_dev("observeEvent(input$new_reens, ...")
+
+    write_db_new_reens(
+      conn = global$conn,
+      theidoak = input$new_reens[1],
+      date_reens = input$new_reens[2]
+    )
+
+    trigger("updatedb")
+  })
 
   observeEvent(input$complete_truffe, {
     req(input$complete_truffe)

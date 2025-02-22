@@ -27,9 +27,109 @@ $( document ).ready(function() {
     templatefindtruffle = data;
   });
 
+  var templateaddreens;
+
+  // Charger le modèle HTML pour la carte d'identité du chêne
+  $.get('www/template_add_reens.html', function(data) {
+    templateaddreens = data;
+  });
+
 Swal.fire({
   title: 'Chêne  ' + arg.id + ' :',
-  showDenyButton: true,
+  html: `
+  <button id="identity" class="swal-btn" style="background:#3A8544;">Carte d'identité</button>
+  <button id="add_truffle" class="swal-btn" style="background:#28652c;">Ajouter une truffe</button>
+  <button id="add_reens" class="swal-btn" style="background:#154515;">Ajouter un réensemencement</button>
+`, showCancelButton: true,
+showConfirmButton: false,
+didOpen: () => {
+  document.getElementById("identity").addEventListener("click", () => {
+    var filledtemplateidentitycard = fillTemplate(templateidentitycard, arg);
+
+    Swal.fire({
+      title: 'Carte d identité du chêne',
+      html: filledtemplateidentitycard,
+      showCancelButton: false,
+      confirmButtonText: `Fermer`
+    }).then((result) => {
+        Shiny.setInputValue("chene_click", null, {priority: "event"});
+    })
+  });
+  document.getElementById("add_truffle").addEventListener("click", () => {
+    var filledtemplatefindtruffle = fillTemplate(templatefindtruffle, arg);
+
+    Swal.fire({
+      title: 'Détails de la truffe trouvée :',
+      html: filledtemplatefindtruffle,
+      focusConfirm: false,
+      preConfirm: () => {
+        var inputDateValue = document.getElementById('inputDate').value;
+        var inputNumValue = document.getElementById('inputNum').value;
+        var inputEstimValue = document.getElementById('inputEstim').checked;
+        var inputCommValue = document.getElementById('inputComm').value;
+
+       return { date: inputDateValue, num: inputNumValue ,estim: inputEstimValue, comm: inputCommValue};
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        const { date, num, estim, comm } = result.value;
+
+          // Vérifier si des champs sont vides
+          if (date === "") {
+
+            // Afficher un message d'erreur à l'utilisateur TODO
+            Swal.fire({
+              icon: 'error',
+              title: 'Informations incomplètes',
+              text: 'Veuillez remplir au moins la date.',
+            });
+          } else {
+            // Toutes les informations sont valides
+            Shiny.setInputValue('new_truffe', [arg.id, date, num, estim, comm]);
+            Shiny.setInputValue("chene_click", null, {priority: "event"});
+          }
+
+      }
+    })
+  });
+  document.getElementById("add_reens").addEventListener("click", () => {
+    var filledtemplateaddreens = fillTemplate(templateaddreens, arg);
+
+    Swal.fire({
+      title: 'Réensemencement :',
+      html: filledtemplateaddreens,
+      focusConfirm: false,
+      preConfirm: () => {
+        var inputDateValue = document.getElementById('inputDate').value;
+
+       return { date: inputDateValue};
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        const { date } = result.value;
+
+          // Vérifier si des champs sont vides
+          if (date === "") {
+
+            // Afficher un message d'erreur à l'utilisateur TODO
+            Swal.fire({
+              icon: 'error',
+              title: 'Informations incomplètes',
+              text: 'Veuillez remplir la date.',
+            });
+          } else {
+            // Toutes les informations sont valides
+            Shiny.setInputValue('new_reens', [arg.id, date]);
+            Shiny.setInputValue("chene_click", null, {priority: "event"});
+          }
+
+      }
+    })
+  });
+}
+  /*showDenyButton: true,
   confirmButtonText: `Carte d'identité`,
   denyButtonText: `Ajouter une truffe`,
   showCancelButton: true
@@ -91,7 +191,7 @@ Swal.fire({
   } else if (result.isDismissed) {
     console.log("Dismissed chene_click");
     Shiny.setInputValue("chene_click", null, {priority: "event"});
-  }
+  } */
 })
 
   });
