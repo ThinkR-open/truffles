@@ -78,4 +78,4 @@ run_app()
 
 The developer documentation is available in the pkgdown:
 
-<https://truffles-murielledelmotte-5682f051faf59930546c7b5710250177cfc5b.gitlab.io/>
+<https://murielledelmotte.gitlab.io/truffles>
