@@ -4,13 +4,13 @@
 \alias{connect_db}
 \title{connect_db}
 \usage{
-connect_db(dbname = "chenes_truffe.sqlite")
+connect_db(dbname = "postgres")
 }
 \arguments{
-\item{dbname}{name of db available in inst/}
+\item{dbname}{name of db}
 }
 \description{
-To connect to the database available in the \{truffles\} package
+To connect to the database
 }
 \examples{
 connect_db()

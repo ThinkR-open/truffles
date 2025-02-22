@@ -4,9 +4,9 @@
 #' This function writes new truffle data to the specified database table.
 #'
 #' @param conn A connection to the database.
-#' @param theidchene The ID of the oak tree (oak) where the truffle was found.
-#' @param date_trouvee The date the truffle was found.
-#' @param poids The weight of the truffle in grams.
+#' @param theidoak The ID of the oak tree (oak) where the truffle was found.
+#' @param date_found The date the truffle was found.
+#' @param weight The weight of the truffle in grams.
 #' @param estimation logical indicating whether the weight was estimated or not.
 #' @param comment Any additional comments related to the truffle.
 #' @param digest_ The digest of the truffle.
@@ -18,18 +18,18 @@
 #'
 #' @export
 #' @examples
-#' # write_db_new_truffe(theidchene = "chene")
+#' # write_db_new_truffe(theidoak = "chene")
 write_db_new_truffe <-
-  function(conn = connect_db(), theidchene, date_trouvee, poids, estimation, comment, digest_ = Sys.time(), date_comment = Sys.Date()) {
-    idtruffe <- digest(digest_)
+  function(conn = connect_db(), theidoak, date_found, weight, estimation, comment, digest_ = Sys.time(), date_comment = Sys.Date()) {
+    idtruffle <- digest(digest_)
 
     add_truffe <- data.frame(
-      idtruffe = idtruffe,
-      idchene = theidchene,
-      date_trouve = as.Date(date_trouvee),
-      poids = poids,
+      idtruffle = idtruffle,
+      idoak = theidoak,
+      date_found = as.character(date_found),
+      weight = weight,
       estimation = estimation,
-      commentaires = paste(date_comment, comment, sep = " : ")
+      comment = paste(date_comment, comment, sep = " : ")
     )
 
     dbAppendTable(conn, "truffe", add_truffe)

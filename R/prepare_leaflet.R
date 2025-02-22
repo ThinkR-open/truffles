@@ -11,26 +11,26 @@
 #' @export
 #' @examples
 #' dbchene <- data.frame(
-#'   id = c(1, 2, 3),
+#'   idoak = c(1, 2, 3),
 #'   chene_nom = c("Chene 1", "Chene 2", "Chene 3")
 #' )
 #' dbtruffe <- data.frame(
-#'   idchene = c(1, 1, 3),
-#'   idtruffe = c(1, 2, 3),
+#'   idoak = c(1, 1, 3),
+#'   idtruffle = c(1, 2, 3),
 #'   estimation = c(1, 0, 1),
-#'   poids = c(10, 15, NA)
+#'   weight = c(10, 15, NA)
 #' )
 #' prepare_leaflet(dbchene, dbtruffe)
 prepare_leaflet <- function(dbchene, dbtruffe) {
   t <- dbtruffe |>
-    dplyr::filter(estimation == 1 | is.na(poids)) |>
+    dplyr::filter(estimation == 1 | is.na(weight)) |>
     dplyr::mutate(info_missing = 1) |>
-    dplyr::distinct(idchene, info_missing)
+    dplyr::distinct(idoak, info_missing)
 
   c <- dbchene |>
     dplyr::full_join(
       t,
-      by = c("id" = "idchene")
+      by = "idoak"
     )
 
   data_prep <- lapply(

@@ -6,9 +6,9 @@
 \usage{
 write_db_new_truffe(
   conn = connect_db(),
-  theidchene,
-  date_trouvee,
-  poids,
+  theidoak,
+  date_found,
+  weight,
   estimation,
   comment,
   digest_ = Sys.time(),
@@ -18,11 +18,11 @@ write_db_new_truffe(
 \arguments{
 \item{conn}{A connection to the database.}
 
-\item{theidchene}{The ID of the oak tree (oak) where the truffle was found.}
+\item{theidoak}{The ID of the oak tree (oak) where the truffle was found.}
 
-\item{date_trouvee}{The date the truffle was found.}
+\item{date_found}{The date the truffle was found.}
 
-\item{poids}{The weight of the truffle in grams.}
+\item{weight}{The weight of the truffle in grams.}
 
 \item{estimation}{logical indicating whether the weight was estimated or not.}
 
@@ -36,5 +36,5 @@ write_db_new_truffe(
 This function writes new truffle data to the specified database table.
 }
 \examples{
-# write_db_new_truffe(theidchene = "chene")
+# write_db_new_truffe(theidoak = "chene")
 }

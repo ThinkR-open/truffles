@@ -105,8 +105,8 @@ Swal.fire({
         '<label for="date">Date :</label>' + 
         '<input type="date" id="date" class="swal2-input" placeholder="Date" value="' + (arg.date_t ? arg.date_t : '') + '"><hr>' +
         '<div style="display: inline-block">' +
-          '<label for="weight">Poids (en g):</label>' +
-          '<input type="number" id="weight" class="swal2-input" placeholder="Poids (kg)" value="' + (arg.poids ? arg.poids : '') + '">' +
+          '<label for="weight">weight (en g):</label>' +
+          '<input type="number" id="weight" class="swal2-input" placeholder="weight (kg)" value="' + (arg.weight ? arg.weight : '') + '">' +
         '</div>' +
         '<div style="display: inline-block;"> ' +
           '<div style="text-align: center;"> ' +
@@ -145,7 +145,7 @@ Swal.fire({
                 });
               } else {
                 // Toutes les informations sont valides
-                Shiny.setInputValue('complete_truffe', [arg.id, arg.idtruffe, date, weight, estim, comment]);
+                Shiny.setInputValue('complete_truffe', [arg.id, arg.idtruffle, date, weight, estim, comment]);
               }
        
       } else if (result.isDismissed) {

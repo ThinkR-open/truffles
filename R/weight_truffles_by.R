@@ -19,16 +19,16 @@
 #' conn <- connect_db()
 #' truffes <- DBI::dbReadTable(conn, name = "truffe")
 #'
-#' weight_truffles_by(truffes, annee = lubridate::year(as.Date(date_trouve)))
+#' weight_truffles_by(truffes, annee = lubridate::year(as.Date(date_found)))
 #'
 #' truffes_chene <- truffes |>
-#'   inner_join(DBI::dbReadTable(conn, name = "chenes_feularde"), by = join_by(idchene == id))
-#' weight_truffles_by(truffes_chene, annee = lubridate::year(as.Date(date_trouve)), type)
+#'   inner_join(DBI::dbReadTable(conn, name = "chenes_feularde"), by = "idoak")
+#' weight_truffles_by(truffes_chene, annee = lubridate::year(as.Date(date_found)), type)
 weight_truffles_by <- function(dbtruffe, ...) {
   check_param(dbtruffe, "data.frame")
-  check_names_dataframe(c("poids"), dbtruffe)
+  check_names_dataframe(c("weight"), dbtruffe)
 
   dbtruffe |>
     group_by(...) |>
-    summarise(poids = sum(poids, na.rm = TRUE), .groups = "drop")
+    summarise(weight = sum(weight, na.rm = TRUE), .groups = "drop")
 }

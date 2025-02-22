@@ -5,13 +5,13 @@ library(dplyr)
 library(RSQLite)
 
 # chenes_feularde <- geojson_read("data-raw/map(2).geojson")
-dates <- as.numeric(seq(as.Date("2015-01-01"), as.Date("2015-12-31"), by = "day"))
+dates <- as.character(seq(as.Date("2015-01-01"), as.Date("2015-12-31"), by = "day"))
 
 chenes_feularde <- readr::read_csv("data-raw/points(5).csv")
 chenes_feularde <- chenes_feularde |>
   mutate(
-    ID = as.character(ID),
-    date_plantation = sample(dates, size = 1),
+    idoak = as.character(ID),
+    planting_date = sample(dates, size = 1),
     Present = case_when(
       is.na(Present) ~ TRUE,
       TRUE ~ Present
@@ -21,36 +21,43 @@ chenes_feularde <- chenes_feularde |>
       TRUE ~ "Green"
     )
   ) |>
+  select(-ID) |>
   janitor::clean_names()
 
 chenes_feularde$reensemence <- sample(c(0, 1), size = nrow(chenes_feularde), replace = TRUE)
 
+#readr::write_csv(chenes_feularde, "chenes_truffe.csv")
 
 conn <- dbConnect(SQLite(), "inst/chenes_truffe.sqlite")
 dbWriteTable(conn, "chenes_feularde", chenes_feularde, overwrite = TRUE)
 
-dates <- as.numeric(seq(as.Date("2022-01-01"), as.Date("2024-01-31"), by = "day"))
+dates <- as.character(seq(as.Date("2022-01-01"), as.Date("2024-01-31"), by = "day"))
 truffe <- data.frame(
-  idtruffe = paste0("truffe", 1:100),
-  idchene = sample(chenes_feularde$id, 100, replace = TRUE) |> as.character(),
-  date_trouve = sample(dates, size = 100, replace = TRUE),
-  poids = sample(c(1:200), 100, replace = TRUE),
-  commentaires = paste(c(1:100), "- commentaires")
+  idtruffle = paste0("truffe", 1:100),
+  idoak = sample(chenes_feularde$idoak, 100, replace = TRUE) |> as.character(),
+  date_found = sample(dates, size = 100, replace = TRUE),
+  weight = sample(c(1:200), 100, replace = TRUE),
+  comment = paste(c(1:100), "- comment")
 )
 
 truffe$estimation <- 0
 truffe$estimation[c(1, 2, 10)] <- 1
+#readr::write_csv(truffe, "truffe.csv")
 
 dbWriteTable(conn, "truffe", truffe, overwrite = TRUE)
 
 reens <- data.frame(
-  idchene = chenes_feularde |>
+  idoak = chenes_feularde |>
     filter(reensemence == 1) |>
-    pull(id)
+    pull(idoak)
 )
 
 reens$date_reens <- sample(dates, size = nrow(reens), replace = TRUE)
+reens <- reens |>
+  mutate(idreens = row_number()) |>
+  select(idreens, everything())
 
+#readr::write_csv(reens, "reens.csv")
 
 dbWriteTable(conn, "reens", reens, overwrite = TRUE)
 DBI::dbDisconnect(conn)

@@ -4,12 +4,12 @@
 \alias{get_info_chene_truffe}
 \title{Get information about truffles associated with an oak tree}
 \usage{
-get_info_chene_truffe(dbtruffe, theidchene)
+get_info_chene_truffe(dbtruffe, theidoak)
 }
 \arguments{
 \item{dbtruffe}{Database containing information about truffles.}
 
-\item{theidchene}{ID of the oak tree for which information about associated truffles
+\item{theidoak}{ID of the oak tree for which information about associated truffles
 is to be retrieved.}
 }
 \value{
@@ -24,6 +24,6 @@ based on the oak tree's ID from the provided truffle database.
 conn <- connect_db()
 truffe <- DBI::dbReadTable(conn, name = "truffe")
 
-get_info_chene_truffe(dbtruffe = truffe, theidchene = "119")
+get_info_chene_truffe(dbtruffe = truffe, theidoak = "119")
 DBI::dbDisconnect(conn)
 }

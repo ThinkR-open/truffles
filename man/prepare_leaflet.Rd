@@ -19,14 +19,14 @@ This function prepares data for Leaflet JavaScript visualization.
 }
 \examples{
 dbchene <- data.frame(
-  id = c(1, 2, 3),
+  idoak = c(1, 2, 3),
   chene_nom = c("Chene 1", "Chene 2", "Chene 3")
 )
 dbtruffe <- data.frame(
-  idchene = c(1, 1, 3),
-  idtruffe = c(1, 2, 3),
+  idoak = c(1, 1, 3),
+  idtruffle = c(1, 2, 3),
   estimation = c(1, 0, 1),
-  poids = c(10, 15, NA)
+  weight = c(10, 15, NA)
 )
 prepare_leaflet(dbchene, dbtruffe)
 }

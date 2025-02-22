@@ -9,38 +9,38 @@ test_that("update_db_truffe works", {
     conn,
     "truffe",
     data.frame(
-      idtruffe = "156",
-      idchene = "15",
-      date_trouve = 18294,
-      poids = 12,
+      idtruffle = "156",
+      idoak = "15",
+      date_found = 18294,
+      weight = 12,
       estimation = 1,
-      commentaires = "Comment"
+      comment = "Comment"
     )
   )
 
   update_db_truffe(
     conn,
-    idtruffe = "156",
-    idchene = "15",
-    date_trouve = 18294,
-    poids = 22,
+    idtruffle = "156",
+    idoak = "15",
+    date_found = 18294,
+    weight = 22,
     estimation = 0,
-    commentaires = "New comment"
+    comment = "New comment"
   )
 
   # Check that the truffle has been correctly added to the database
   expected_output <-
     data.frame(
-      idtruffe = "156",
-      idchene = "15",
-      date_trouve = 18294,
-      poids = 22,
+      idtruffle = "156",
+      idoak = "15",
+      date_found = 18294,
+      weight = 22,
       estimation = 0,
-      commentaires = formater_comment("New comment")
+      comment = formater_comment("New comment")
     )
   expect_equal(
     DBI::dbReadTable(conn, "truffe") |>
-      dplyr::filter(idtruffe == "156"),
+      dplyr::filter(idtruffle == "156"),
     expected_output
   )
 })

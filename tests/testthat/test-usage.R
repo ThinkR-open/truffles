@@ -13,12 +13,12 @@ test_that("Usage works", {
     conn_usage,
     "truffe",
     data.frame(
-      idtruffe = character(),
-      idchene = character(),
-      date_trouve = numeric(),
-      poids = numeric(),
+      idtruffle = character(),
+      idoak = character(),
+      date_found = character(),
+      weight = numeric(),
       estimation = logical(),
-      commentaires = character()
+      comment = character()
     )
   )
 
@@ -50,7 +50,7 @@ test_that("Usage works", {
 
   ######################################
   # ADD A NEW TRUFFLE WITH ALL INFO
-  theidchene <- sample(
+  theidoak <- sample(
     df_prep$data_prep |>
       purrr::map(1),
     size = 1
@@ -60,14 +60,14 @@ test_that("Usage works", {
     dbchene = chenes_feularde,
     dbtruffe = truffe,
     dbreensemence = reens,
-    theidchene = theidchene
+    theidoak = theidoak
   )
 
   write_db_new_truffe(
     conn = conn_usage,
-    theidchene = theidchene,
-    date_trouvee = "2024-01-01",
-    poids = 25,
+    theidoak = theidoak,
+    date_found = "2024-01-01",
+    weight = 25,
     estimation = 0,
     comment = "Un commentaire"
   )
@@ -75,7 +75,7 @@ test_that("Usage works", {
   ######################################
   # ADD A NEW TRUFFLE WITHOUT WEIGHT
 
-  theidchene <- sample(
+  theidoak <- sample(
     df_prep$data_prep |>
       purrr::map(1),
     size = 1
@@ -85,14 +85,14 @@ test_that("Usage works", {
     dbchene = chenes_feularde,
     dbtruffe = truffe,
     dbreensemence = reens,
-    theidchene = theidchene
+    theidoak = theidoak
   )
 
   write_db_new_truffe(
     conn = conn_usage,
-    theidchene = theidchene,
-    date_trouvee = "2024-01-01",
-    poids = NA,
+    theidoak = theidoak,
+    date_found = "2024-01-01",
+    weight = NA,
     estimation = 1,
     comment = "Un commentaire"
   )
@@ -100,7 +100,7 @@ test_that("Usage works", {
   ######################################
   # ADD A NEW TRUFFLE WITH ESTIMATE WEIGHT
 
-  theidchene <- sample(
+  theidoak <- sample(
     df_prep$data_prep |>
       purrr::map(1),
     size = 1
@@ -110,14 +110,14 @@ test_that("Usage works", {
     dbchene = chenes_feularde,
     dbtruffe = truffe,
     dbreensemence = reens,
-    theidchene = theidchene
+    theidoak = theidoak
   )
 
   write_db_new_truffe(
     conn = conn_usage,
-    theidchene = theidchene,
-    date_trouvee = "2024-01-01",
-    poids = 100,
+    theidoak = theidoak,
+    date_found = "2024-01-01",
+    weight = 100,
     estimation = 1,
     comment = "Un commentaire"
   )

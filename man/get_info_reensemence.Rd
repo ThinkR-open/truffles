@@ -4,12 +4,12 @@
 \alias{get_info_reensemence}
 \title{Get the latest reseeding date for a given oak tree ID.}
 \usage{
-get_info_reensemence(dbreensemence, theidchene)
+get_info_reensemence(dbreensemence, theidoak)
 }
 \arguments{
-\item{dbreensemence}{A data frame containing reseeding information with columns "idchene" and "date_reens".}
+\item{dbreensemence}{A data frame containing reseeding information with columns "idoak" and "date_reens".}
 
-\item{theidchene}{The ID of the oak tree for which to retrieve the reseeding date.}
+\item{theidoak}{The ID of the oak tree for which to retrieve the reseeding date.}
 }
 \value{
 Returns the latest reseeding date for the specified oak tree ID. If no reseeding
@@ -23,6 +23,6 @@ from a dataframe containing reseeding information.
 conn <- connect_db()
 reensemence <- DBI::dbReadTable(conn, name = "reens")
 
-get_info_reensemence(dbreensemence = reensemence, theidchene = "150")
+get_info_reensemence(dbreensemence = reensemence, theidoak = "150")
 DBI::dbDisconnect(conn)
 }

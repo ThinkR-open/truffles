@@ -43,12 +43,12 @@ DBI::dbWriteTable(
   conn_usage,
   "truffe",
   data.frame(
-    idtruffe = character(),
-    idchene = character(),
-    date_trouve = numeric(),
-    poids = numeric(),
+    idtruffle = character(),
+    idoak = character(),
+    date_found = numeric(),
+    weight = numeric(),
     estimation = logical(),
-    commentaires = character()
+    comment = character()
   )
 )
 
@@ -56,12 +56,12 @@ DBI::dbWriteTable(
   conn_usage,
   "chenes",
   data.frame(
-    id = character(),
+    idoak = character(),
     lon = numeric(),
     lat = numeric(),
     type = character(),
     present = numeric(),
-    date_plantation = numeric(),
+    planting_date = numeric(),
     reensemence = numeric()
   )
 )
@@ -70,7 +70,7 @@ DBI::dbWriteTable(
   conn_usage,
   "reens",
   data.frame(
-    idchene = character(),
+    idoak = character(),
     date_reens = numeric()
   )
 )
@@ -80,12 +80,12 @@ DBI::dbWriteTable(
 ```{r}
 chenes_ <- structure(
   list(
-    id = c("1", "2", "3", "4", "5"),
+    idoak = c("1", "2", "3", "4", "5"),
     lon = c(1.53193333748493, 1.53198654139325, 1.53203490858186, 1.53208085741133, 1.53213164296051),
     lat = c(47.9984324222873, 47.9984696419663, 47.9985181893329, 47.99855540895, 47.998600719752),
     type = c("Normal", "Normal", "Normal", "Normal", "Green"),
     present = c(1L, 1L, 1L, 1L, 1L),
-    date_plantation = c("2024-01-15", "2023-12-20", "2023-11-05", "2024-02-10", "2023-10-25")
+    planting_date = c("2024-01-15", "2023-12-20", "2023-11-05", "2024-02-10", "2023-10-25")
   ),
   row.names = c(NA, -5L),
   class = c("tbl_df", "tbl", "data.frame")
@@ -102,7 +102,7 @@ DBI::dbWriteTable(
 
 reens_ <- structure(
   list(
-    idchene = c("5", "5", "1"),
+    idoak = c("5", "5", "1"),
     date_reens = c(19128, 19043, 19605)
   ),
   row.names = c(
@@ -154,41 +154,41 @@ Nous ajoutons une nouvelle truffe avec toutes les informations requises.
 ```{r}
 write_db_new_truffe(
   conn = conn_usage,
-  theidchene = "5",
-  date_trouvee = "2024-01-01",
-  poids = 25,
+  theidoak = "5",
+  date_found = "2024-01-01",
+  weight = 25,
   estimation = 0,
   comment = "Un commentaire"
 )
 ```
 
-### Ajout d'une nouvelle truffe sans poids
+### Ajout d'une nouvelle truffe sans weight
 
-Nous ajoutons une nouvelle truffe sans spécifier le poids.
+Nous ajoutons une nouvelle truffe sans spécifier le weight.
 
 ```{r}
 write_db_new_truffe(
   conn = conn_usage,
-  theidchene = "1",
-  date_trouvee = "2024-01-01",
-  poids = NA,
+  theidoak = "1",
+  date_found = "2024-01-01",
+  weight = NA,
   estimation = 1,
-  comment = "Poids a completer plus tard"
+  comment = "weight a completer plus tard"
 )
 ```
 
-### Ajout d'une nouvelle truffe avec estimation du poids
+### Ajout d'une nouvelle truffe avec estimation du weight
 
-Nous ajoutons une nouvelle truffe en estimant son poids.
+Nous ajoutons une nouvelle truffe en estimant son weight.
 
 ```{r}
 write_db_new_truffe(
   conn = conn_usage,
-  theidchene = "3",
-  date_trouvee = "2024-02-01",
-  poids = 100,
+  theidoak = "3",
+  date_found = "2024-02-01",
+  weight = 100,
   estimation = 1,
-  comment = "Un poids estime"
+  comment = "Un weight estime"
 )
 ```
 
@@ -205,14 +205,14 @@ truffe
 ## Complétion d'informations
 
 ```{r}
-info <- get_info_chene_last_truffe(dbtruffe = truffe, theidchene = "3")
+info <- get_info_chene_last_truffe(dbtruffe = truffe, theidoak = "3")
 update_db_truffe(
   conn_usage,
-  idtruffe = info$idtruffe,
-  idchene = info$idchene,
-  date_trouve = info$date_trouve,
-  poids = 32,
-  commentaires = "J'avais surestimé",
+  idtruffle = info$idtruffle,
+  idoak = info$idoak,
+  date_found = info$date_found,
+  weight = 32,
+  comment = "J'avais surestimé",
   estimation = 0
 )
 ```
@@ -229,36 +229,36 @@ get_info(
   dbchene = chenes,
   dbtruffe = truffe,
   dbreensemence = reens,
-  theidchene = "3"
+  theidoak = "3"
 )
 ```
 
 La dernière truffe trouvée pour le chêne n°5
 
 ```{r}
-get_info_chene_last_truffe(dbtruffe = truffe, theidchene = "5")
+get_info_chene_last_truffe(dbtruffe = truffe, theidoak = "5")
 ```
 ## Calcul d'aggrégation:
 
-### Poids total de truffes trouvés
+### weight total de truffes trouvés
 
 ```{r}
 weight_truffles_by(truffe)
 ```
 
 
-### Poids total de truffes trouvés par annee
+### weight total de truffes trouvés par annee
 
 ```{r}
-weight_truffles_by(truffe, annee = year(as.Date(date_trouve)))
+weight_truffles_by(truffe, annee = year(as.Date(date_found)))
 ```
 
-### Poids total de truffes trouvés par annee et par type
+### weight total de truffes trouvés par annee et par type
 
 ```{r}
 truffes_chene <- truffe |>
-  dplyr::inner_join(chenes, by = dplyr::join_by(idchene == id))
-weight_truffles_by(truffes_chene, annee = lubridate::year(as.Date(date_trouve)), type)
+  dplyr::inner_join(chenes, by = "idoak")
+weight_truffles_by(truffes_chene, annee = lubridate::year(as.Date(date_found)), type)
 ```
 
 ## Déconnexion de la base de données

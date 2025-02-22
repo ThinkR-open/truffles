@@ -25,7 +25,7 @@ L'application utilise également les bibliothèques JavaScript Leaflet, SweetAle
 L'application Shiny suit une architecture basée sur {golem}. 
 Voici la structure de base de l'application :
 
-```{kotlin}
+```
 .
 ├── CODE_OF_CONDUCT.md
 ├── data-raw
@@ -62,7 +62,7 @@ Avec entre autre:
 {fusen} est utilisé pour implémenter les fonctionnalités métier de l'application. 
 Les fonctions et les modules {fusen} doivent être développés dans les flat file dédiés dans le dossier dev/. 
 
-```{kotlin}
+```
 ├── dev
 │   ├── 01_start.R
 │   ├── 02_dev.R
@@ -82,7 +82,7 @@ Les fonctions et les modules {fusen} doivent être développés dans les flat fi
 ## Utilisation des Bibliothèques JavaScript
 
 
-```{kotlin}
+```
 ./inst/app/www
 ├── chart.js
 ├── chart.umd.min.js
@@ -111,7 +111,7 @@ Elle est notamment utilisée pour les intéractions avec l'utilisateur via des m
 
 Il est important de noter que l'utilisation de SweetAlert2 dans cette application repose également sur des templates HTML pour construire les modales:
 
-```{kotlin}
+```
 ├── template_find_truffle.html
 └── template_identity_card.html
 ```

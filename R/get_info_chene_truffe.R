@@ -5,7 +5,7 @@
 #' based on the oak tree's ID from the provided truffle database.
 #'
 #' @param dbtruffe Database containing information about truffles.
-#' @param theidchene ID of the oak tree for which information about associated truffles
+#' @param theidoak ID of the oak tree for which information about associated truffles
 #' is to be retrieved.
 #'
 #' @return A list containing information about truffles associated with the oak tree,
@@ -18,44 +18,44 @@
 #' conn <- connect_db()
 #' truffe <- DBI::dbReadTable(conn, name = "truffe")
 #'
-#' get_info_chene_truffe(dbtruffe = truffe, theidchene = "119")
+#' get_info_chene_truffe(dbtruffe = truffe, theidoak = "119")
 #' DBI::dbDisconnect(conn)
-get_info_chene_truffe <- function(dbtruffe, theidchene) {
+get_info_chene_truffe <- function(dbtruffe, theidoak) {
   check_param(dbtruffe, "data.frame")
-  check_param(theidchene, "character")
-  check_names_dataframe(c("idchene", "poids", "date_trouve", "commentaires"), dbtruffe)
+  check_param(theidoak, "character")
+  check_names_dataframe(c("idoak", "weight", "date_found", "comment"), dbtruffe)
 
   truffe_chene <- dbtruffe |>
-    filter(idchene == theidchene)
+    filter(idoak == theidoak)
 
   if (nrow(truffe_chene) == 0) {
     return(list(
-      poids_tot = 0,
+      weight_tot = 0,
       derniere_truffe = "-",
       comments = "-"
     ))
   }
 
-  poids_tot <- truffe_chene |>
-    summarise(poids_tot = sum(poids, na.rm = TRUE)) |>
-    pull(poids_tot)
+  weight_tot <- truffe_chene |>
+    summarise(weight_tot = sum(weight, na.rm = TRUE)) |>
+    pull(weight_tot)
 
   derniere_truffe <- truffe_chene |>
-    summarise(date_trouve = as.Date(max(date_trouve, na.rm = TRUE))) |>
-    pull(date_trouve)
+    summarise(date_found = as.Date(max(date_found, na.rm = TRUE))) |>
+    pull(date_found)
 
   comments <-
     paste(
       paste(
-        as.Date(truffe_chene$date_trouve),
-        truffe_chene$commentaires,
+        as.Date(truffe_chene$date_found),
+        truffe_chene$comment,
         sep = " : "
       ),
       collapse = "<br>"
     )
 
   return(list(
-    poids_tot = poids_tot,
+    weight_tot = weight_tot,
     derniere_truffe = derniere_truffe,
     comments = comments
   ))

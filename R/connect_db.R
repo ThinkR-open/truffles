@@ -1,20 +1,22 @@
 
 #' connect_db
 #'
-#' To connect to the database available in the \{truffles\} package
+#' To connect to the database 
 #'
-#' @param dbname name of db available in inst/
-#' @importFrom RSQLite SQLite
+#' @param dbname name of db 
+#' @importFrom RPostgres Postgres
 #' @importFrom DBI dbConnect
 #' @return NULL
 #'
 #' @export
 #' @examples
 #' connect_db()
-connect_db <- function(dbname = "chenes_truffe.sqlite") {
-  conn <- dbConnect(
-    SQLite(),
-    system.file(dbname, package = "truffles")
-  )
+connect_db <- function(dbname = "postgres") {
+  conn <- dbConnect(Postgres(),
+                 dbname = "postgres",
+                 host = Sys.getenv("HOST"),
+                 port = 6543,
+                 user = Sys.getenv("USER"),
+                 password = Sys.getenv("PWD"))
   return(conn)
 }

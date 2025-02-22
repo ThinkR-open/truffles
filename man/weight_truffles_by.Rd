@@ -26,9 +26,9 @@ library(dplyr)
 conn <- connect_db()
 truffes <- DBI::dbReadTable(conn, name = "truffe")
 
-weight_truffles_by(truffes, annee = lubridate::year(as.Date(date_trouve)))
+weight_truffles_by(truffes, annee = lubridate::year(as.Date(date_found)))
 
 truffes_chene <- truffes |>
-  inner_join(DBI::dbReadTable(conn, name = "chenes_feularde"), by = join_by(idchene == id))
-weight_truffles_by(truffes_chene, annee = lubridate::year(as.Date(date_trouve)), type)
+  inner_join(DBI::dbReadTable(conn, name = "chenes_feularde"), by = "idoak")
+weight_truffles_by(truffes_chene, annee = lubridate::year(as.Date(date_found)), type)
 }

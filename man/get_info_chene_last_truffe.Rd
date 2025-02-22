@@ -4,12 +4,12 @@
 \alias{get_info_chene_last_truffe}
 \title{Get Information about the Last Truffle Found on a Specific Oak Tree}
 \usage{
-get_info_chene_last_truffe(dbtruffe, theidchene, filter_missing_info = FALSE)
+get_info_chene_last_truffe(dbtruffe, theidoak, filter_missing_info = FALSE)
 }
 \arguments{
 \item{dbtruffe}{A data frame containing information about truffles.}
 
-\item{theidchene}{The ID of the oak tree.}
+\item{theidoak}{The ID of the oak tree.}
 
 \item{filter_missing_info}{logical to filter truffle with missing data}
 }
@@ -22,12 +22,12 @@ This function retrieves information about the last truffle found on a specific o
 \examples{
 
 dbtruffe <- data.frame(
-  idchene = c("123", "123", "456", "789"),
+  idoak = c("123", "123", "456", "789"),
   estimation = c(1, 0, 1, 0),
-  poids = c(NA, 5, 10, 100),
-  date_trouve = as.Date(c("2023-01-01", "2023-03-15", "2023-02-01", "2022-12-01"))
+  weight = c(NA, 5, 10, 100),
+  date_found = as.Date(c("2023-01-01", "2023-03-15", "2023-02-01", "2022-12-01"))
 )
 
-get_info_chene_last_truffe(dbtruffe = dbtruffe, theidchene = "123")
-get_info_chene_last_truffe(dbtruffe = dbtruffe, theidchene = "123", filter_missing_info = TRUE)
+get_info_chene_last_truffe(dbtruffe = dbtruffe, theidoak = "123")
+get_info_chene_last_truffe(dbtruffe = dbtruffe, theidoak = "123", filter_missing_info = TRUE)
 }

@@ -15,7 +15,7 @@ Imports:
     golem (>= 0.4.1),
     lubridate,
     purrr,
-    RSQLite,
+    RPostgres,
     shiny (>= 1.8.0),
     shinyMobile,
     shinyWidgets
@@ -23,6 +23,7 @@ Suggests:
     covr,
     knitr,
     rmarkdown,
+    RSQLite,
     testthat (>= 3.0.0),
     tibble
 VignetteBuilder: 
