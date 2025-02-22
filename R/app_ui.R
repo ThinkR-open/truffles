@@ -15,8 +15,7 @@ app_ui <- function(request) {
       f7TabLayout(
         navbar = f7Navbar(
           title = "Les ch\u00eanes truffiers",
-          hairline = TRUE,
-          shadow = TRUE
+          hairline = TRUE
         ),
         f7Tabs(
           animated = TRUE,
@@ -24,26 +23,18 @@ app_ui <- function(request) {
             tabName = "Carte",
             icon = f7Icon("map"),
             active = TRUE,
-            f7Shadow(
-              intensity = 10,
-              hover = TRUE,
-              f7Card(
-                title = NULL,
-                mod_carto_leaflet_ui("carto_leaflet_1")
-              )
+            f7Card(
+              title = NULL,
+              mod_carto_leaflet_ui("carto_leaflet_1")
             )
           ),
           f7Tab(
             tabName = "Graphe",
             icon = f7Icon("graph_square"),
             active = FALSE,
-            f7Shadow(
-              intensity = 10,
-              hover = TRUE,
-              f7Card(
-                title = NULL,
-                mod_dataviz_ui("dataviz_1")
-              )
+            f7Card(
+              title = NULL,
+              mod_dataviz_ui("dataviz_1")
             )
           )
         )

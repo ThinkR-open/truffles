@@ -54,7 +54,8 @@ mod_carto_leaflet_server <- function(id, global) {
       # prepa data to js
       local$df_prep <- prepare_leaflet(
         dbchene = global$chenes_feularde,
-        dbtruffe = global$truffe
+        dbtruffe = global$truffe,
+        dbreens = global$reensemence
       )
     })
 

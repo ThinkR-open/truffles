@@ -45,8 +45,7 @@ if (reens === 0) {
 
 
 } else {
-
-            if (locations[i][6] === "1") {
+            if (locations[i][7] === "1") {
               marker.setStyle({color: '#184254'})
               } else {
                marker.setStyle({color: '#7f9199'})

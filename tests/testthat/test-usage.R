@@ -45,7 +45,8 @@ test_that("Usage works", {
 
   df_prep <- prepare_leaflet(
     dbchene = chenes_feularde,
-    dbtruffe = truffe
+    dbtruffe = truffe,
+    dbreens = reens
   )
 
   ######################################

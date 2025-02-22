@@ -105,7 +105,7 @@ app_server <- function(input, output, session) {
       conn = global$conn,
       idtruffle = input$complete_truffe[2],
       idoak = input$complete_truffe[1],
-      date_found = as.numeric(as.Date(input$complete_truffe[3])),
+      date_found = as.character(input$complete_truffe[3]),
       weight = as.numeric(input$complete_truffe[4]),
       estimation = as.numeric(as.logical(input$complete_truffe[5])),
       comment = input$complete_truffe[6]

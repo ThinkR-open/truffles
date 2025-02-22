@@ -13,5 +13,6 @@ globalVariables(unique(c(
   "present",
   # prepare_leaflet:
   "estimation",
-  "info_missing"
+  "info_missing",
+  "info_reens"
 )))
