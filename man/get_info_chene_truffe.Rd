@@ -23,7 +23,7 @@ based on the oak tree's ID from the provided truffle database.
 \examples{
 conn <- DBI::dbConnect(
    RSQLite::SQLite(),
-   system.file(dbname, package = "truffles")
+   system.file(dbname = "chenes_truffe.sqlite", package = "truffles")
  )
 truffe <- DBI::dbReadTable(conn, name = "truffe")
 
