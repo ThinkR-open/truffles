@@ -21,7 +21,7 @@ from a dataframe containing reseeding information.
 }
 \examples{
 conn <- DBI::dbConnect(
-   SQLite(),
+   RSQLite::SQLite(),
    system.file(dbname, package = "truffles")
  )
 reensemence <- DBI::dbReadTable(conn, name = "reens")

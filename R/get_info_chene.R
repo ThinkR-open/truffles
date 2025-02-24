@@ -17,7 +17,7 @@
 #' @examples
 #' 
 #' conn <- DBI::dbConnect(
-#'    SQLite(),
+#'    RSQLite::SQLite(),
 #'    system.file(dbname, package = "truffles")
 #'  )
 #' chene <- DBI::dbReadTable(conn, name = "chenes_feularde")
