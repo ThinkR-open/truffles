@@ -10,7 +10,9 @@
 #'
 #' @export
 #' @examples
+#' if (interactive()) {
 #' connect_db()
+#' }
 connect_db <- function(dbname = "postgres") {
   conn <- dbConnect(Postgres(),
                  dbname = "postgres",

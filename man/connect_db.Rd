@@ -13,5 +13,7 @@ connect_db(dbname = "postgres")
 To connect to the database
 }
 \examples{
+if (interactive()) {
 connect_db()
+}
 }

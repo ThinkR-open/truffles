@@ -42,7 +42,7 @@
 #'   estimation = 0,
 #'   comment = "It's good!"
 #' )
-update_db_truffe <- function(conn = connect_db(), idtruffle, idoak, date_found, weight, comment, estimation) {
+update_db_truffe <- function(conn, idtruffle, idoak, date_found, weight, comment, estimation) {
   comment <- formater_comment(comment)
 
   # Build and execute the SQL query to update the line

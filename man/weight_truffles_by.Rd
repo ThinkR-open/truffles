@@ -23,7 +23,10 @@ in a given data frame.
 
 library(dplyr)
 
-conn <- connect_db()
+conn <- DBI::dbConnect(
+   SQLite(),
+   system.file(dbname, package = "truffles")
+ )
 truffes <- DBI::dbReadTable(conn, name = "truffe")
 
 weight_truffles_by(truffes, annee = lubridate::year(as.Date(date_found)))

@@ -5,7 +5,7 @@
 \title{Update a row in the "truffe" table of a database.}
 \usage{
 update_db_truffe(
-  conn = connect_db(),
+  conn,
   idtruffle,
   idoak,
   date_found,

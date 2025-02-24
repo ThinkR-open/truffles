@@ -15,7 +15,10 @@
 #' @export
 #'
 #' @examples
-#' conn <- connect_db()
+#' conn <- DBI::dbConnect(
+#'    SQLite(),
+#'    system.file(dbname, package = "truffles")
+#'  )
 #' truffe <- DBI::dbReadTable(conn, name = "truffe")
 #'
 #' get_info_chene_truffe(dbtruffe = truffe, theidoak = "119")

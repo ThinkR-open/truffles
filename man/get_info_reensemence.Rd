@@ -20,7 +20,10 @@ This function retrieves the latest reseeding date for a specified oak tree ID
 from a dataframe containing reseeding information.
 }
 \examples{
-conn <- connect_db()
+conn <- DBI::dbConnect(
+   SQLite(),
+   system.file(dbname, package = "truffles")
+ )
 reensemence <- DBI::dbReadTable(conn, name = "reens")
 
 get_info_reensemence(dbreensemence = reensemence, theidoak = "150")

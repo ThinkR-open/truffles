@@ -21,7 +21,10 @@ This function retrieves information about truffles associated with a specific oa
 based on the oak tree's ID from the provided truffle database.
 }
 \examples{
-conn <- connect_db()
+conn <- DBI::dbConnect(
+   SQLite(),
+   system.file(dbname, package = "truffles")
+ )
 truffe <- DBI::dbReadTable(conn, name = "truffe")
 
 get_info_chene_truffe(dbtruffe = truffe, theidoak = "119")
