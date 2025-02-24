@@ -1,10 +1,5 @@
 test_that("Usage works", {
-  conn <- connect_db()
 
-  chenes_feularde_ <- dbReadTable(conn, name = "chenes_feularde")
-  reens_ <- dbReadTable(conn, name = "reens")
-
-  DBI::dbDisconnect(conn)
   # Creation d'une DB temporaire pour les tests:
   conn_usage <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
 
@@ -25,13 +20,34 @@ test_that("Usage works", {
   DBI::dbWriteTable(
     conn_usage,
     "chenes_feularde",
-    chenes_feularde_
+    structure(list(idoak = c("1", "2", "3", "4"), lon = c(
+      1.53193333748493,
+      1.53198654139325, 1.53203490858186, 1.53208085741133
+    ), lat = c(
+      47.9984324222873,
+      47.9984696419663, 47.9985181893329, 47.99855540895
+    ), type = c(
+      "Normal",
+      "Normal", "Normal", "Normal"
+    ), present = c(
+      TRUE, TRUE, TRUE,
+      TRUE
+    ), planting_date = c(
+      "2015-05-20", "2015-05-20", "2015-05-20",
+      "2015-05-20"
+    )), row.names = c(NA, 4L), class = "data.frame")
   )
 
   DBI::dbWriteTable(
     conn_usage,
     "reens",
-    reens_
+    structure(list(idreens = c(
+      "e294c59bb131c6d58c836c323b1d7c69",
+      "f19aaf4b06711b747f5272268b875941"
+    ), idoak = c("19", "79"), date_reens = c(
+      "2025-02-21",
+      "2025-02-04"
+    )), class = "data.frame", row.names = c(NA, -2L))
   )
 
   chenes_feularde <- dbReadTable(conn_usage, name = "chenes_feularde")
