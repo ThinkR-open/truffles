@@ -124,7 +124,7 @@ DBI::dbWriteTable(
 
 Nous chargeons les données à partir de la base de données. Nous supposons que les tables de la base de données contiennent les informations suivantes :
 
-- chenes_feularde : données sur les chênes
+- chenes : données sur les chênes
 - truffe : données sur les truffes trouvées
 - reens : données sur les resemis
 

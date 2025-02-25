@@ -10,7 +10,7 @@
 app_server <- function(input, output, session) {
   global <- reactiveValues(
     conn = NULL,
-    chenes_feularde = NULL,
+    chenes = NULL,
     truffe = NULL
   )
 
@@ -19,16 +19,28 @@ app_server <- function(input, output, session) {
   init("updatedb")
 
   observeEvent(TRUE, {
-    log_info_dev("Connect db")
-    global$conn <- connect_db()
+    tryCatch(
+      {
+        global$conn <- connect_db()
+      },
+      error = function(e) {
+        log_info_dev("Database connection failed")
+        f7Dialog(
+          title = "Erreur de connexion",
+          text = "Base de données indisponible",
+          type = "alert"
+        )
+      }
+    )
     trigger("updatedb")
   })
+
 
   observe({
     watch("updatedb")
     req(global$conn)
     log_info_dev("Read table db")
-    global$chenes_feularde <- dbReadTable(global$conn, name = "chenes_feularde") |>
+    global$chenes <- dbReadTable(global$conn, name = "chenes") |>
       filter(present == 1)
     global$truffe <- dbReadTable(global$conn, name = "truffe")
     global$reensemence <- dbReadTable(global$conn, name = "reens")
@@ -58,7 +70,7 @@ app_server <- function(input, output, session) {
       )
     } else {
       info <- get_info(
-        dbchene = global$chenes_feularde,
+        dbchene = global$chenes,
         dbtruffe = global$truffe,
         dbreensemence = global$reensemence,
         theidoak = input$chene_click

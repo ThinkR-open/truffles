@@ -19,7 +19,7 @@ test_that("Usage works", {
 
   DBI::dbWriteTable(
     conn_usage,
-    "chenes_feularde",
+    "chenes",
     structure(list(idoak = c("1", "2", "3", "4"), lon = c(
       1.53193333748493,
       1.53198654139325, 1.53203490858186, 1.53208085741133
@@ -50,17 +50,17 @@ test_that("Usage works", {
     )), class = "data.frame", row.names = c(NA, -2L))
   )
 
-  chenes_feularde <- dbReadTable(conn_usage, name = "chenes_feularde")
+  chenes <- dbReadTable(conn_usage, name = "chenes")
   truffe <- dbReadTable(conn_usage, name = "truffe")
   reens <- dbReadTable(conn_usage, name = "reens")
 
 
   ######################################
-  chenes_feularde <- chenes_feularde |>
+  chenes <- chenes |>
     dplyr::filter(present == 1)
 
   df_prep <- prepare_leaflet(
-    dbchene = chenes_feularde,
+    dbchene = chenes,
     dbtruffe = truffe,
     dbreens = reens
   )
@@ -74,7 +74,7 @@ test_that("Usage works", {
   )[[1]]
 
   info <- get_info(
-    dbchene = chenes_feularde,
+    dbchene = chenes,
     dbtruffe = truffe,
     dbreensemence = reens,
     theidoak = theidoak
@@ -99,7 +99,7 @@ test_that("Usage works", {
   )[[1]]
 
   info <- get_info(
-    dbchene = chenes_feularde,
+    dbchene = chenes,
     dbtruffe = truffe,
     dbreensemence = reens,
     theidoak = theidoak
@@ -124,7 +124,7 @@ test_that("Usage works", {
   )[[1]]
 
   info <- get_info(
-    dbchene = chenes_feularde,
+    dbchene = chenes,
     dbtruffe = truffe,
     dbreensemence = reens,
     theidoak = theidoak

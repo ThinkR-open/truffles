@@ -48,12 +48,12 @@ mod_carto_leaflet_server <- function(id, global) {
     )
 
     observe({
-      req(global$chenes_feularde)
+      req(global$chenes)
       req(global$truffe)
       log_info_dev("prepa leaflet")
       # prepa data to js
       local$df_prep <- prepare_leaflet(
-        dbchene = global$chenes_feularde,
+        dbchene = global$chenes,
         dbtruffe = global$truffe,
         dbreens = global$reensemence
       )
@@ -64,7 +64,7 @@ mod_carto_leaflet_server <- function(id, global) {
         input$reens_id,
         input$missingdata,
         global$truffe,
-        global$chenes_feularde
+        global$chenes
       ),
       ignoreNULL = FALSE,
       {

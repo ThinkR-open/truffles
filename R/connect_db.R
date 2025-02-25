@@ -16,9 +16,9 @@
 connect_db <- function(dbname = "postgres") {
   conn <- dbConnect(Postgres(),
                  dbname = "postgres",
-                 host = Sys.getenv("HOST"),
+                 host = Sys.getenv("HOST", unset = ""),
                  port = 6543,
-                 user = Sys.getenv("USER"),
-                 password = Sys.getenv("PWD"))
+                 user = Sys.getenv("USER", unset = ""),
+                 password = Sys.getenv("PWD", unset = ""))
   return(conn)
 }

@@ -31,7 +31,7 @@ mod_dataviz_server <- function(id, global) {
     observeEvent(
       c(
         global$truffe,
-        global$chenes_feularde
+        global$chenes
       ),
       {
         req(global$truffe)
@@ -55,7 +55,7 @@ mod_dataviz_server <- function(id, global) {
 
         truf_chene <- global$truffe |>
           dplyr::inner_join(
-            global$chenes_feularde,
+            global$chenes,
             by = "idoak"
           ) |>
           weight_truffles_by(annee = lubridate::year(as.Date(date_found)), type)

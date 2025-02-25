@@ -15,7 +15,7 @@
 #' @export
 #' @examples
 #' conn <- DBI::dbConnect(RSQLite::SQLite(), system.file("chenes_truffe.sqlite", package = "truffles"))
-#' chene <- DBI::dbReadTable(conn, name = "chenes_feularde")
+#' chene <- DBI::dbReadTable(conn, name = "chenes")
 #' truffe <- DBI::dbReadTable(conn, name = "truffe")
 #' reensemence <- DBI::dbReadTable(conn, name = "reens")
 #'
