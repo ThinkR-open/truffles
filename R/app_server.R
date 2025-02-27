@@ -27,7 +27,7 @@ app_server <- function(input, output, session) {
         log_info_dev("Database connection failed")
         f7Dialog(
           title = "Erreur de connexion",
-          text = "Base de données indisponible",
+          text = "Base de donn\u00e9es indisponible",
           type = "alert"
         )
       }
