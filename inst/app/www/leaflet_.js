@@ -4,13 +4,25 @@ $( document ).ready(function() {
 
   Shiny.addCustomMessageHandler('map', function(arg) {
 
+    var locations = arg.data
+    var reens = arg.reens
+    var mean_lat = locations.length 
+    ? locations.reduce((sum, loc) => sum + Number(loc[2] || 0), 0) / locations.length 
+    : 0;
+
+    var mean_lon = locations.length 
+    ? locations.reduce((sum, loc) => sum + Number(loc[1] || 0), 0) / locations.length 
+    : 0;
+
     if (map === null) {
       // Créer la carte uniquement si elle n'existe pas encore
-      map = L.map(document.getElementById(arg.id)).setView([47.99889, 1.532564], 50);
+      map = L.map(document.getElementById(arg.id)).setView([mean_lat, mean_lon], 50);
       L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         maxZoom: 19,
+        opacity: 0.7,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(map);
+
     }
 
 
@@ -23,9 +35,7 @@ $( document ).ready(function() {
         });
     }
 
-      var locations = arg.data
-      var reens = arg.reens
-
+    
 
         for (var i = 0; i < locations.length; i++) {
         marker = new L.circleMarker([locations[i][2], locations[i][1]])
