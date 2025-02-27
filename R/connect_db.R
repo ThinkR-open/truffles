@@ -1,9 +1,9 @@
 
 #' connect_db
 #'
-#' To connect to the database 
+#' To connect to the database
 #'
-#' @param dbname name of db 
+#' @param dbname name of db
 #' @importFrom RPostgres Postgres
 #' @importFrom DBI dbConnect
 #' @return NULL
@@ -19,6 +19,6 @@ connect_db <- function(dbname = "postgres") {
                  host = Sys.getenv("HOST", unset = ""),
                  port = 6543,
                  user = Sys.getenv("USER", unset = ""),
-                 password = Sys.getenv("PWD", unset = ""))
+                 password = Sys.getenv("PWORD", unset = ""))
   return(conn)
 }
