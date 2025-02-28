@@ -14,9 +14,24 @@ $( document ).ready(function() {
     ? locations.reduce((sum, loc) => sum + Number(loc[1] || 0), 0) / locations.length 
     : 0;
 
+
+    // Calculer les coordonnées min/max comme avant
+    var minLat = Math.min(...locations.map(loc => Number(loc[2] || 0)));
+    var maxLat = Math.max(...locations.map(loc => Number(loc[2] || 0)));
+    var minLon = Math.min(...locations.map(loc => Number(loc[1] || 0)));
+    var maxLon = Math.max(...locations.map(loc => Number(loc[1] || 0)));
+    // Calculer l'étendue géographique
+    var latDiff = maxLat - minLat;
+    var lonDiff = maxLon - minLon;
+    // Calculer la taille de l'écran en pixels
+    var screenWidth = window.innerWidth; // Largeur de l'écran en pixels
+    // Estimer un niveau de zoom en fonction de l'étendue géographique et de la taille de l'écran
+    var zoom = Math.round(Math.log2(screenWidth / (latDiff + lonDiff * Math.cos(mean_lat * Math.PI / 180))));
+    
+
     if (map === null) {
       // Créer la carte uniquement si elle n'existe pas encore
-      map = L.map(document.getElementById(arg.id)).setView([mean_lat, mean_lon], 50);
+      map = L.map(document.getElementById(arg.id)).setView([mean_lat, mean_lon], zoom - 0.7);
       L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         maxZoom: 19,
         opacity: 0.7,
