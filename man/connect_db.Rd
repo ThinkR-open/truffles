@@ -4,16 +4,30 @@
 \alias{connect_db}
 \title{connect_db}
 \usage{
-connect_db(dbname = "postgres")
+connect_db(
+  dbname = "postgres",
+  host = Sys.getenv("DB_HOST", unset = ""),
+  port = 6543,
+  user = Sys.getenv("DB_USER", unset = ""),
+  password = Sys.getenv("DB_PWD", unset = "")
+)
 }
 \arguments{
 \item{dbname}{name of db}
+
+\item{host}{host of db}
+
+\item{port}{port of db}
+
+\item{user}{user of db}
+
+\item{password}{password of db}
 }
 \description{
 To connect to the database
 }
 \examples{
 if (interactive()) {
-connect_db()
+  connect_db()
 }
 }

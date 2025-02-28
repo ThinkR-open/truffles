@@ -20,8 +20,16 @@ app_server <- function(input, output, session) {
 
   observeEvent(TRUE, {
     tryCatch(
-      {
+      { 
+        if (isTRUE(getOption("golem.app.prod"))) {
+          global$conn <- connect_db(
+            port = Sys.getenv("DB_PORT_PROD"),
+            user = Sys.getenv("DB_USER_PROD"),
+            password = Sys.getenv("DB_PWD_PROD")
+          )
+        } else {
         global$conn <- connect_db()
+        }
       },
       error = function(e) {
         log_info_dev("Database connection failed")

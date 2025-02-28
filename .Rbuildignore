@@ -18,3 +18,5 @@ inst/site
 ^rsconnect$
 ^\.rscignore$
 ^\.github$
+README.html
+manifest.json
