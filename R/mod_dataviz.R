@@ -58,7 +58,9 @@ mod_dataviz_server <- function(id, global) {
             global$chenes,
             by = "idoak"
           ) |>
-          weight_truffles_by(annee = lubridate::year(as.Date(date_found)), type)
+          weight_truffles_by(annee = lubridate::year(as.Date(date_found)), type) |> 
+          tidyr::complete(annee, type) |>
+          tidyr::replace_na(list(weight = 0))
 
         golem::invoke_js(
           "byyeartype",
