@@ -8,7 +8,6 @@ $run_dev.*
 ^truffles\.Rproj$
 ^LICENSE\.md$
 ^README\.Rmd$
-^\.gitlab-ci\.yml$
 ^ci/lib$
 ^CODE_OF_CONDUCT\.md$
 ^_pkgdown\.yml$
