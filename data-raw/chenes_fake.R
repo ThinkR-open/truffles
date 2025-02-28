@@ -7,7 +7,7 @@ library(RSQLite)
 # chenes <- geojson_read("data-raw/map(2).geojson")
 dates <- as.character(seq(as.Date("2015-01-01"), as.Date("2015-12-31"), by = "day"))
 
-chenes <- readr::read_csv("data-raw/points(5).csv")
+chenes <- readr::read_csv("data-raw/points_tuileries.csv")
 chenes <- chenes |>
   mutate(
     idoak = as.character(ID),
