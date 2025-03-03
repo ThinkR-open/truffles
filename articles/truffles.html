@@ -264,13 +264,13 @@ requises.</p>
 <code class="sourceCode R"><span><span class="va">truffe</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbReadTable.html" class="external-link">dbReadTable</a></span><span class="op">(</span><span class="va">conn_usage</span>, name <span class="op">=</span> <span class="st">"truffe"</span><span class="op">)</span></span>
 <span><span class="va">truffe</span></span>
 <span><span class="co">#&gt;                          idtruffle idoak date_found weight estimation</span></span>
-<span><span class="co">#&gt; 1 d6193e18a44d14e2b4a8e71bcb9af39a     5 2024-01-01     25          0</span></span>
-<span><span class="co">#&gt; 2 c3de849864810eb75c2d278957ed0b2c     1 2024-01-01     NA          1</span></span>
-<span><span class="co">#&gt; 3 42d259135199e400ec7849b32bb0d818     3 2024-02-01    100          1</span></span>
+<span><span class="co">#&gt; 1 8cae9b4e57d657da4d1f12158e535dd8     5 2024-01-01     25          0</span></span>
+<span><span class="co">#&gt; 2 3076504f2bb7b6f03e1b730c843d45a0     1 2024-01-01     NA          1</span></span>
+<span><span class="co">#&gt; 3 f5d283959e307bec86272d0e12f9bb8c     3 2024-02-01    100          1</span></span>
 <span><span class="co">#&gt;                                     comment</span></span>
-<span><span class="co">#&gt; 1               2025-02-28 : Un commentaire</span></span>
-<span><span class="co">#&gt; 2 2025-02-28 : weight a completer plus tard</span></span>
-<span><span class="co">#&gt; 3             2025-02-28 : Un weight estime</span></span></code></pre></div>
+<span><span class="co">#&gt; 1               2025-03-03 : Un commentaire</span></span>
+<span><span class="co">#&gt; 2 2025-03-03 : weight a completer plus tard</span></span>
+<span><span class="co">#&gt; 3             2025-03-03 : Un weight estime</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -318,7 +318,7 @@ requises.</p>
 <span><span class="co">#&gt; [1] "2024-02-01"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $truffes$comments</span></span>
-<span><span class="co">#&gt; [1] "2024-02-01 : 2025-02-28 : J'avais surestimé"</span></span>
+<span><span class="co">#&gt; [1] "2024-02-01 : 2025-03-03 : J'avais surestimé"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $reensemence</span></span>
@@ -327,9 +327,9 @@ requises.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/get_info_chene_last_truffe.html">get_info_chene_last_truffe</a></span><span class="op">(</span>dbtruffe <span class="op">=</span> <span class="va">truffe</span>, theidoak <span class="op">=</span> <span class="st">"5"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                          idtruffle idoak date_found weight estimation</span></span>
-<span><span class="co">#&gt; 1 d6193e18a44d14e2b4a8e71bcb9af39a     5 2024-01-01     25          0</span></span>
+<span><span class="co">#&gt; 1 8cae9b4e57d657da4d1f12158e535dd8     5 2024-01-01     25          0</span></span>
 <span><span class="co">#&gt;                       comment estim_js</span></span>
-<span><span class="co">#&gt; 1 2025-02-28 : Un commentaire</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 2025-03-03 : Un commentaire</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="calcul-daggrégation">Calcul d’aggrégation:<a class="anchor" aria-label="anchor" href="#calcul-daggr%C3%A9gation"></a>
