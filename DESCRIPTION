@@ -18,7 +18,8 @@ Imports:
     RPostgres,
     shiny (>= 1.8.0),
     shinyMobile,
-    shinyWidgets
+    shinyWidgets,
+    tidyr
 Suggests: 
     covr,
     knitr,
