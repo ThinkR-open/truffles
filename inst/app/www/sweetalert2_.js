@@ -157,7 +157,7 @@ $(document).ready(function () {
       });
     }
 
-    openMainSwal(arg.Id);
+    openMainSwal(arg.id);
   });
 
   Shiny.addCustomMessageHandler("modal_info_missing", function (arg) {
