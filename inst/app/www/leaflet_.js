@@ -62,8 +62,7 @@ $(document).ready(function () {
       marker = new L.circleMarker([locations[i][2], locations[i][1]])
         .unbindPopup()
         .addTo(map)
-        .on("click", onClick)
-        .setStyle({ radius: "5" });
+        .on("click", onClick);
 
       marker.id = locations[i][0];
 
@@ -97,6 +96,24 @@ $(document).ready(function () {
         }
       }
     }
+
+// Fonction pour mettre à jour la taille des marqueurs en fonction du zoom
+function updateMarkerSize() {
+  var currentZoom = map.getZoom();
+
+  map.eachLayer(function (layer) {
+    if (layer instanceof L.CircleMarker) {
+      let baseSize = 4; // Taille d'origine
+      let zoomFactor = (currentZoom - 10) * 0.5; // Ajustement doux
+      let newRadius = baseSize + zoomFactor;
+
+      layer.setStyle({ radius: Math.max(newRadius, baseSize) }); // Évite qu'ils deviennent trop petits
+    }
+  });
+}
+
+// Écouteur d'événement sur le zoom
+map.on("zoomend", updateMarkerSize);
 
     function onClick(e) {
       Shiny.setInputValue("chene_click", this.id);
