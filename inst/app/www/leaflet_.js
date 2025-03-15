@@ -32,6 +32,7 @@ $(document).ready(function () {
     );
 
     if (map === null) {
+      document.getElementById(arg.id).style.height = "580px";
       // Créer la carte uniquement si elle n'existe pas encore
       map = L.map(document.getElementById(arg.id)).setView(
         [mean_lat, mean_lon],

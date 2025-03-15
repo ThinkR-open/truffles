@@ -10,7 +10,6 @@
 #' @param estimation logical indicating whether the weight was estimated or not.
 #' @param comment Any additional comments related to the truffle.
 #' @param digest_ The digest of the truffle.
-#' @param date_comment the date of the comment (Sys.Date() by default)
 #'
 #' @importFrom digest digest
 #' @importFrom DBI dbAppendTable
@@ -20,7 +19,7 @@
 #' @examples
 #' # write_db_new_truffe(theidoak = "chene")
 write_db_new_truffe <-
-  function(conn = connect_db(), theidoak, date_found, weight, estimation, comment, digest_ = Sys.time(), date_comment = Sys.Date()) {
+  function(conn = connect_db(), theidoak, date_found, weight, estimation, comment, digest_ = Sys.time()) {
     idtruffle <- digest(digest_)
 
     add_truffe <- data.frame(
@@ -29,7 +28,7 @@ write_db_new_truffe <-
       date_found = as.character(date_found),
       weight = weight,
       estimation = estimation,
-      comment = paste(date_comment, comment, sep = " : ")
+      comment = formater_comment(comment)
     )
 
     dbAppendTable(conn, "truffe", add_truffe)
