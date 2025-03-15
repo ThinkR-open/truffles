@@ -264,13 +264,13 @@ requises.</p>
 <code class="sourceCode R"><span><span class="va">truffe</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbReadTable.html" class="external-link">dbReadTable</a></span><span class="op">(</span><span class="va">conn_usage</span>, name <span class="op">=</span> <span class="st">"truffe"</span><span class="op">)</span></span>
 <span><span class="va">truffe</span></span>
 <span><span class="co">#&gt;                          idtruffle idoak date_found weight estimation</span></span>
-<span><span class="co">#&gt; 1 df6cdb84cd2d209c7155d2ccc83b5b9b     5 2024-01-01     25          0</span></span>
-<span><span class="co">#&gt; 2 694b520f944e430670f9d628a45f0afe     1 2024-01-01     NA          1</span></span>
-<span><span class="co">#&gt; 3 22cd6fc2c5cc7e704503e6399851f460     3 2024-02-01    100          1</span></span>
-<span><span class="co">#&gt;                           comment</span></span>
-<span><span class="co">#&gt; 1               Un commentaire : </span></span>
-<span><span class="co">#&gt; 2 weight a completer plus tard : </span></span>
-<span><span class="co">#&gt; 3             Un weight estime :</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 0568a3baaa2cf75937c414d53c275006     5 2024-01-01     25          0</span></span>
+<span><span class="co">#&gt; 2 9990ecfe90214380d4db726ea44cbeaf     1 2024-01-01     NA          1</span></span>
+<span><span class="co">#&gt; 3 86ddc862954e0a02185f3cc86e152a23     3 2024-02-01    100          1</span></span>
+<span><span class="co">#&gt;                                     comment</span></span>
+<span><span class="co">#&gt; 1               2024-01-01 : Un commentaire</span></span>
+<span><span class="co">#&gt; 2 2024-01-01 : weight a completer plus tard</span></span>
+<span><span class="co">#&gt; 3             2024-02-01 : Un weight estime</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -317,8 +317,11 @@ requises.</p>
 <span><span class="co">#&gt; $truffes$derniere_truffe</span></span>
 <span><span class="co">#&gt; [1] "2024-02-01"</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $truffes$comments</span></span>
-<span><span class="co">#&gt; [1] "2024-02-01 : J'avais surestimé : "</span></span>
+<span><span class="co">#&gt; $truffes$last_comment</span></span>
+<span><span class="co">#&gt; [1] "2024-02-01 : 2024-02-01 : J'avais surestimé"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $truffes$other_comments</span></span>
+<span><span class="co">#&gt; [1] "-"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $reensemence</span></span>
@@ -327,9 +330,9 @@ requises.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/get_info_chene_last_truffe.html">get_info_chene_last_truffe</a></span><span class="op">(</span>dbtruffe <span class="op">=</span> <span class="va">truffe</span>, theidoak <span class="op">=</span> <span class="st">"5"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                          idtruffle idoak date_found weight estimation</span></span>
-<span><span class="co">#&gt; 1 df6cdb84cd2d209c7155d2ccc83b5b9b     5 2024-01-01     25          0</span></span>
-<span><span class="co">#&gt;             comment estim_js</span></span>
-<span><span class="co">#&gt; 1 Un commentaire :</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 0568a3baaa2cf75937c414d53c275006     5 2024-01-01     25          0</span></span>
+<span><span class="co">#&gt;                       comment estim_js</span></span>
+<span><span class="co">#&gt; 1 2024-01-01 : Un commentaire</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="calcul-daggrégation">Calcul d’aggrégation:<a class="anchor" aria-label="anchor" href="#calcul-daggr%C3%A9gation"></a>
