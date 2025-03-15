@@ -60,10 +60,10 @@ $(document).ready(function () {
 
     for (var i = 0; i < locations.length; i++) {
       marker = new L.circleMarker([locations[i][2], locations[i][1]])
-        .bindPopup(locations[i][0])
+        .unbindPopup()
         .addTo(map)
         .on("click", onClick)
-        .setStyle({ radius: "4" });
+        .setStyle({ radius: "5" });
 
       marker.id = locations[i][0];
 
