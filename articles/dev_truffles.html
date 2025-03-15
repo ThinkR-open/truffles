@@ -75,7 +75,7 @@
 </h2>
 <p>Cette documentation vise à fournir des instructions détaillées pour
 les développeurs travaillant sur cette application utilisant {golem} et
-implémentant des fonctionnalités métier avec {fusen}.</p>
+implémentant des fonctionnalités métier.</p>
 <p>L’application utilise également les bibliothèques JavaScript Leaflet,
 SweetAlert2 et Chart.js.</p>
 </div>
@@ -85,15 +85,18 @@ SweetAlert2 et Chart.js.</p>
 <p>L’application Shiny suit une architecture basée sur {golem}. Voici la
 structure de base de l’application :</p>
 <pre><code>.
+├── app.R
 ├── CODE_OF_CONDUCT.md
 ├── data-raw
 ├── DESCRIPTION
+├── dev
 ├── dev
 ├── docs
 ├── inst
 ├── LICENSE
 ├── LICENSE.md
 ├── man
+├── manifest.json
 ├── NAMESPACE
 ├── NEWS.md
 ├── R
@@ -106,35 +109,15 @@ structure de base de l’application :</p>
 <p>Avec entre autre:</p>
 <pre><code>DESCRIPTION: Fichier de description du package.
 R/: Contient les scripts pour le serveur (app_server.R) et l'interface utilisateur (app_ui.R).
-data-raw/: Répertoire pour stocker les données utilisées poru construire la base sql qui sert d'exemple.
+data-raw/: Répertoire pour stocker les données utilisées pour construire la base sql qui sert d'exemple.
 inst/app/: Répertoire pour les ressources web statiques utilisées par l'application.
 man/: Documentation pour les fonctions.
 tests/: Tests unitaires pour l'application.</code></pre>
 </div>
 <div class="section level2">
-<h2 id="développement-des-fonctionnalités-métier-avec-fusen">Développement des fonctionnalités métier avec {fusen}<a class="anchor" aria-label="anchor" href="#d%C3%A9veloppement-des-fonctionnalit%C3%A9s-m%C3%A9tier-avec-fusen"></a>
-</h2>
-<p>{fusen} est utilisé pour implémenter les fonctionnalités métier de
-l’application. Les fonctions et les modules {fusen} doivent être
-développés dans les flat file dédiés dans le dossier dev/.</p>
-<pre><code>├── dev
-│   ├── 01_start.R
-│   ├── 02_dev.R
-│   ├── 03_deploy.R
-│   ├── config_attachment.yaml
-│   ├── config_fusen.yaml
-│   ├── config_not_registered.csv
-│   ├── flat_get_info_chene_truffe.Rmd
-│   ├── flat_utils.Rmd
-│   ├── flat_utils_db.Rmd
-│   ├── flat_utils_js.Rmd
-│   ├── run_dev.R
-│   └── structure_app.excalidraw</code></pre>
-</div>
-<div class="section level2">
 <h2 id="utilisation-des-bibliothèques-javascript">Utilisation des Bibliothèques JavaScript<a class="anchor" aria-label="anchor" href="#utilisation-des-biblioth%C3%A8ques-javascript"></a>
 </h2>
-<pre><code>./inst/app/www
+<pre><code>inst/app/www
 ├── chart.js
 ├── chart.umd.min.js
 ├── chartjs_.js
@@ -146,6 +129,7 @@ développés dans les flat file dédiés dans le dossier dev/.</p>
 ├── sweetalert2.all.min.js
 ├── sweetalert2.min.css
 ├── sweetalert2_.js
+├── template_add_reens.html
 ├── template_find_truffle.html
 └── template_identity_card.html</code></pre>
 <div class="section level3">
@@ -164,7 +148,8 @@ intéractions avec l’utilisateur via des modals.</p>
 <p>Il est important de noter que l’utilisation de SweetAlert2 dans cette
 application repose également sur des templates HTML pour construire les
 modales:</p>
-<pre><code>├── template_find_truffle.html
+<pre><code>├── template_add_reens.html
+├── template_find_truffle.html
 └── template_identity_card.html</code></pre>
 </div>
 <div class="section level3">
@@ -185,9 +170,34 @@ graphiques interactifs. Elle est utilisée dans l’onglet “dataviz”.</p>
 <p><img src="../reference/figures/pkgnet_global.png"></p>
 </div>
 <div class="section level2">
-<h2 id="visualisation-des-dépendances---app_server-r">Visualisation des dépendances - app_server.R<a class="anchor" aria-label="anchor" href="#visualisation-des-d%C3%A9pendances---app_server-r"></a>
+<h2 id="variables-denvironnement-pour-la-connexion-à-la-base-de-données">Variables d’environnement pour la connexion à la base de
+données<a class="anchor" aria-label="anchor" href="#variables-denvironnement-pour-la-connexion-%C3%A0-la-base-de-donn%C3%A9es"></a>
 </h2>
-<p><img src="../reference/figures/pkgnet_app_server.png"></p>
+<p>La fonction <code><a href="../reference/connect_db.html">connect_db()</a></code> utilise des variables
+d’environnement pour sécuriser les informations de connexion à la base
+de données. Afin de garantir une connexion réussie, les variables
+suivantes doivent être définies avant d’exécuter la fonction :</p>
+<ul>
+<li>DB_HOST : Adresse du serveur de la base de données (ex. “localhost”
+ou une adresse IP).</li>
+<li>DB_USER : Identifiant de l’utilisateur ayant accès à la base.</li>
+<li>DB_PWD : Mot de passe associé à l’utilisateur.</li>
+</ul>
+<p>Ces variables sont récupérées dans le code via Sys.getenv(),
+permettant de ne pas stocker directement les identifiants sensibles dans
+le code source.</p>
+<p>Si ces variables ne sont pas définies, la connexion échouera.</p>
+<div class="section level3">
+<h3 id="configuration-des-variables-denvironnement">Configuration des variables d’environnement<a class="anchor" aria-label="anchor" href="#configuration-des-variables-denvironnement"></a>
+</h3>
+<p>Avant d’utiliser connect_db(), assurez-vous que ces variables sont
+bien définies dans votre environnement d’exécution.</p>
+<p>Dans le fichier .Renviron :</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">DB_HOST</span> <span class="op">=</span> <span class="va">mon_serveur</span></span>
+<span><span class="va">DB_USER</span> <span class="op">=</span> <span class="va">mon_utilisateur</span></span>
+<span><span class="va">DB_PWD</span> <span class="op">=</span> <span class="va">mon_mot_de_passe</span></span></code></pre></div>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
