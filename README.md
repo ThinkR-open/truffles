@@ -74,3 +74,4 @@ run_app()
 ## Developper
 
 The developer documentation is available in the pkgdown:
+<https://thinkr-open.github.io/truffles/>

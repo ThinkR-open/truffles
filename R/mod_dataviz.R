@@ -44,7 +44,7 @@ mod_dataviz_server <- function(id, global) {
           "byyear",
           list(
             id = ns("graph1"),
-            label = "weight en grammes",
+            label = "Poids en grammes",
             labels = truf$annee,
             data = truf$weight,
             title = "R\u00e9colte annuelle de truffes"

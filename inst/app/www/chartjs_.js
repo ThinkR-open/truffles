@@ -59,15 +59,15 @@ newChart =  new Chart(ctx, {
       datasets: [{
         label: arg.label1,
         data: arg.data1,
-        borderColor: '#af4424',
-        backgroundColor: '#af4424',
+        borderColor: '#FF0000',
+        backgroundColor: '#FF0000',
         borderWidth: 1
       },
       {
         label: arg.label2,
         data: arg.data2,
-        borderColor: '#556b2f',
-        backgroundColor:'#556b2f',
+        borderColor: '#FFA500',
+        backgroundColor:'#FFA500',
         borderWidth: 1
       }]
     },
