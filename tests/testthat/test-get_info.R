@@ -39,7 +39,8 @@ test_that("get_info works", {
     truffes = list(
       weight_tot = 0,
       derniere_truffe = "-",
-      comments = "-"
+      last_comment = "-",
+      other_comments = "-"
     ),
     reensemence = "2021-06-20"
   )
@@ -56,7 +57,8 @@ test_that("get_info works", {
       truffes = list(
         weight_tot = 125,
         derniere_truffe = structure(19844, class = "Date"),
-        comments = "2024-04-01 : Small truffle<br>2024-05-01 : Medium truffle"
+        last_comment = "2024-05-01 : Medium truffle",
+        other_comments = "2024-04-01 : Small truffle"
       ),
       reensemence = "-"
     )

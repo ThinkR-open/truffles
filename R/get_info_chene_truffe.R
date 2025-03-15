@@ -11,7 +11,7 @@
 #' @return A list containing information about truffles associated with the oak tree,
 #' including the total weight, date of the last truffle found, and any comments.
 #'
-#' @importFrom dplyr filter summarise pull
+#' @importFrom dplyr filter summarise pull arrange desc
 #' @export
 #'
 #' @examples
@@ -24,42 +24,48 @@
 #' get_info_chene_truffe(dbtruffe = truffe, theidoak = "119")
 #' DBI::dbDisconnect(conn)
 get_info_chene_truffe <- function(dbtruffe, theidoak) {
-  check_param(dbtruffe, "data.frame")
-  check_param(theidoak, "character")
-  check_names_dataframe(c("idoak", "weight", "date_found", "comment"), dbtruffe)
+    check_param(dbtruffe, "data.frame")
+    check_param(theidoak, "character")
+    check_names_dataframe(c(
+        "idoak", "weight", "date_found",
+        "comment"
+    ), dbtruffe)
+    truffe_chene <- filter(dbtruffe, idoak == theidoak)
+    if (nrow(truffe_chene) == 0) {
+        return(list(weight_tot = 0, derniere_truffe = "-", last_comment = "-", other_comments = "-"))
+    }
 
-  truffe_chene <- dbtruffe |>
-    filter(idoak == theidoak)
 
-  if (nrow(truffe_chene) == 0) {
-    return(list(
-      weight_tot = 0,
-      derniere_truffe = "-",
-      comments = "-"
-    ))
-  }
+    weight_tot <- pull(summarise(truffe_chene, weight_tot = sum(weight,
+        na.rm = TRUE
+    )), weight_tot)
+    derniere_truffe <- pull(summarise(truffe_chene, date_found = as.Date(max(date_found,
+        na.rm = TRUE
+    ))), date_found)
 
-  weight_tot <- truffe_chene |>
-    summarise(weight_tot = sum(weight, na.rm = TRUE)) |>
-    pull(weight_tot)
+    sort_comment <- truffe_chene |>
+        arrange(desc(date_found))
 
-  derniere_truffe <- truffe_chene |>
-    summarise(date_found = as.Date(max(date_found, na.rm = TRUE))) |>
-    pull(date_found)
-
-  comments <-
-    paste(
-      paste(
-        as.Date(truffe_chene$date_found),
-        truffe_chene$comment,
+    last_comment <- paste(as.Date(sort_comment$date_found[1]),
+        sort_comment$comment[1],
         sep = " : "
-      ),
-      collapse = "<br>"
     )
 
-  return(list(
-    weight_tot = weight_tot,
-    derniere_truffe = derniere_truffe,
-    comments = comments
-  ))
+    if (nrow(sort_comment) > 1) {
+        other_comments <- paste(paste(as.Date(sort_comment$date_found[-1]),
+            sort_comment$comment[-1],
+            sep = " : "
+        ), collapse = "<br>")
+    } else {
+        other_comments <- "-"
+    }
+
+
+
+    return(list(
+        weight_tot = weight_tot, 
+        derniere_truffe = derniere_truffe,
+        last_comment = last_comment,
+        other_comments = other_comments
+    ))
 }

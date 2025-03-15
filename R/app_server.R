@@ -93,7 +93,8 @@ app_server <- function(input, output, session) {
           date_p = as.Date(info$chene$planting_date),
           der_truf = info$truffes$derniere_truffe,
           tot_weight = info$truffes$weight_tot,
-          comments = info$truffes$comments
+          last_comment = info$truffes$last_comment,
+          other_comments = info$truffes$other_comments
         )
       )
     }

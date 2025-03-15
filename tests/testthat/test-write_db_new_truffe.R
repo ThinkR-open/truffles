@@ -32,7 +32,7 @@ test_that("write_db_new_truffe works", {
       date_found = "2024-03-08",
       weight = 50,
       estimation = 1,
-      comment = formater_comment("Freshly found truffle")
+      comment = formater_comment("2024-03-08", "Freshly found truffle")
     )
   expect_equal(DBI::dbReadTable(conn, "truffe"), expected_output)
 })

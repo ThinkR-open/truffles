@@ -36,7 +36,7 @@ test_that("update_db_truffe works", {
       date_found = 18294,
       weight = 22,
       estimation = 0,
-      comment = formater_comment("New comment")
+      comment = formater_comment("18294", "New comment")
     )
   expect_equal(
     DBI::dbReadTable(conn, "truffe") |>

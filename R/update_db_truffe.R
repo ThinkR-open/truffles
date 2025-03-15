@@ -43,7 +43,7 @@
 #'   comment = "It's good!"
 #' )
 update_db_truffe <- function(conn, idtruffle, idoak, date_found, weight, comment, estimation) {
-  comment <- formater_comment(comment)
+  comment <- formater_comment(date_found, comment)
 
   # Build and execute the SQL query to update the line
 
