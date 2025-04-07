@@ -14,7 +14,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, message = FALSE, warning=FALSE}
+
 library(truffles)
 library(DBI)
 library(lubridate)

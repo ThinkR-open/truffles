@@ -40,4 +40,23 @@ test_that("get_info_chene_truffe works", {
     )
 
   expect_equal(get_info_chene_truffe(dbtruffe, "3"), expected_output)
+
+
+
+  dbtruffe <- data.frame(
+    idoak = c("1"),
+    weight = c(100),
+    date_found = c(
+      "2024-01-01"
+    ),
+    comment = c(
+      "Belle truffe"
+    )
+  )
+
+  expect_equal(get_info_chene_truffe(dbtruffe, "1"), list(
+    weight_tot = 100, derniere_truffe = structure(19723, class = "Date"),
+    last_comment = "2024-01-01 : Belle truffe", other_comments = "-"
+  ))
+
 })

@@ -52,7 +52,7 @@ run_app()
 
 ## Cartography tab
 
-### Visuasilation of home page
+### Visualization of home page
 
 ![](man/figures/accueil.png)
 
