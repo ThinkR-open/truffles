@@ -31,5 +31,5 @@ jobs:
 
       - name: Test DB connection
         run: |
-          Rscript -e 'library(tonpackage); con <- connect_db(); print(DBI::dbListTables(con)); DBI::dbDisconnect(con)'
+          Rscript -e 'library(truffles); con <- connect_db(); print(DBI::dbListTables(con)); DBI::dbDisconnect(con)'
 
