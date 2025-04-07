@@ -28,7 +28,7 @@ write_db_new_truffe <-
       date_found = as.character(date_found),
       weight = weight,
       estimation = estimation,
-      comment = formater_comment(date_found, comment)
+      comment = comment
     )
 
     dbAppendTable(conn, "truffe", add_truffe)
