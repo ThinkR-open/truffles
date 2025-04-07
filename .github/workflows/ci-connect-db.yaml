@@ -1,9 +1,7 @@
 name: Connect to DB every 5 days
 
-on:
-  schedule:
-    - cron: '*/5 * * * *' # Toutes les 5 minutes
-  workflow_dispatch:      # Permet de le lancer manuellement si besoin
+on: 
+  workflow_dispatch:   # Permet de le lancer manuellement si besoin
 
 jobs:
   connect-db:
