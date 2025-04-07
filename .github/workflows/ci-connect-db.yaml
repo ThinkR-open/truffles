@@ -1,7 +1,8 @@
 name: Connect to DB every 5 days
 
 on: 
-  workflow_dispatch:   # Permet de le lancer manuellement si besoin
+  push:
+    branches: [try_CI_connect_db]   # Permet de le lancer manuellement si besoin
 
 jobs:
   connect-db:
