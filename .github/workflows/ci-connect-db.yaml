@@ -1,0 +1,40 @@
+name: Connect to DB every 5 days
+
+on: 
+  push:
+    branches: [try_CI_connect_db]   
+
+jobs:
+  connect-db:
+    runs-on: windows-latest
+
+    env:
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PWD: ${{ secrets.DB_PWD }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+
+      - name: Install dependencies
+        run: |
+          Rscript -e 'install.packages("remotes")'
+          Rscript -e 'remotes::install_deps(dependencies = TRUE)'
+
+
+      - name: Install truffles
+        run: |
+          Rscript -e 'remotes::install_local(".", upgrade = "never")'
+
+      - name: check env
+        run: |
+          Rscript -e 'substr(Sys.getenv("DB_USER"), start = 1, stop = 3 )'
+          Rscript -e 'substr(Sys.getenv("DB_PWD"), start = 1, stop = 3 )'
+          Rscript -e 'substr(Sys.getenv("DB_HOST"), start = 1, stop = 3 )'
+
+      - name: Test DB connection
+        run: |
+          Rscript -e 'library(truffles); con <- connect_db(); print(DBI::dbListTables(con)); DBI::dbDisconnect(con)'
+
