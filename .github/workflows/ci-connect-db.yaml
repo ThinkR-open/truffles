@@ -2,7 +2,7 @@ name: Connect to DB every 5 days
 
 on: 
   schedule:
-    - cron: '*/5 * * * *'  # Toutes les 5 minutes
+    - cron: '0 6 */5 * *' # Tous les 5 jours à 6h du matin UTC
 
 jobs:
   connect-db:
