@@ -2,7 +2,7 @@ name: Connect to DB every 5 days
 
 on: 
   push:
-    branches: [try_CI_connect_db]   # Permet de le lancer manuellement si besoin
+    branches: [try_CI_connect_db]   
 
 jobs:
   connect-db:
@@ -28,6 +28,11 @@ jobs:
         run: |
           Rscript -e 'remotes::install_local(".", upgrade = "never")'
 
+      - name: check env
+        run: |
+          Rscript -e 'substr(Sys.getenv("DB_USER"), start = 1, stop = 3 )'
+          Rscript -e 'substr(Sys.getenv("DB_PWD"), start = 1, stop = 3 )'
+          Rscript -e 'substr(Sys.getenv("DB_HOST"), start = 1, stop = 3 )'
 
       - name: Test DB connection
         run: |
