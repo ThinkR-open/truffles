@@ -3,12 +3,7 @@
 
 # truffles <img src="man/figures/hex-truffles.png" align="right" alt="" width="120" />
 
-<!-- badges: start -->
-
-[![R build
-status](https://gitlab.com/MurielleDelmotte/truffles/badges/main/pipeline.svg)](https://gitlab.com/thinkr-open/squirrels/-/pipelines)
-<!-- badges: end --> R package for mapping and managing a truffle tree
-plantation
+R package for mapping and managing a truffle tree plantation
 
 truffles is an R package designed to facilitate the visualization and
 management of a truffle tree plantation via a mobile application. With
@@ -41,7 +36,9 @@ To install truffles, you can use the following command in your R
 environment:
 
 ``` r
-remotes::install_gitlab("https://gitlab.com/MurielleDelmotte/truffles")
+# install.packages("remotes")
+remotes::install_github("Thinkr-open/truffles") # Stable development version
+# remotes::install_github("Thinkr-open/truffles@dev") # Bleeding edge development version
 ```
 
 ## Getting Started
@@ -56,7 +53,7 @@ run_app()
 
 ## Cartography tab
 
-### Visuasilation of home page
+### Visualization of home page
 
 ![](man/figures/accueil.png)
 
@@ -77,5 +74,4 @@ run_app()
 ## Developper
 
 The developer documentation is available in the pkgdown:
-
-<https://truffles-murielledelmotte-5682f051faf59930546c7b5710250177cfc5b.gitlab.io/>
+<https://thinkr-open.github.io/truffles/>

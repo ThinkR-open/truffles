@@ -8,10 +8,15 @@ $run_dev.*
 ^truffles\.Rproj$
 ^LICENSE\.md$
 ^README\.Rmd$
-^\.gitlab-ci\.yml$
 ^ci/lib$
 ^CODE_OF_CONDUCT\.md$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
 inst/site
+^app\.R$
+^rsconnect$
+^\.rscignore$
+^\.github$
+README.html
+manifest.json

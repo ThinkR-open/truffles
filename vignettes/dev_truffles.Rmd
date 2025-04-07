@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-Cette documentation vise à fournir des instructions détaillées pour les développeurs travaillant sur cette application utilisant {golem} et implémentant des fonctionnalités métier avec {fusen}.
+Cette documentation vise à fournir des instructions détaillées pour les développeurs travaillant sur cette application utilisant {golem} et implémentant des fonctionnalités métier.
 
 L'application utilise également les bibliothèques JavaScript Leaflet, SweetAlert2 et Chart.js.
 
@@ -25,17 +25,24 @@ L'application utilise également les bibliothèques JavaScript Leaflet, SweetAle
 L'application Shiny suit une architecture basée sur {golem}. 
 Voici la structure de base de l'application :
 
-```{kotlin}
+```{r, echo=FALSE, eval=FALSE}
+fs::dir_tree(recurse = 0)
+```
+
+```
 .
+├── app.R
 ├── CODE_OF_CONDUCT.md
 ├── data-raw
 ├── DESCRIPTION
+├── dev
 ├── dev
 ├── docs
 ├── inst
 ├── LICENSE
 ├── LICENSE.md
 ├── man
+├── manifest.json
 ├── NAMESPACE
 ├── NEWS.md
 ├── R
@@ -51,39 +58,20 @@ Avec entre autre:
 
     DESCRIPTION: Fichier de description du package.
     R/: Contient les scripts pour le serveur (app_server.R) et l'interface utilisateur (app_ui.R).
-    data-raw/: Répertoire pour stocker les données utilisées poru construire la base sql qui sert d'exemple.
+    data-raw/: Répertoire pour stocker les données utilisées pour construire la base sql qui sert d'exemple.
     inst/app/: Répertoire pour les ressources web statiques utilisées par l'application.
     man/: Documentation pour les fonctions.
     tests/: Tests unitaires pour l'application.
 
 
-## Développement des fonctionnalités métier avec {fusen}
-
-{fusen} est utilisé pour implémenter les fonctionnalités métier de l'application. 
-Les fonctions et les modules {fusen} doivent être développés dans les flat file dédiés dans le dossier dev/. 
-
-```{kotlin}
-├── dev
-│   ├── 01_start.R
-│   ├── 02_dev.R
-│   ├── 03_deploy.R
-│   ├── config_attachment.yaml
-│   ├── config_fusen.yaml
-│   ├── config_not_registered.csv
-│   ├── flat_get_info_chene_truffe.Rmd
-│   ├── flat_utils.Rmd
-│   ├── flat_utils_db.Rmd
-│   ├── flat_utils_js.Rmd
-│   ├── run_dev.R
-│   └── structure_app.excalidraw
-```
-
-
 ## Utilisation des Bibliothèques JavaScript
 
+```{r, echo=FALSE, eval=FALSE}
+fs::dir_tree(path = "inst/app/www",recurse = 0)
+```
 
-```{kotlin}
-./inst/app/www
+```
+inst/app/www
 ├── chart.js
 ├── chart.umd.min.js
 ├── chartjs_.js
@@ -95,6 +83,7 @@ Les fonctions et les modules {fusen} doivent être développés dans les flat fi
 ├── sweetalert2.all.min.js
 ├── sweetalert2.min.css
 ├── sweetalert2_.js
+├── template_add_reens.html
 ├── template_find_truffle.html
 └── template_identity_card.html
 ```
@@ -111,7 +100,8 @@ Elle est notamment utilisée pour les intéractions avec l'utilisateur via des m
 
 Il est important de noter que l'utilisation de SweetAlert2 dans cette application repose également sur des templates HTML pour construire les modales:
 
-```{kotlin}
+```
+├── template_add_reens.html
 ├── template_find_truffle.html
 └── template_identity_card.html
 ```
@@ -130,6 +120,26 @@ Elle est utilisée dans l'onglet "dataviz".
 ![](../reference/figures/pkgnet_global.png)
 
 
-## Visualisation des dépendances - app_server.R
+## Variables d'environnement pour la connexion à la base de données
 
-![](../reference/figures/pkgnet_app_server.png)
+La fonction `connect_db()` utilise des variables d'environnement pour sécuriser les informations de connexion à la base de données. 
+Afin de garantir une connexion réussie, les variables suivantes doivent être définies avant d'exécuter la fonction :
+
+- DB_HOST : Adresse du serveur de la base de données (ex. "localhost" ou une adresse IP).
+- DB_USER : Identifiant de l'utilisateur ayant accès à la base.
+- DB_PWD : Mot de passe associé à l'utilisateur.
+
+Ces variables sont récupérées dans le code via Sys.getenv(), permettant de ne pas stocker directement les identifiants sensibles dans le code source.
+
+Si ces variables ne sont pas définies, la connexion échouera.
+
+### Configuration des variables d'environnement
+
+Avant d'utiliser connect_db(), assurez-vous que ces variables sont bien définies dans votre environnement d'exécution. 
+
+Dans le fichier .Renviron :
+```r
+DB_HOST = mon_serveur
+DB_USER = mon_utilisateur
+DB_PWD = mon_mot_de_passe
+```

@@ -31,14 +31,14 @@ mod_dataviz_server <- function(id, global) {
     observeEvent(
       c(
         global$truffe,
-        global$chenes_feularde
+        global$chenes
       ),
       {
         req(global$truffe)
         log_info_dev("Dataviz")
 
         # By year
-        truf <- weight_truffles_by(global$truffe, annee = lubridate::year(as.Date(date_trouve)))
+        truf <- weight_truffles_by(global$truffe, annee = lubridate::year(as.Date(date_found)))
 
         golem::invoke_js(
           "byyear",
@@ -46,7 +46,7 @@ mod_dataviz_server <- function(id, global) {
             id = ns("graph1"),
             label = "Poids en grammes",
             labels = truf$annee,
-            data = truf$poids,
+            data = truf$weight,
             title = "R\u00e9colte annuelle de truffes"
           )
         )
@@ -55,10 +55,12 @@ mod_dataviz_server <- function(id, global) {
 
         truf_chene <- global$truffe |>
           dplyr::inner_join(
-            global$chenes_feularde,
-            by = dplyr::join_by(idchene == id)
+            global$chenes,
+            by = "idoak"
           ) |>
-          weight_truffles_by(annee = lubridate::year(as.Date(date_trouve)), type)
+          weight_truffles_by(annee = lubridate::year(as.Date(date_found)), type) |> 
+          tidyr::complete(annee, type) |>
+          tidyr::replace_na(list(weight = 0))
 
         golem::invoke_js(
           "byyeartype",
@@ -67,8 +69,8 @@ mod_dataviz_server <- function(id, global) {
             label1 = "Normal",
             label2 = "Vert",
             labels = unique(truf_chene$annee),
-            data1 = truf_chene |> filter(type == "Normal") |> pull(poids),
-            data2 = truf_chene |> filter(type == "Green") |> pull(poids),
+            data1 = truf_chene |> filter(type == "Normal") |> pull(weight),
+            data2 = truf_chene |> filter(type == "Green") |> pull(weight),
             title = "R\u00e9colte annuelle de truffes par Type"
           )
         )

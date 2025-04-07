@@ -5,27 +5,27 @@
 \title{Update a row in the "truffe" table of a database.}
 \usage{
 update_db_truffe(
-  conn = connect_db(),
-  idtruffe,
-  idchene,
-  date_trouve,
-  poids,
-  commentaires,
+  conn,
+  idtruffle,
+  idoak,
+  date_found,
+  weight,
+  comment,
   estimation
 )
 }
 \arguments{
 \item{conn}{A connection to the database.}
 
-\item{idtruffe}{The identifier of the truffle to update.}
+\item{idtruffle}{The identifier of the truffle to update.}
 
-\item{idchene}{The identifier of the oak tree associated with the truffle.}
+\item{idoak}{The identifier of the oak tree associated with the truffle.}
 
-\item{date_trouve}{The date when the truffle was found.}
+\item{date_found}{The date when the truffle was found.}
 
-\item{poids}{The weight of the truffle.}
+\item{weight}{The weight of the truffle.}
 
-\item{commentaires}{The comments associated with the truffle.}
+\item{comment}{The comments associated with the truffle.}
 
 \item{estimation}{The estimation of the truffle.}
 }
@@ -39,27 +39,27 @@ This function updates a row in the "truffe" table of a database using an SQL UPD
 
 conn <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
 
-# Création de la table truffe dans la base de données
+# Create a truffle table in the database
 DBI::dbWriteTable(
   conn,
   "truffe",
   data.frame(
-    idtruffe = "156",
-    idchene = "15",
-    date_trouve = as.numeric(as.Date("2020/02/02")),
-    poids = 12,
+    idtruffle = "156",
+    idoak = "15",
+    date_found = as.numeric(as.Date("2020/02/02")),
+    weight = 12,
     estimation = 1,
-    commentaires = "Comment"
+    comment = "Comment"
   )
 )
 
 update_db_truffe(
   conn,
-  idtruffe = "156",
-  idchene = "15",
-  date_trouve = as.numeric(as.Date("2020/02/02")),
-  poids = 22,
+  idtruffle = "156",
+  idoak = "15",
+  date_found = as.numeric(as.Date("2020/02/02")),
+  weight = 22,
   estimation = 0,
-  commentaires = "C'est déjà bien!"
+  comment = "It's good!"
 )
 }

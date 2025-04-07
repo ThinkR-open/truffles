@@ -8,3 +8,4 @@ README.html
 inst/doc
 inst/site
 docs
+.Renviron
