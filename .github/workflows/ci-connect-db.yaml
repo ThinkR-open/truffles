@@ -1,8 +1,8 @@
 name: Connect to DB every 5 days
 
 on: 
-  push:
-    branches: [try_CI_connect_db]   
+  schedule:
+    - cron: '*/5 * * * *'  # Toutes les 5 minutes
 
 jobs:
   connect-db:
