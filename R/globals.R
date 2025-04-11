@@ -3,7 +3,7 @@ globalVariables(unique(c(
   "planting_date",
   "id",
   "type",
-  # get_info_chene:
+  # get_info_oak:
   "id",
   # get_info_oak_truffle:
   "date_found",

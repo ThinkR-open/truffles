@@ -2,7 +2,7 @@
 
 export(connect_db)
 export(get_info)
-export(get_info_chene)
+export(get_info_oak)
 export(get_info_oak_last_truffle)
 export(get_info_oak_truffle)
 export(get_info_reensemence)
