@@ -63,7 +63,7 @@ app_server <- function(input, output, session) {
 
 
     if (isTRUE(global$missingdata)) {
-      info <- get_info_chene_last_truffe(dbtruffe = global$truffe, theidoak = input$chene_click, filter_missing_info = TRUE)
+      info <- get_info_oak_last_truffle(dbtruffle = global$truffe, theidoak = input$chene_click, filter_missing_info = TRUE)
 
       golem::invoke_js(
         "modal_info_missing",

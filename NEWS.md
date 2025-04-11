@@ -1,9 +1,11 @@
 # truffles (development version)
 
+- Rename `get_info_chene_last_truffe()` -> `get_info_oak_last_truffle()`
+
 # truffles 0.0.2
 
 - Using flexbox in modals
-- New function get_info_reensemence() to get information about the latest reseeding date
+- New function `get_info_reensemence()` to get information about the latest reseeding date
 - Add User Doc / Dev Doc in pkgdown 
 
 # truffles 0.0.1
