@@ -1,6 +1,6 @@
 
-test_that("get_info_chene_truffe works", {
-  dbtruffe <- data.frame(
+test_that("get_info_oak_truffle works", {
+  dbtruffle <- data.frame(
     idoak = c("1", "1", "2", "3", "3"),
     weight = c(100, 150, 200, 50, 75),
     date_found = c(
@@ -21,10 +21,10 @@ test_that("get_info_chene_truffe works", {
 
   # Test when oak does not exist in the database
   expect_equal(
-    get_info_chene_truffe(dbtruffe, "4"),
+    get_info_oak_truffle(dbtruffle, "4"),
     list(
       weight_tot = 0,
-      derniere_truffe = "-",
+      last_truffle = "-",
       last_comment = "-",
       other_comments = "-"
     )
@@ -34,16 +34,16 @@ test_that("get_info_chene_truffe works", {
   expected_output <-
     list(
       weight_tot = 125,
-      derniere_truffe = as.Date("2024-05-01"),
+      last_truffle = as.Date("2024-05-01"),
       last_comment = "2024-05-01 : Truffe moyenne",
       other_comments = "2024-04-01 : Truffe petite"
     )
 
-  expect_equal(get_info_chene_truffe(dbtruffe, "3"), expected_output)
+  expect_equal(get_info_oak_truffle(dbtruffle, "3"), expected_output)
 
 
 
-  dbtruffe <- data.frame(
+  dbtruffle <- data.frame(
     idoak = c("1"),
     weight = c(100),
     date_found = c(
@@ -54,8 +54,8 @@ test_that("get_info_chene_truffe works", {
     )
   )
 
-  expect_equal(get_info_chene_truffe(dbtruffe, "1"), list(
-    weight_tot = 100, derniere_truffe = structure(19723, class = "Date"),
+  expect_equal(get_info_oak_truffle(dbtruffle, "1"), list(
+    weight_tot = 100, last_truffle = structure(19723, class = "Date"),
     last_comment = "2024-01-01 : Belle truffe", other_comments = "-"
   ))
 

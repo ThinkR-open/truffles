@@ -3,15 +3,15 @@
 #'
 #' This function prepares data for Leaflet JavaScript visualization.
 #'
-#' @param dbchene A data frame containing information about oak trees.
-#' @param dbtruffe A data frame containing information about truffles.
+#' @param dboak A data frame containing information about oak trees.
+#' @param dbtruffle A data frame containing information about truffles.
 #' @param dbreens A data frame containing information about reensemencement.
 #' @importFrom dplyr filter mutate distinct full_join
 #' @return A list suitable for passing to Leaflet JavaScript for visualization.
 #'
 #' @export
 #' @examples
-#' dbchene <- data.frame(
+#' dboak <- data.frame(
 #'   idoak = c(1, 2, 3),
 #'   chene_nom = c("Chene 1", "Chene 2", "Chene 3")
 #' )
@@ -22,15 +22,15 @@
 #'   date_reens = c("2022-04-30")
 #' )
 #' 
-#' dbtruffe <- data.frame(
+#' dbtruffle <- data.frame(
 #'   idoak = c(1, 1, 3),
 #'   idtruffle = c(1, 2, 3),
 #'   estimation = c(1, 0, 1),
 #'   weight = c(10, 15, NA)
 #' )
-#' prepare_leaflet(dbchene, dbtruffe, dbreens)
-prepare_leaflet <- function(dbchene, dbtruffe, dbreens) {
-  t <- dbtruffe |>
+#' prepare_leaflet(dboak, dbtruffle, dbreens)
+prepare_leaflet <- function(dboak, dbtruffle, dbreens) {
+  t <- dbtruffle |>
     dplyr::filter(estimation == 1 | is.na(weight)) |>
     dplyr::mutate(info_missing = 1) |>
     dplyr::distinct(idoak, info_missing)
@@ -38,7 +38,7 @@ prepare_leaflet <- function(dbchene, dbtruffe, dbreens) {
   r <- dbreens |>
         dplyr::mutate(info_reens = 1) |>
         dplyr::distinct(idoak, info_reens)
-  c <- dbchene |>
+  c <- dboak |>
     dplyr::full_join(
       t,
       by = "idoak"

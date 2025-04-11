@@ -1,13 +1,13 @@
 
 test_that("get_info works", {
   # Creating test data
-  dbchene <- data.frame(
+  dboak <- data.frame(
     idoak = c("1", "2", "3"),
     type = c("Green oak", "Sessile oak", "Pedunculate oak"),
     planting_date = c("2020-01-01", "2018-03-15", "2019-06-20")
   )
 
-  dbtruffe <- data.frame(
+  dbtruffle <- data.frame(
     idoak = c("1", "1", "2", "3", "3"),
     weight = c(100, 150, 200, 50, 75),
     date_found = c(
@@ -38,14 +38,14 @@ test_that("get_info works", {
     ),
     truffes = list(
       weight_tot = 0,
-      derniere_truffe = "-",
+      last_truffle = "-",
       last_comment = "-",
       other_comments = "-"
     ),
     reensemence = "2021-06-20"
   )
 
-  expect_equal(get_info(dbchene, dbtruffe, dbreensemence, "4"), expected_output0)
+  expect_equal(get_info(dboak, dbtruffle, dbreensemence, "4"), expected_output0)
 
   # Test quand le chene existe dans la base de donnees
   expected_output <-
@@ -56,11 +56,11 @@ test_that("get_info works", {
       ),
       truffes = list(
         weight_tot = 125,
-        derniere_truffe = structure(19844, class = "Date"),
+        last_truffle = structure(19844, class = "Date"),
         last_comment = "2024-05-01 : Medium truffle",
         other_comments = "2024-04-01 : Small truffle"
       ),
       reensemence = "-"
     )
-  expect_equal(get_info(dbchene, dbtruffe, dbreensemence, "3"), expected_output)
+  expect_equal(get_info(dboak, dbtruffle, dbreensemence, "3"), expected_output)
 })
