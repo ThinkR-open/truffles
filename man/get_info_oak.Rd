@@ -7,9 +7,9 @@
 get_info_oak(dboak, theidoak)
 }
 \arguments{
-\item{theidoak}{ID of the oak tree for which information is to be retrieved.}
+\item{dboak}{Database containing information about oak trees.}
 
-\item{dbchene}{Database containing information about oak trees.}
+\item{theidoak}{ID of the oak tree for which information is to be retrieved.}
 }
 \value{
 A list containing information about the oak tree, including its type and

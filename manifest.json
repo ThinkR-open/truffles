@@ -2725,7 +2725,7 @@
     "R/run_app.R": {
       "checksum": "ffd44ffe75041a7b0cb89f205afe3fc9"
     },
-    "R/update_db_truffe.R": {
+    "R/update_db_truffle.R": {
       "checksum": "e34768bd763b7445ab61aadabbc57dfc"
     },
     "R/utils_log_shiny.R": {
@@ -2737,7 +2737,7 @@
     "R/write_db_new_reens.R": {
       "checksum": "86b106ff2004c041debdad189ae25227"
     },
-    "R/write_db_new_truffe.R": {
+    "R/write_db_new_truffle.R": {
       "checksum": "84a872ad9cf0851fc76781a040333779"
     }
   },

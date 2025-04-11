@@ -4,7 +4,7 @@
 #' This function retrieves information about a specific oak tree based on its ID
 #' from the provided oak tree database.
 #'
-#' @param dbchene Database containing information about oak trees.
+#' @param dboak Database containing information about oak trees.
 #' @param theidoak ID of the oak tree for which information is to be retrieved.
 #'
 #' @return A list containing information about the oak tree, including its type and

@@ -4,12 +4,12 @@
 \alias{get_info}
 \title{Get information about oak and truffles}
 \usage{
-get_info(dbchene, dbtruffe, dbreensemence, theidoak)
+get_info(dboak, dbtruffle, dbreensemence, theidoak)
 }
 \arguments{
-\item{dbchene}{Database containing information about oak trees.}
+\item{dboak}{Database containing information about oak trees.}
 
-\item{dbtruffe}{Database containing information about truffles.}
+\item{dbtruffle}{Database containing information about truffles.}
 
 \item{dbreensemence}{Database containing reseeding information.}
 
@@ -28,6 +28,6 @@ chene <- DBI::dbReadTable(conn, name = "chenes")
 truffe <- DBI::dbReadTable(conn, name = "truffe")
 reensemence <- DBI::dbReadTable(conn, name = "reens")
 
-get_info(dbchene = chene, dbtruffe = truffe, dbreensemence = reensemence, theidoak = "162")
+get_info(dboak = chene, dbtruffle = truffe, dbreensemence = reensemence, theidoak = "162")
 DBI::dbDisconnect(conn)
 }

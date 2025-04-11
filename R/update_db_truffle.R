@@ -33,7 +33,7 @@
 #'   )
 #' )
 #'
-#' update_db_truffe(
+#' update_db_truffle(
 #'   conn,
 #'   idtruffle = "156",
 #'   idoak = "15",
@@ -42,7 +42,7 @@
 #'   estimation = 0,
 #'   comment = "It's good!"
 #' )
-update_db_truffe <- function(conn, idtruffle, idoak, date_found, weight, comment, estimation) {
+update_db_truffle <- function(conn, idtruffle, idoak, date_found, weight, comment, estimation) {
   # Build and execute the SQL query to update the line
 
   update_query <- DBI::sqlInterpolate(
