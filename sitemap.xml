@@ -12,16 +12,17 @@
 <url><loc>/news/index.html</loc></url>
 <url><loc>/reference/connect_db.html</loc></url>
 <url><loc>/reference/get_info.html</loc></url>
-<url><loc>/reference/get_info_chene.html</loc></url>
-<url><loc>/reference/get_info_chene_last_truffe.html</loc></url>
-<url><loc>/reference/get_info_chene_truffe.html</loc></url>
+<url><loc>/reference/get_info_oak.html</loc></url>
+<url><loc>/reference/get_info_oak_last_truffle.html</loc></url>
+<url><loc>/reference/get_info_oak_truffle.html</loc></url>
 <url><loc>/reference/get_info_reensemence.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
 <url><loc>/reference/prepare_leaflet.html</loc></url>
 <url><loc>/reference/run_app.html</loc></url>
-<url><loc>/reference/update_db_truffe.html</loc></url>
+<url><loc>/reference/truffles-package.html</loc></url>
+<url><loc>/reference/update_db_truffle.html</loc></url>
 <url><loc>/reference/weight_truffles_by.html</loc></url>
 <url><loc>/reference/write_db_new_reens.html</loc></url>
-<url><loc>/reference/write_db_new_truffe.html</loc></url>
+<url><loc>/reference/write_db_new_truffle.html</loc></url>
 </urlset>
 

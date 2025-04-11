@@ -212,7 +212,7 @@ requises.</p>
 <h3 id="ajout-de-la-nouvelle-truffe">Ajout de la nouvelle truffe<a class="anchor" aria-label="anchor" href="#ajout-de-la-nouvelle-truffe"></a>
 </h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/write_db_new_truffe.html">write_db_new_truffe</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/write_db_new_truffle.html">write_db_new_truffle</a></span><span class="op">(</span></span>
 <span>  conn <span class="op">=</span> <span class="va">conn_usage</span>,</span>
 <span>  theidoak <span class="op">=</span> <span class="st">"5"</span>,</span>
 <span>  date_found <span class="op">=</span> <span class="st">"2024-01-01"</span>,</span>
@@ -227,7 +227,7 @@ requises.</p>
 </h3>
 <p>Nous ajoutons une nouvelle truffe sans spécifier le weight.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/write_db_new_truffe.html">write_db_new_truffe</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/write_db_new_truffle.html">write_db_new_truffle</a></span><span class="op">(</span></span>
 <span>  conn <span class="op">=</span> <span class="va">conn_usage</span>,</span>
 <span>  theidoak <span class="op">=</span> <span class="st">"1"</span>,</span>
 <span>  date_found <span class="op">=</span> <span class="st">"2024-01-01"</span>,</span>
@@ -242,7 +242,7 @@ requises.</p>
 </h3>
 <p>Nous ajoutons une nouvelle truffe en estimant son weight.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/write_db_new_truffe.html">write_db_new_truffe</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/write_db_new_truffle.html">write_db_new_truffle</a></span><span class="op">(</span></span>
 <span>  conn <span class="op">=</span> <span class="va">conn_usage</span>,</span>
 <span>  theidoak <span class="op">=</span> <span class="st">"3"</span>,</span>
 <span>  date_found <span class="op">=</span> <span class="st">"2024-02-01"</span>,</span>
@@ -260,9 +260,9 @@ requises.</p>
 <code class="sourceCode R"><span><span class="va">truffe</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbReadTable.html" class="external-link">dbReadTable</a></span><span class="op">(</span><span class="va">conn_usage</span>, name <span class="op">=</span> <span class="st">"truffe"</span><span class="op">)</span></span>
 <span><span class="va">truffe</span></span>
 <span><span class="co">#&gt;                          idtruffle idoak date_found weight estimation</span></span>
-<span><span class="co">#&gt; 1 f22737e83175a575f933526c940fd545     5 2024-01-01     25          0</span></span>
-<span><span class="co">#&gt; 2 75a2b158582df8816dda75995d78643a     1 2024-01-01     NA          1</span></span>
-<span><span class="co">#&gt; 3 1798c0cb8040e1c3842577d3d0e390cf     3 2024-02-01    100          1</span></span>
+<span><span class="co">#&gt; 1 53464a646db2ebb282fa5aa9ddcf8593     5 2024-01-01     25          0</span></span>
+<span><span class="co">#&gt; 2 e61f9adc4e8196733dd5a71d7b08fb92     1 2024-01-01     NA          1</span></span>
+<span><span class="co">#&gt; 3 b2a013395a8301b82082ddd694c6c199     3 2024-02-01    100          1</span></span>
 <span><span class="co">#&gt;                        comment</span></span>
 <span><span class="co">#&gt; 1               Un commentaire</span></span>
 <span><span class="co">#&gt; 2 weight a completer plus tard</span></span>
@@ -273,8 +273,8 @@ requises.</p>
 <h2 id="complétion-dinformations">Complétion d’informations<a class="anchor" aria-label="anchor" href="#compl%C3%A9tion-dinformations"></a>
 </h2>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">info</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_info_chene_last_truffe.html">get_info_chene_last_truffe</a></span><span class="op">(</span>dbtruffe <span class="op">=</span> <span class="va">truffe</span>, theidoak <span class="op">=</span> <span class="st">"3"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/update_db_truffe.html">update_db_truffe</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">info</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_info_oak_last_truffle.html">get_info_oak_last_truffle</a></span><span class="op">(</span>dbtruffle <span class="op">=</span> <span class="va">truffe</span>, theidoak <span class="op">=</span> <span class="st">"3"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/update_db_truffle.html">update_db_truffle</a></span><span class="op">(</span></span>
 <span>  <span class="va">conn_usage</span>,</span>
 <span>  idtruffle <span class="op">=</span> <span class="va">info</span><span class="op">$</span><span class="va">idtruffle</span>,</span>
 <span>  idoak <span class="op">=</span> <span class="va">info</span><span class="op">$</span><span class="va">idoak</span>,</span>
@@ -293,8 +293,8 @@ requises.</p>
 <p>Nous récupèrons les informations du chêne truffier n°5 :</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/get_info.html">get_info</a></span><span class="op">(</span></span>
-<span>  dbchene <span class="op">=</span> <span class="va">chenes</span>,</span>
-<span>  dbtruffe <span class="op">=</span> <span class="va">truffe</span>,</span>
+<span>  dboak <span class="op">=</span> <span class="va">chenes</span>,</span>
+<span>  dbtruffle <span class="op">=</span> <span class="va">truffe</span>,</span>
 <span>  dbreensemence <span class="op">=</span> <span class="va">reens</span>,</span>
 <span>  theidoak <span class="op">=</span> <span class="st">"3"</span></span>
 <span><span class="op">)</span></span>
@@ -310,7 +310,7 @@ requises.</p>
 <span><span class="co">#&gt; $truffes$weight_tot</span></span>
 <span><span class="co">#&gt; [1] 32</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $truffes$derniere_truffe</span></span>
+<span><span class="co">#&gt; $truffes$last_truffle</span></span>
 <span><span class="co">#&gt; [1] "2024-02-01"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $truffes$last_comment</span></span>
@@ -324,11 +324,18 @@ requises.</p>
 <span><span class="co">#&gt; [1] "-"</span></span></code></pre></div>
 <p>La dernière truffe trouvée pour le chêne n°5</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_info_chene_last_truffe.html">get_info_chene_last_truffe</a></span><span class="op">(</span>dbtruffe <span class="op">=</span> <span class="va">truffe</span>, theidoak <span class="op">=</span> <span class="st">"5"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                          idtruffle idoak date_found weight estimation</span></span>
-<span><span class="co">#&gt; 1 f22737e83175a575f933526c940fd545     5 2024-01-01     25          0</span></span>
-<span><span class="co">#&gt;          comment estim_js</span></span>
-<span><span class="co">#&gt; 1 Un commentaire</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_info_oak_truffle.html">get_info_oak_truffle</a></span><span class="op">(</span>dbtruffle <span class="op">=</span> <span class="va">truffe</span>, theidoak <span class="op">=</span> <span class="st">"5"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $weight_tot</span></span>
+<span><span class="co">#&gt; [1] 25</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $last_truffle</span></span>
+<span><span class="co">#&gt; [1] "2024-01-01"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $last_comment</span></span>
+<span><span class="co">#&gt; [1] "2024-01-01 : Un commentaire"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $other_comments</span></span>
+<span><span class="co">#&gt; [1] "-"</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="calcul-daggrégation">Calcul d’aggrégation:<a class="anchor" aria-label="anchor" href="#calcul-daggr%C3%A9gation"></a>
