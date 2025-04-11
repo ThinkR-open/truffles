@@ -206,7 +206,7 @@ truffe
 ## Complétion d'informations
 
 ```{r}
-info <- get_info_oak_last_truffle(dbtruffle = truffe, theidoak = "3")
+info <- get_info_oak_truffle(dbtruffle = truffe, theidoak = "3")
 update_db_truffe(
   conn_usage,
   idtruffle = info$idtruffle,
@@ -237,7 +237,7 @@ get_info(
 La dernière truffe trouvée pour le chêne n°5
 
 ```{r}
-get_info_oak_last_truffle(dbtruffle = truffe, theidoak = "5")
+get_info_oak_truffle(dbtruffle = truffe, theidoak = "5")
 ```
 ## Calcul d'aggrégation:
 

@@ -24,7 +24,7 @@
 get_info <- function(dbchene, dbtruffe, dbreensemence, theidoak) {
   resultat <- list(
     chene = get_info_chene(dbchene = dbchene, theidoak = theidoak),
-    truffes = get_info_chene_truffe(dbtruffe = dbtruffe, theidoak = theidoak),
+    truffes = get_info_oak_truffle(dbtruffle = dbtruffe, theidoak = theidoak),
     reensemence = get_info_reensemence(dbreensemence = dbreensemence, theidoak = theidoak)
   )
 

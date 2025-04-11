@@ -1,6 +1,7 @@
 # truffles (development version)
 
 - Rename `get_info_chene_last_truffe()` -> `get_info_oak_last_truffle()`
+- Rename `get_info_chene_truffe()` -> `get_info_oak_truffle()`
 
 # truffles 0.0.2
 

@@ -5,7 +5,7 @@ globalVariables(unique(c(
   "type",
   # get_info_chene:
   "id",
-  # get_info_chene_truffe:
+  # get_info_oak_truffle:
   "date_found",
   "idoak",
   "weight",
