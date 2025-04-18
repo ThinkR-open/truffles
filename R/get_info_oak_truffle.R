@@ -4,7 +4,7 @@
 #' This function retrieves information about truffles associated with a specific oak tree
 #' based on the oak tree's ID from the provided truffle database.
 #'
-#' @param dbtruffe Database containing information about truffles.
+#' @param dbtruffle Database containing information about truffles.
 #' @param theidoak ID of the oak tree for which information about associated truffles
 #' is to be retrieved.
 #'
@@ -21,29 +21,29 @@
 #'  )
 #' truffe <- DBI::dbReadTable(conn, name = "truffe")
 #'
-#' get_info_chene_truffe(dbtruffe = truffe, theidoak = "119")
+#' get_info_oak_truffle(dbtruffle = truffe, theidoak = "119")
 #' DBI::dbDisconnect(conn)
-get_info_chene_truffe <- function(dbtruffe, theidoak) {
-    check_param(dbtruffe, "data.frame")
+get_info_oak_truffle <- function(dbtruffle, theidoak) {
+    check_param(dbtruffle, "data.frame")
     check_param(theidoak, "character")
     check_names_dataframe(c(
         "idoak", "weight", "date_found",
         "comment"
-    ), dbtruffe)
-    truffe_chene <- filter(dbtruffe, idoak == theidoak)
-    if (nrow(truffe_chene) == 0) {
-        return(list(weight_tot = 0, derniere_truffe = "-", last_comment = "-", other_comments = "-"))
+    ), dbtruffle)
+    truffle_oak <- filter(dbtruffle, idoak == theidoak)
+    if (nrow(truffle_oak) == 0) {
+        return(list(weight_tot = 0, last_truffle = "-", last_comment = "-", other_comments = "-"))
     }
 
 
-    weight_tot <- pull(summarise(truffe_chene, weight_tot = sum(weight,
+    weight_tot <- pull(summarise(truffle_oak, weight_tot = sum(weight,
         na.rm = TRUE
     )), weight_tot)
-    derniere_truffe <- pull(summarise(truffe_chene, date_found = as.Date(max(date_found,
+    last_truffle <- pull(summarise(truffle_oak, date_found = as.Date(max(date_found,
         na.rm = TRUE
     ))), date_found)
 
-    sort_comment <- truffe_chene |>
+    sort_comment <- truffle_oak |>
         arrange(desc(date_found))
 
     last_comment <- paste(as.Date(sort_comment$date_found[1]),
@@ -64,7 +64,7 @@ get_info_chene_truffe <- function(dbtruffe, theidoak) {
 
     return(list(
         weight_tot = weight_tot, 
-        derniere_truffe = derniere_truffe,
+        last_truffle = last_truffle,
         last_comment = last_comment,
         other_comments = other_comments
     ))

@@ -1,5 +1,5 @@
 
-test_that("write_db_new_truffe works", {
+test_that("write_db_new_truffle works", {
   conn <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
 
   # Creating the truffle table in the database
@@ -22,7 +22,7 @@ test_that("write_db_new_truffe works", {
   weight <- 50
   comment <- "Freshly found truffle"
   estimation <- 1
-  write_db_new_truffe(conn, theidoak, date_found, weight, estimation, comment, digest_ = date_found)
+  write_db_new_truffle(conn, theidoak, date_found, weight, estimation, comment, digest_ = date_found)
 
   # Check that the truffle has been correctly added to the database
   expected_output <-
@@ -32,7 +32,7 @@ test_that("write_db_new_truffe works", {
       date_found = "2024-03-08",
       weight = 50,
       estimation = 1,
-      comment = formater_comment("2024-03-08", "Freshly found truffle")
+      comment = "Freshly found truffle"
     )
   expect_equal(DBI::dbReadTable(conn, "truffe"), expected_output)
 })

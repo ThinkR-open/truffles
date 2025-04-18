@@ -53,8 +53,8 @@ mod_carto_leaflet_server <- function(id, global) {
       log_info_dev("prepa leaflet")
       # prepa data to js
       local$df_prep <- prepare_leaflet(
-        dbchene = global$chenes,
-        dbtruffe = global$truffe,
+        dboak = global$chenes,
+        dbtruffle = global$truffe,
         dbreens = global$reensemence
       )
     })

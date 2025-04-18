@@ -153,7 +153,7 @@ Nous ajoutons une nouvelle truffe avec toutes les informations requises.
 ### Ajout de la nouvelle truffe
 
 ```{r}
-write_db_new_truffe(
+write_db_new_truffle(
   conn = conn_usage,
   theidoak = "5",
   date_found = "2024-01-01",
@@ -168,7 +168,7 @@ write_db_new_truffe(
 Nous ajoutons une nouvelle truffe sans spécifier le weight.
 
 ```{r}
-write_db_new_truffe(
+write_db_new_truffle(
   conn = conn_usage,
   theidoak = "1",
   date_found = "2024-01-01",
@@ -183,7 +183,7 @@ write_db_new_truffe(
 Nous ajoutons une nouvelle truffe en estimant son weight.
 
 ```{r}
-write_db_new_truffe(
+write_db_new_truffle(
   conn = conn_usage,
   theidoak = "3",
   date_found = "2024-02-01",
@@ -206,8 +206,8 @@ truffe
 ## Complétion d'informations
 
 ```{r}
-info <- get_info_chene_last_truffe(dbtruffe = truffe, theidoak = "3")
-update_db_truffe(
+info <- get_info_oak_last_truffle(dbtruffle = truffe, theidoak = "3")
+update_db_truffle(
   conn_usage,
   idtruffle = info$idtruffle,
   idoak = info$idoak,
@@ -227,8 +227,8 @@ truffe <- dbReadTable(conn_usage, name = "truffe")
 Nous récupèrons les informations du chêne truffier n°5 :
 ```{r}
 get_info(
-  dbchene = chenes,
-  dbtruffe = truffe,
+  dboak = chenes,
+  dbtruffle = truffe,
   dbreensemence = reens,
   theidoak = "3"
 )
@@ -237,7 +237,7 @@ get_info(
 La dernière truffe trouvée pour le chêne n°5
 
 ```{r}
-get_info_chene_last_truffe(dbtruffe = truffe, theidoak = "5")
+get_info_oak_truffle(dbtruffle = truffe, theidoak = "5")
 ```
 ## Calcul d'aggrégation:
 

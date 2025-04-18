@@ -21,9 +21,3 @@ check_names_dataframe <- function(names, df) {
   return(invisible())
 }
 
-#' formater_comment
-#' @noRd
-formater_comment <- function(date_found, comment) {
-  c <- paste(date_found, comment, sep = " : ")
-  return(c)
-}

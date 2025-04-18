@@ -2695,13 +2695,13 @@
     "R/connect_db.R": {
       "checksum": "bcad807e0568639cc3787999feeec9e6"
     },
-    "R/get_info_chene_last_truffe.R": {
+    "R/get_info_oak_last_truffle.R": {
       "checksum": "2d701150b0a5ba51b9ec2fe3adb46c20"
     },
-    "R/get_info_chene_truffe.R": {
+    "R/get_info_oak_truffle.R": {
       "checksum": "eb7b2ebadee45a863459bae4079cbfb1"
     },
-    "R/get_info_chene.R": {
+    "R/get_info_oak.R": {
       "checksum": "29e3d45a69e093786b855ac1df662948"
     },
     "R/get_info_reensemence.R": {
@@ -2725,7 +2725,7 @@
     "R/run_app.R": {
       "checksum": "ffd44ffe75041a7b0cb89f205afe3fc9"
     },
-    "R/update_db_truffe.R": {
+    "R/update_db_truffle.R": {
       "checksum": "e34768bd763b7445ab61aadabbc57dfc"
     },
     "R/utils_log_shiny.R": {
@@ -2737,7 +2737,7 @@
     "R/write_db_new_reens.R": {
       "checksum": "86b106ff2004c041debdad189ae25227"
     },
-    "R/write_db_new_truffe.R": {
+    "R/write_db_new_truffle.R": {
       "checksum": "84a872ad9cf0851fc76781a040333779"
     }
   },

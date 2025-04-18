@@ -63,7 +63,7 @@ app_server <- function(input, output, session) {
 
 
     if (isTRUE(global$missingdata)) {
-      info <- get_info_chene_last_truffe(dbtruffe = global$truffe, theidoak = input$chene_click, filter_missing_info = TRUE)
+      info <- get_info_oak_last_truffle(dbtruffle = global$truffe, theidoak = input$chene_click, filter_missing_info = TRUE)
 
       golem::invoke_js(
         "modal_info_missing",
@@ -78,8 +78,8 @@ app_server <- function(input, output, session) {
       )
     } else {
       info <- get_info(
-        dbchene = global$chenes,
-        dbtruffe = global$truffe,
+        dboak = global$chenes,
+        dbtruffle = global$truffe,
         dbreensemence = global$reensemence,
         theidoak = input$chene_click
       )
@@ -91,7 +91,7 @@ app_server <- function(input, output, session) {
           type = info$chene$type,
           date_reens = info$reensemence,
           date_p = as.Date(info$chene$planting_date),
-          der_truf = info$truffes$derniere_truffe,
+          der_truf = info$truffes$last_truffle,
           tot_weight = info$truffes$weight_tot,
           last_comment = info$truffes$last_comment,
           other_comments = info$truffes$other_comments
@@ -105,7 +105,7 @@ app_server <- function(input, output, session) {
     req(input$new_truffe)
     log_info_dev("observeEvent(input$new_truffe, ...")
 
-    write_db_new_truffe(
+    write_db_new_truffle(
       conn = global$conn,
       theidoak = input$new_truffe[1],
       date_found = input$new_truffe[2],
@@ -134,7 +134,7 @@ app_server <- function(input, output, session) {
     req(input$complete_truffe)
     log_info_dev("observeEvent(input$complete_truffe, ...")
 
-    update_db_truffe(
+    update_db_truffle(
       conn = global$conn,
       idtruffle = input$complete_truffe[2],
       idoak = input$complete_truffe[1],

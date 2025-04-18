@@ -1,6 +1,6 @@
 
-test_that("update_db_truffe works", {
-  expect_true(inherits(update_db_truffe, "function"))
+test_that("update_db_truffle works", {
+  expect_true(inherits(update_db_truffle, "function"))
 
   conn <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
 
@@ -18,7 +18,7 @@ test_that("update_db_truffe works", {
     )
   )
 
-  update_db_truffe(
+  update_db_truffle(
     conn,
     idtruffle = "156",
     idoak = "15",
@@ -36,7 +36,7 @@ test_that("update_db_truffe works", {
       date_found = 18294,
       weight = 22,
       estimation = 0,
-      comment = formater_comment("18294", "New comment")
+      comment = "New comment"
     )
   expect_equal(
     DBI::dbReadTable(conn, "truffe") |>

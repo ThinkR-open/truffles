@@ -4,10 +4,10 @@
 \alias{weight_truffles_by}
 \title{Calculate total weight of truffles grouped by specified columns}
 \usage{
-weight_truffles_by(dbtruffe, ...)
+weight_truffles_by(dbtruffle, ...)
 }
 \arguments{
-\item{dbtruffe}{A data frame containing information about truffles.}
+\item{dbtruffle}{A data frame containing information about truffles.}
 
 \item{...}{Columns to group by, passed as arguments.}
 }

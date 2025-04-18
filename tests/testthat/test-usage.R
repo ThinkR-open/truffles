@@ -60,8 +60,8 @@ test_that("Usage works", {
     dplyr::filter(present == 1)
 
   df_prep <- prepare_leaflet(
-    dbchene = chenes,
-    dbtruffe = truffe,
+    dboak = chenes,
+    dbtruffle = truffe,
     dbreens = reens
   )
 
@@ -74,13 +74,13 @@ test_that("Usage works", {
   )[[1]]
 
   info <- get_info(
-    dbchene = chenes,
-    dbtruffe = truffe,
+    dboak = chenes,
+    dbtruffle = truffe,
     dbreensemence = reens,
     theidoak = theidoak
   )
 
-  write_db_new_truffe(
+  write_db_new_truffle(
     conn = conn_usage,
     theidoak = theidoak,
     date_found = "2024-01-01",
@@ -99,13 +99,13 @@ test_that("Usage works", {
   )[[1]]
 
   info <- get_info(
-    dbchene = chenes,
-    dbtruffe = truffe,
+    dboak = chenes,
+    dbtruffle = truffe,
     dbreensemence = reens,
     theidoak = theidoak
   )
 
-  write_db_new_truffe(
+  write_db_new_truffle(
     conn = conn_usage,
     theidoak = theidoak,
     date_found = "2024-01-01",
@@ -124,13 +124,13 @@ test_that("Usage works", {
   )[[1]]
 
   info <- get_info(
-    dbchene = chenes,
-    dbtruffe = truffe,
+    dboak = chenes,
+    dbtruffle = truffe,
     dbreensemence = reens,
     theidoak = theidoak
   )
 
-  write_db_new_truffe(
+  write_db_new_truffle(
     conn = conn_usage,
     theidoak = theidoak,
     date_found = "2024-01-01",

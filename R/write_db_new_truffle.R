@@ -17,8 +17,8 @@
 #'
 #' @export
 #' @examples
-#' # write_db_new_truffe(theidoak = "chene")
-write_db_new_truffe <-
+#' # write_db_new_truffle(theidoak = "chene")
+write_db_new_truffle <-
   function(conn = connect_db(), theidoak, date_found, weight, estimation, comment, digest_ = Sys.time()) {
     idtruffle <- digest(digest_)
 
@@ -28,7 +28,7 @@ write_db_new_truffe <-
       date_found = as.character(date_found),
       weight = weight,
       estimation = estimation,
-      comment = formater_comment(date_found, comment)
+      comment = comment
     )
 
     dbAppendTable(conn, "truffe", add_truffe)
