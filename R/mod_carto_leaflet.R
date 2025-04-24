@@ -24,9 +24,6 @@ mod_carto_leaflet_ui <- function(id) {
         fill = TRUE,
         status = "primary"
       )
-      # tags$input(type = "checkbox", id = ns("reens_id"), value = "1"),
-      # tags$label("Rensemenc\u00e9"),
-      # style = "display: inline-block; margin-right: 10px;"
     ),
     tags$div(
       id = ns("mymap"),
