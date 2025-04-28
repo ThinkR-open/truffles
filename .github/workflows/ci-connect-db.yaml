@@ -36,5 +36,5 @@ jobs:
 
       - name: Test DB connection
         run: |
-          Rscript -e 'library(truffles); con <- connect_db(); write_db_new_truffle(conn = con, theidoak = 1, date_found = Sys.Date(), weight = 25, estimation = 1, comment = "tosupp_for_CI"); DBI::dbExecute(con, "DELETE FROM truffe WHERE comment = 'tosupp_for_CI'"); DBI::dbDisconnect(con)'
+          Rscript -e 'library(truffles); con <- connect_db(); write_db_new_truffle(conn = con, theidoak = 1, date_found = Sys.Date(), weight = 25, estimation = 1, comment = "tosupp_for_CI"); DBI::dbExecute(con, "DELETE FROM truffe WHERE comment = $1", params = list("tosupp_for_CI")); DBI::dbDisconnect(con)'
 
