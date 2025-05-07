@@ -71,7 +71,7 @@ mod_carto_leaflet_server <- function(id, global) {
 
         if (isTRUE(input$missingdata)) {
           thedata <- local$df_prep$data_prep |>
-            purrr::keep(\(x) (x[8] == "1"))
+            purrr::keep(\(x) (x["info_missing"] == "1"))
           thereens <- 0
         } else {
           thedata <- local$df_prep$data_prep

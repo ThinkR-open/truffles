@@ -5,20 +5,20 @@ $(document).ready(function () {
     var locations = arg.data;
     var reens = arg.reens;
     var mean_lat = locations.length
-      ? locations.reduce((sum, loc) => sum + Number(loc[2] || 0), 0) /
+      ? locations.reduce((sum, loc) => sum + Number(loc.lat || 0), 0) /
         locations.length
       : 0;
 
     var mean_lon = locations.length
-      ? locations.reduce((sum, loc) => sum + Number(loc[1] || 0), 0) /
+      ? locations.reduce((sum, loc) => sum + Number(loc.lon || 0), 0) /
         locations.length
       : 0;
 
     // Calculer les coordonnées min/max comme avant
-    var minLat = Math.min(...locations.map((loc) => Number(loc[2] || 0)));
-    var maxLat = Math.max(...locations.map((loc) => Number(loc[2] || 0)));
-    var minLon = Math.min(...locations.map((loc) => Number(loc[1] || 0)));
-    var maxLon = Math.max(...locations.map((loc) => Number(loc[1] || 0)));
+    var minLat = Math.min(...locations.map((loc) => Number(loc.lat || 0)));
+    var maxLat = Math.max(...locations.map((loc) => Number(loc.lat || 0)));
+    var minLon = Math.min(...locations.map((loc) => Number(loc.lon || 0)));
+    var maxLon = Math.max(...locations.map((loc) => Number(loc.lon || 0)));
     // Calculer l'étendue géographique
     var latDiff = maxLat - minLat;
     var lonDiff = maxLon - minLon;
@@ -59,15 +59,15 @@ $(document).ready(function () {
     }
 
     for (var i = 0; i < locations.length; i++) {
-      marker = new L.circleMarker([locations[i][2], locations[i][1]])
+      marker = new L.circleMarker([locations[i].lat, locations[i].lon])
         .unbindPopup()
         .addTo(map)
         .on("click", onClick);
 
-      marker.id = locations[i][0];
+      marker.id = locations[i].idoak;
 
       if (reens === 0) {
-        if (locations[i][3] === "Normal") {
+        if (locations[i].type === "Normal") {
           marker.setStyle({
             color: "#FF0000",
             fillColor: "#FF0000",
@@ -81,7 +81,7 @@ $(document).ready(function () {
           });
         }
       } else {
-        if (locations[i][7] === "1") {
+        if (locations[i].info_reens === "1") {
           marker.setStyle({
             color: "#00AEEF",
             fillColor: "#00AEEF",
