@@ -7,6 +7,7 @@
 #' @param dbtruffle A data frame containing information about truffles.
 #' @param dbreens A data frame containing information about reensemencement.
 #' @importFrom dplyr filter mutate distinct full_join
+#' @importFrom purrr set_names
 #' @return A list suitable for passing to Leaflet JavaScript for visualization.
 #'
 #' @export
@@ -51,7 +52,8 @@ prepare_leaflet <- function(dboak, dbtruffle, dbreens) {
   data_prep <- lapply(
     1:nrow(c),
     function(i) {
-      unname(as.list(as.character(c[i, ])))
+      unname(as.list(as.character(c[i, ]))) |> 
+      set_names(names(c))
     }
   )
 
